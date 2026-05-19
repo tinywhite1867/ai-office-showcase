@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>督办管理系统 · 上线宣传册</title>
+<meta name="description" content="重点工作督办，一张表搞定。Excel 一键导入，状态自动判定，报告一键生成。">
+<style>
+/* =====================================================
+   督办管理系统 — 上线宣传册 (Cyber Edition)
+   ===================================================== */
+:root {
+  --bg-0:#050814; --bg-1:#0a0f24; --bg-2:#0f1733;
+  --panel:rgba(18,26,56,.55); --panel-2:rgba(28,38,78,.45);
+  --line:rgba(118,152,255,.18); --line-strong:rgba(118,152,255,.35);
+
+  --neon-1:#00e5ff; --neon-2:#7c5cff; --neon-3:#ff5cb3;
+  --neon-4:#00ffa3; --neon-5:#ffb74d;
+
+  --text:#e6ecff; --text-2:#a9b5d6; --text-3:#6e7aa0;
+
+  --grad-1:linear-gradient(135deg,#00e5ff 0%,#7c5cff 100%);
+  --grad-2:linear-gradient(135deg,#7c5cff 0%,#ff5cb3 100%);
+  --grad-3:linear-gradient(135deg,#00ffa3 0%,#00e5ff 100%);
+
+  --shadow-glow:0 0 0 1px rgba(124,92,255,.18), 0 24px 60px -20px rgba(0,229,255,.35);
+  --shadow-card:0 1px 0 rgba(255,255,255,.04) inset, 0 30px 60px -30px rgba(0,0,0,.6);
+
+  --r-md:14px; --r-lg:22px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",Roboto,sans-serif;
+  color:var(--text); background:var(--bg-0);
+  line-height:1.65; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden; position:relative;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    linear-gradient(rgba(124,92,255,.06) 1px,transparent 1px) 0 0/44px 44px,
+    linear-gradient(90deg,rgba(124,92,255,.06) 1px,transparent 1px) 0 0/44px 44px,
+    radial-gradient(80% 50% at 50% 0%,rgba(124,92,255,.18),transparent 60%),
+    radial-gradient(60% 40% at 80% 80%,rgba(0,229,255,.15),transparent 60%),
+    radial-gradient(50% 40% at 10% 60%,rgba(255,92,179,.10),transparent 60%);
+  mask-image:radial-gradient(ellipse at 50% 30%,#000 60%,transparent 100%);
+}
+a{color:var(--neon-1);text-decoration:none;}
+.container{width:min(1200px,92%);margin:0 auto;position:relative;z-index:2;}
+::selection{background:rgba(124,92,255,.4);color:#fff;}
+
+/* ============ Nav ============ */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  padding:16px 0; transition:background .3s,padding .3s,border-color .3s;
+  border-bottom:1px solid transparent;
+}
+.nav.scrolled{
+  background:rgba(8,12,30,.78);
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  border-bottom-color:var(--line); padding:12px 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;color:var(--text);letter-spacing:.02em;}
+.nav-logo .mark{
+  width:30px;height:30px;border-radius:8px;
+  background:var(--grad-1); position:relative;
+  box-shadow:0 0 24px rgba(0,229,255,.55);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;color:#001428;font-size:14px;
+}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{font-size:13.5px;color:var(--text-2);transition:color .2s;}
+.nav-links a:hover{color:var(--neon-1);}
+.nav-cta{
+  padding:9px 18px; background:var(--grad-1);
+  border-radius:999px; color:#001428; font-size:13px; font-weight:700;
+  box-shadow:0 8px 24px -6px rgba(0,229,255,.55);
+  transition:transform .2s,box-shadow .2s;
+}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 30px -6px rgba(0,229,255,.65);}
+@media (max-width:760px){.nav-links{display:none;}}
+
+/* ============ Hero ============ */
+.hero{
+  position:relative; min-height:100vh;
+  display:flex; align-items:center;
+  padding:140px 0 80px; overflow:hidden;
+}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;}
+@media (max-width:980px){.hero-grid{grid-template-columns:1fr;gap:40px;}}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:6px 14px 6px 10px;
+  background:rgba(0,229,255,.08);
+  border:1px solid rgba(0,229,255,.3);
+  border-radius:999px;
+  font-size:12.5px;color:var(--neon-1);
+  margin-bottom:28px;letter-spacing:.05em;
+}
+.hero-badge .pulse{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--neon-4);
+  box-shadow:0 0 0 0 rgba(0,255,163,.7);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(0,255,163,.7);}
+  70%{box-shadow:0 0 0 12px rgba(0,255,163,0);}
+  100%{box-shadow:0 0 0 0 rgba(0,255,163,0);}
+}
+.hero h1{
+  font-size:clamp(38px,6.4vw,76px);
+  line-height:1.06; font-weight:800;
+  letter-spacing:-.025em; margin-bottom:26px;
+}
+.hero h1 .accent{background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero h1 .accent2{background:var(--grad-2);-webkit-background-clip:text;background-clip:text;color:transparent;}
+
+.hero p.lead{
+  font-size:clamp(15px,1.5vw,18px);
+  color:var(--text-2); max-width:520px; margin-bottom:38px;
+}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:50px;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 26px;border-radius:10px;
+  font-size:14.5px;font-weight:600;border:none;
+  transition:transform .2s,box-shadow .2s;
+  position:relative; cursor:pointer;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{
+  background:var(--grad-1); color:#001428;
+  box-shadow:0 12px 40px -6px rgba(0,229,255,.55);
+}
+.btn-primary:hover{box-shadow:0 18px 50px -6px rgba(0,229,255,.7);}
+.btn-ghost{
+  background:rgba(255,255,255,.04); color:var(--text);
+  border:1px solid var(--line-strong); backdrop-filter:blur(8px);
+}
+.btn-ghost:hover{background:rgba(255,255,255,.08);border-color:var(--neon-1);color:var(--neon-1);}
+
+.hero-meta{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:12px 24px; padding:24px 28px;
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:16px; backdrop-filter:blur(12px);
+  max-width:640px; position:relative; overflow:hidden;
+}
+.hero-meta::before{
+  content:""; position:absolute; top:0;left:-100%;width:100%;height:2px;
+  background:linear-gradient(90deg,transparent,var(--neon-1),transparent);
+  animation:scan 4s linear infinite;
+}
+@keyframes scan{from{left:-100%;}to{left:100%;}}
+.hero-meta .num{
+  font-size:26px;font-weight:800;line-height:1.1;
+  font-variant-numeric:tabular-nums;
+  background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero-meta .lbl{font-size:11.5px;color:var(--text-3);margin-top:2px;letter-spacing:.05em;}
+@media (max-width:560px){.hero-meta{grid-template-columns:repeat(2,1fr);}}
+
+/* Hero mockup */
+.mock-frame{
+  position:relative; padding:14px;
+  border-radius:18px;
+  background:var(--panel); border:1px solid var(--line-strong);
+  box-shadow:var(--shadow-glow);
+  backdrop-filter:blur(12px);
+  transform:perspective(1400px) rotateY(-6deg) rotateX(2deg);
+  animation:hover 7s ease-in-out infinite;
+}
+@keyframes hover{
+  0%,100%{transform:perspective(1400px) rotateY(-6deg) rotateX(2deg) translateY(0);}
+  50%{transform:perspective(1400px) rotateY(-6deg) rotateX(2deg) translateY(-10px);}
+}
+.mock-bar{display:flex;align-items:center;gap:6px;padding:4px 4px 12px;}
+.mock-bar span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.18);}
+.mock-bar span:nth-child(1){background:#ff5f57;}
+.mock-bar span:nth-child(2){background:#febc2e;}
+.mock-bar span:nth-child(3){background:#28c840;}
+.mock-bar .url{
+  margin-left:10px;flex:1;
+  background:rgba(0,0,0,.35);border:1px solid var(--line);
+  border-radius:6px;padding:4px 10px;
+  font-size:11px;color:var(--text-3);
+  font-family:"SF Mono","Menlo",monospace;
+}
+.mock-body{
+  background:linear-gradient(180deg,#08102a 0%,#0a1432 100%);
+  border-radius:12px;overflow:hidden;border:1px solid var(--line);
+}
+.mk-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 16px;border-bottom:1px solid var(--line);
+  background:rgba(0,229,255,.04);
+}
+.mk-title{font-weight:700;color:var(--neon-1);font-size:13px;letter-spacing:.05em;}
+.mk-user{color:var(--text-3);font-size:11px;}
+.mk-layout{display:grid;grid-template-columns:100px 1fr;}
+.mk-side{background:rgba(0,0,0,.25);border-right:1px solid var(--line);padding:10px 0;}
+.mk-side div{padding:7px 14px;font-size:11.5px;color:var(--text-3);border-left:2px solid transparent;}
+.mk-side div.on{background:rgba(0,229,255,.08);color:var(--neon-1);border-left-color:var(--neon-1);font-weight:600;}
+.mk-main{padding:14px;}
+.mk-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:12px;}
+.mk-stat{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:8px;padding:9px 10px;}
+.mk-stat .n{font-size:18px;font-weight:800;color:var(--text);}
+.mk-stat .l{font-size:10px;color:var(--text-3);margin-top:2px;}
+.mk-stat.w{border-color:rgba(255,183,77,.5);background:rgba(255,183,77,.06);}
+.mk-stat.w .n{color:var(--neon-5);}
+.mk-stat.d{border-color:rgba(255,92,179,.5);background:rgba(255,92,179,.06);}
+.mk-stat.d .n{color:var(--neon-3);}
+.mk-stat.g{border-color:rgba(0,255,163,.5);background:rgba(0,255,163,.06);}
+.mk-stat.g .n{color:var(--neon-4);}
+.mk-list{font-size:11.5px;}
+.mk-list .row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:7px 0;border-bottom:1px dashed var(--line);color:var(--text-2);gap:8px;
+}
+.mk-list .row:last-child{border-bottom:none;}
+.mk-list .row .tt{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.mk-tag{font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(0,229,255,.18);color:var(--neon-1);border:1px solid rgba(0,229,255,.4);}
+.mk-tag.wn{background:rgba(255,183,77,.2);color:var(--neon-5);border-color:rgba(255,183,77,.4);}
+.mk-tag.dg{background:rgba(255,92,179,.18);color:var(--neon-3);border-color:rgba(255,92,179,.4);}
+.mk-tag.dn{background:rgba(0,255,163,.18);color:var(--neon-4);border-color:rgba(0,255,163,.4);}
+
+/* ============ Sections common ============ */
+section{padding:110px 0;position:relative;}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;font-weight:700;color:var(--neon-1);
+  text-transform:uppercase;letter-spacing:.25em;margin-bottom:16px;
+}
+.eyebrow::before{content:"";width:24px;height:1px;background:var(--neon-1);}
+.section-title{
+  font-size:clamp(30px,4.6vw,52px);
+  font-weight:800;letter-spacing:-.025em;
+  line-height:1.18;margin-bottom:18px;max-width:800px;
+}
+.section-title .grad{background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.section-title .grad2{background:var(--grad-2);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.section-title .grad3{background:var(--grad-3);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.section-sub{font-size:16px;color:var(--text-2);max-width:680px;margin-bottom:64px;}
+.center-head{text-align:center;}
+.center-head .eyebrow{justify-content:center;}
+.center-head .section-title,.center-head .section-sub{margin-left:auto;margin-right:auto;}
+
+/* ============ Compare (Before / After) ============ */
+.compare-grid{
+  display:grid; grid-template-columns:1fr 56px 1fr;
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:var(--r-lg); overflow:hidden;
+  backdrop-filter:blur(12px); box-shadow:var(--shadow-card);
+}
+@media (max-width:860px){
+  .compare-grid{grid-template-columns:1fr;}
+  .compare-arrow{display:none;}
+}
+.compare-col{padding:36px 34px;}
+.compare-col.before{background:rgba(0,0,0,.18);border-right:1px solid var(--line);}
+.compare-col.before .compare-head{color:var(--text-3);}
+.compare-col.after .compare-head{color:var(--neon-1);}
+.compare-head{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;margin-bottom:22px;}
+.compare-col ul{list-style:none;}
+.compare-col li{display:flex;gap:12px;padding:11px 0;font-size:14.5px;color:var(--text-2);}
+.compare-col li .ic{
+  flex-shrink:0;width:22px;height:22px;border-radius:6px;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:700;margin-top:2px;
+}
+.compare-col.before li .ic{background:rgba(255,92,179,.12);color:var(--neon-3);border:1px solid rgba(255,92,179,.3);}
+.compare-col.after li .ic{background:rgba(0,255,163,.12);color:var(--neon-4);border:1px solid rgba(0,255,163,.3);}
+.compare-arrow{display:flex;align-items:center;justify-content:center;background:transparent;}
+.compare-arrow div{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--grad-1);color:#001428;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 30px rgba(0,229,255,.5);font-weight:900;font-size:20px;
+}
+
+/* ============ Value Cards (便捷4特点) ============ */
+.value-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+@media (max-width:980px){.value-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.value-grid{grid-template-columns:1fr;}}
+.value-card{
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:var(--r-md); padding:28px 24px;
+  position:relative; overflow:hidden;
+  backdrop-filter:blur(10px);
+  transition:transform .35s,border-color .35s,box-shadow .35s;
+}
+.value-card::before{
+  content:""; position:absolute; inset:-1px; border-radius:var(--r-md);
+  padding:1px; background:var(--grad-1);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude;
+  opacity:0; transition:opacity .35s;
+}
+.value-card:hover{transform:translateY(-6px);box-shadow:0 30px 60px -25px rgba(0,229,255,.4);}
+.value-card:hover::before{opacity:1;}
+.value-icon{
+  width:48px;height:48px;border-radius:12px;
+  background:rgba(0,229,255,.08); border:1px solid rgba(0,229,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px; color:var(--neon-1);
+  font-size:22px;font-weight:900;
+}
+.value-card h3{font-size:18px;font-weight:700;margin-bottom:10px;color:var(--text);}
+.value-card p{font-size:13.5px;color:var(--text-2);line-height:1.7;}
+
+/* ============ 6模块概览 ============ */
+.six-section{padding:130px 0 90px;}
+.six-section .head-wrap{text-align:center;margin-bottom:60px;}
+.six-section .six-title{
+  font-size:clamp(56px,10vw,140px);
+  line-height:.95;font-weight:900;letter-spacing:-.04em;margin-bottom:18px;
+}
+.six-section .six-title .num-6{
+  background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent;
+  font-size:1.15em; filter:drop-shadow(0 0 30px rgba(0,229,255,.4));
+}
+.six-section .six-title .lbl{background:var(--grad-2);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.six-section p.sub{font-size:17px;color:var(--text-2);max-width:680px;margin:0 auto;}
+
+.six-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+@media (max-width:900px){.six-grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){.six-grid{grid-template-columns:1fr;}}
+
+.six-card{
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:var(--r-md); padding:28px 24px;
+  position:relative; overflow:hidden;
+  backdrop-filter:blur(10px);
+  transition:transform .35s,border-color .35s,box-shadow .35s;
+  min-height:190px; display:flex;flex-direction:column;
+}
+.six-card::after{
+  content:""; position:absolute; top:0;left:0;width:100%;height:2px;
+  background:var(--grad-1);
+  transform:scaleX(0); transform-origin:left; transition:transform .5s;
+}
+.six-card:hover{transform:translateY(-6px);border-color:var(--line-strong);box-shadow:0 30px 60px -25px rgba(0,229,255,.35);}
+.six-card:hover::after{transform:scaleX(1);}
+.six-card .s-num{
+  position:absolute; top:16px; right:18px;
+  font-size:50px;font-weight:900;line-height:1;
+  background:var(--grad-2);-webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:.18; font-family:"SF Mono","Menlo",monospace;
+}
+.six-card .s-ic{
+  width:42px;height:42px;border-radius:12px;
+  background:rgba(0,229,255,.08); border:1px solid rgba(0,229,255,.3);
+  color:var(--neon-1);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:16px; font-size:18px;font-weight:900;
+}
+.six-card h3{font-size:19px;font-weight:700;margin-bottom:6px;color:var(--text);}
+.six-card .s-desc{font-size:13.5px;color:var(--text-2);line-height:1.65;}
+
+/* ============ Flow (3步上手) ============ */
+.flow-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  position:relative;
+}
+@media (max-width:860px){.flow-grid{grid-template-columns:1fr;}}
+.flow-card{
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:var(--r-md); padding:32px 28px;
+  backdrop-filter:blur(10px); position:relative; overflow:hidden;
+}
+.flow-card .step-no{
+  font-family:"SF Mono","Menlo",monospace;
+  font-size:13px; font-weight:700;
+  color:var(--neon-2); letter-spacing:.2em; margin-bottom:18px;
+}
+.flow-card .step-no::before{content:"STEP ";opacity:.7;}
+.flow-card .step-big{
+  font-size:48px;font-weight:900;line-height:1;
+  background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent;
+  margin-bottom:16px;
+}
+.flow-card h3{font-size:20px;font-weight:700;margin-bottom:10px;color:var(--text);}
+.flow-card p{font-size:13.5px;color:var(--text-2);line-height:1.7;}
+
+/* ============ Status pills ============ */
+.status-bar{
+  display:flex;flex-wrap:wrap;gap:12px;
+  padding:28px;
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:var(--r-md); backdrop-filter:blur(12px);
+  margin-top:28px;
+}
+.s-pill{
+  padding:8px 18px; border-radius:999px;
+  font-size:13px; font-weight:700; letter-spacing:.05em;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.s-pill::before{content:"";width:8px;height:8px;border-radius:50%;}
+.s-pill.go{background:rgba(0,229,255,.1);color:var(--neon-1);border:1px solid rgba(0,229,255,.4);}
+.s-pill.go::before{background:var(--neon-1);box-shadow:0 0 8px var(--neon-1);}
+.s-pill.wn{background:rgba(255,183,77,.1);color:var(--neon-5);border:1px solid rgba(255,183,77,.4);}
+.s-pill.wn::before{background:var(--neon-5);box-shadow:0 0 8px var(--neon-5);}
+.s-pill.dg{background:rgba(255,92,179,.1);color:var(--neon-3);border:1px solid rgba(255,92,179,.4);}
+.s-pill.dg::before{background:var(--neon-3);box-shadow:0 0 8px var(--neon-3);}
+.s-pill.st{background:rgba(110,122,160,.12);color:var(--text-3);border:1px solid rgba(110,122,160,.3);}
+.s-pill.st::before{background:var(--text-3);}
+.s-pill.pre{background:rgba(124,92,255,.12);color:var(--neon-2);border:1px solid rgba(124,92,255,.4);}
+.s-pill.pre::before{background:var(--neon-2);box-shadow:0 0 8px var(--neon-2);}
+.s-pill.dn{background:rgba(0,255,163,.1);color:var(--neon-4);border:1px solid rgba(0,255,163,.4);}
+.s-pill.dn::before{background:var(--neon-4);box-shadow:0 0 8px var(--neon-4);}
+
+/* ============ KPI ============ */
+.kpi-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:18px;
+  margin-top:40px;
+}
+@media (max-width:760px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+.kpi-card{
+  background:var(--panel); border:1px solid var(--line);
+  border-radius:var(--r-md); padding:30px 22px;
+  text-align:center; backdrop-filter:blur(10px);
+  position:relative; overflow:hidden;
+}
+.kpi-card::before{
+  content:""; position:absolute; top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--neon-1),transparent);
+  opacity:.5;
+}
+.kpi-card .n{
+  font-size:54px; font-weight:900; line-height:1;
+  background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:-.02em;
+  filter:drop-shadow(0 0 20px rgba(0,229,255,.3));
+}
+.kpi-card .n.c2{background:var(--grad-2);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 20px rgba(124,92,255,.3));}
+.kpi-card .n.c3{background:var(--grad-3);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 20px rgba(0,255,163,.3));}
+.kpi-card .l{font-size:13px;color:var(--text-2);margin-top:12px;letter-spacing:.05em;}
+
+/* ============ CTA ============ */
+.cta-section{
+  padding:120px 0;
+  text-align:center;
+}
+.cta-box{
+  background:linear-gradient(135deg,rgba(0,229,255,.06),rgba(124,92,255,.06));
+  border:1px solid var(--line-strong);
+  border-radius:var(--r-lg);
+  padding:70px 40px;
+  position:relative; overflow:hidden;
+  backdrop-filter:blur(12px);
+}
+.cta-box::before{
+  content:""; position:absolute; inset:0;
+  background:
+    radial-gradient(60% 50% at 50% 0%,rgba(0,229,255,.18),transparent 60%),
+    radial-gradient(50% 40% at 50% 100%,rgba(124,92,255,.16),transparent 60%);
+  pointer-events:none;
+}
+.cta-box > *{position:relative;}
+.cta-box h2{
+  font-size:clamp(32px,5vw,56px);
+  font-weight:900; letter-spacing:-.025em;
+  line-height:1.15; margin-bottom:18px;
+}
+.cta-box h2 .g{background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.cta-box p{
+  font-size:16px;color:var(--text-2);max-width:560px;margin:0 auto 32px;
+}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;}
+
+/* ============ Footer ============ */
+footer{
+  border-top:1px solid var(--line);
+  padding:36px 0;
+  text-align:center;
+  font-size:12.5px;
+  color:var(--text-3);
+  letter-spacing:.05em;
+}
+
+/* ============ Reveal on scroll ============ */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s,transform .8s;}
+.reveal.in{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<a href="../../index.html" style="position:fixed;top:12px;left:16px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:999px;background:rgba(0,0,0,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);color:#e8ecf4;font-size:13px;font-weight:600;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(139,92,246,.35)'" onmouseout="this.style.background='rgba(0,0,0,.55)'">&larr; 返回首页</a>
+
+<!-- ============ Nav ============ -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <div class="nav-logo">
+      <span class="mark">督</span>
+      <span>督办管理系统</span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#features">便捷</a></li>
+      <li><a href="#compare">对比</a></li>
+      <li><a href="#modules">模块</a></li>
+      <li><a href="#flow">上手</a></li>
+      <li><a href="#kpi">价值</a></li>
+    </ul>
+    <a href="#cta" class="nav-cta">立即体验 →</a>
+  </div>
+</nav>
+
+<!-- ============ Hero ============ -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-badge">
+        <span class="pulse"></span>
+        DUBAN SYSTEM · V 1.0 上线
+      </div>
+      <h1>
+        重点工作督办，<br>
+        <span class="accent">一张表</span> 搞定。
+      </h1>
+      <p class="lead">
+        告别 Excel 群里催、版本满天飞。<br>
+        台账、进度、统计、报告，<span style="color:var(--neon-1);">一站到底</span>。
+      </p>
+      <div class="hero-cta">
+        <a href="#features" class="btn btn-primary">看看有多便捷 →</a>
+        <a href="#modules" class="btn btn-ghost">六大模块</a>
+      </div>
+      <div class="hero-meta">
+        <div><div class="num">6</div><div class="lbl">核心模块</div></div>
+        <div><div class="num">1</div><div class="lbl">键导入 Excel</div></div>
+        <div><div class="num">0</div><div class="lbl">数据库依赖</div></div>
+        <div><div class="num">5min</div><div class="lbl">部署上线</div></div>
+      </div>
+    </div>
+
+    <!-- Hero mockup -->
+    <div class="mock-frame">
+      <div class="mock-bar">
+        <span></span><span></span><span></span>
+        <div class="url">http://192.168.1.100:3100 — 督办管理系统</div>
+      </div>
+      <div class="mock-body">
+        <div class="mk-head">
+          <div class="mk-title">督办管理系统</div>
+          <div class="mk-user">admin · 在线</div>
+        </div>
+        <div class="mk-layout">
+          <div class="mk-side">
+            <div>▤ 工作台</div>
+            <div class="on">☰ 督办台账</div>
+            <div>★ 统计分析</div>
+            <div>☆ 用户管理</div>
+            <div>◆ 单位管理</div>
+          </div>
+          <div class="mk-main">
+            <div class="mk-stats">
+              <div class="mk-stat"><div class="n">128</div><div class="l">总任务</div></div>
+              <div class="mk-stat"><div class="n">76</div><div class="l">推进中</div></div>
+              <div class="mk-stat w"><div class="n">12</div><div class="l">临期</div></div>
+              <div class="mk-stat d"><div class="n">7</div><div class="l">超期</div></div>
+            </div>
+            <div class="mk-list">
+              <div class="row"><span class="tt">制度库优化升级</span><span class="mk-tag">推进中</span></div>
+              <div class="row"><span class="tt">预算执行进度统计</span><span class="mk-tag wn">临期</span></div>
+              <div class="row"><span class="tt">年度考核方案制定</span><span class="mk-tag dg">超期</span></div>
+              <div class="row"><span class="tt">季度督办通报发布</span><span class="mk-tag dn">已完成</span></div>
+              <div class="row"><span class="tt">项目立项审批跟踪</span><span class="mk-tag">推进中</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Features (4 便捷点) ============ -->
+<section id="features">
+  <div class="container">
+    <div class="center-head">
+      <div class="eyebrow">便捷 · CONVENIENT</div>
+      <h2 class="section-title">不是更强大，<br>是 <span class="grad">更省事</span>。</h2>
+      <p class="section-sub">把繁琐留给系统，把时间还给工作。</p>
+    </div>
+    <div class="value-grid">
+      <div class="value-card reveal">
+        <div class="value-icon">⇣</div>
+        <h3>Excel 一键导入</h3>
+        <p>原督办单 .xlsx 直接拖进来，<b style="color:var(--text);">自动识别表头</b>，无需手敲一行。</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">⏱</div>
+        <h3>状态自动判定</h3>
+        <p>临期、超期，系统按完成日期<b style="color:var(--text);">自动标红</b>，再不用人盯。</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">✎</div>
+        <h3>报告一键生成</h3>
+        <p>季度通报、月度汇总，<b style="color:var(--text);">点一下</b>，初稿就有，告别熬夜手抄。</p>
+      </div>
+      <div class="value-card reveal">
+        <div class="value-icon">⚑</div>
+        <h3>5 分钟部署</h3>
+        <p>无数据库、无云端，<b style="color:var(--text);">局域网即用</b>，数据 100% 在自己手里。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Compare ============ -->
+<section id="compare">
+  <div class="container">
+    <div class="center-head">
+      <div class="eyebrow">BEFORE · AFTER</div>
+      <h2 class="section-title">从"<span class="grad2">催进度</span>"<br>到"<span class="grad">看进度</span>"。</h2>
+    </div>
+    <div class="compare-grid reveal">
+      <div class="compare-col before">
+        <div class="compare-head">⚠ 以前是这样</div>
+        <ul>
+          <li><span class="ic">×</span><span>Excel 满天飞，没人知道哪份是最新</span></li>
+          <li><span class="ic">×</span><span>临期靠电话催、微信群里 @ 人</span></li>
+          <li><span class="ic">×</span><span>完成没附件，回头核查找不到证据</span></li>
+          <li><span class="ic">×</span><span>季度通报靠手抄、熬两天才能出稿</span></li>
+          <li><span class="ic">×</span><span>各单位都能看全表，权限管不住</span></li>
+        </ul>
+      </div>
+      <div class="compare-arrow"><div>→</div></div>
+      <div class="compare-col after">
+        <div class="compare-head">✓ 现在是这样</div>
+        <ul>
+          <li><span class="ic">✓</span><span>一张电子台账，全员实时一致</span></li>
+          <li><span class="ic">✓</span><span>临期超期自动标红，一眼看到</span></li>
+          <li><span class="ic">✓</span><span>附件随手传，证明材料永久留痕</span></li>
+          <li><span class="ic">✓</span><span>一键生成报告，5 分钟成稿</span></li>
+          <li><span class="ic">✓</span><span>按单位授权，各看各的、互不干扰</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6 模块 ============ -->
+<section id="modules" class="six-section">
+  <div class="container">
+    <div class="head-wrap">
+      <div class="eyebrow center-head" style="display:inline-flex;">SIX MODULES</div>
+      <div class="six-title"><span class="num-6">6</span> <span class="lbl">核心模块</span></div>
+      <p class="sub">覆盖督办全流程，每一环都让你省心。</p>
+    </div>
+    <div class="six-grid">
+      <div class="six-card reveal">
+        <div class="s-num">01</div>
+        <div class="s-ic">▤</div>
+        <h3>工作台</h3>
+        <div class="s-desc">关键指标 + 动态推送，登录就知道今天要管什么。</div>
+      </div>
+      <div class="six-card reveal">
+        <div class="s-num">02</div>
+        <div class="s-ic">☰</div>
+        <h3>督办台账</h3>
+        <div class="s-desc">系统核心。Excel 进、报告出、附件随手传。</div>
+      </div>
+      <div class="six-card reveal">
+        <div class="s-num">03</div>
+        <div class="s-ic">★</div>
+        <h3>统计分析</h3>
+        <div class="s-desc">总体 + 各单位双视图，进度、完成率一图看清。</div>
+      </div>
+      <div class="six-card reveal">
+        <div class="s-num">04</div>
+        <div class="s-ic">✎</div>
+        <h3>报告生成</h3>
+        <div class="s-desc">按时间 / 状态 / 单位自动组稿，开会前 1 分钟搞定。</div>
+      </div>
+      <div class="six-card reveal">
+        <div class="s-num">05</div>
+        <div class="s-ic">☆</div>
+        <h3>用户管理</h3>
+        <div class="s-desc">注册即审、单位授权，权限粒度到"看哪几家"。</div>
+      </div>
+      <div class="six-card reveal">
+        <div class="s-num">06</div>
+        <div class="s-ic">✓</div>
+        <h3>操作日志</h3>
+        <div class="s-desc">谁改了哪条、什么时候改的，全程留痕可追。</div>
+      </div>
+    </div>
+
+    <!-- 状态徽章 -->
+    <div class="status-bar reveal" style="margin-top:48px;justify-content:center;">
+      <span class="s-pill go">推进中</span>
+      <span class="s-pill wn">临期</span>
+      <span class="s-pill dg">超期</span>
+      <span class="s-pill st">终止</span>
+      <span class="s-pill pre">预完成</span>
+      <span class="s-pill dn">已完成</span>
+    </div>
+    <p class="center-head" style="margin-top:16px;color:var(--text-3);font-size:13px;">
+      6 种状态自动判定 · 颜色化呈现 · 无需手工标注
+    </p>
+  </div>
+</section>
+
+<!-- ============ Flow · 3步上手 ============ -->
+<section id="flow">
+  <div class="container">
+    <div class="center-head">
+      <div class="eyebrow">3 STEPS</div>
+      <h2 class="section-title">3 步 <span class="grad3">上手</span>，<br>不用培训。</h2>
+    </div>
+    <div class="flow-grid">
+      <div class="flow-card reveal">
+        <div class="step-no">01</div>
+        <div class="step-big">⇣</div>
+        <h3>导入 Excel</h3>
+        <p>把原督办单直接拖进来，<br>表头自动识别，<b style="color:var(--neon-1);">秒变台账</b>。</p>
+      </div>
+      <div class="flow-card reveal">
+        <div class="step-no">02</div>
+        <div class="step-big">✎</div>
+        <h3>更新进度</h3>
+        <p>各单位用自己账号登录，<br>填进度、传附件，<b style="color:var(--neon-1);">不再催</b>。</p>
+      </div>
+      <div class="flow-card reveal">
+        <div class="step-no">03</div>
+        <div class="step-big">↗</div>
+        <h3>生成报告</h3>
+        <p>点击"生成报告"按钮，<br>统计稿 + 通报稿，<b style="color:var(--neon-1);">直接拿来用</b>。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KPI ============ -->
+<section id="kpi">
+  <div class="container">
+    <div class="center-head">
+      <div class="eyebrow">VALUE</div>
+      <h2 class="section-title">让督办，<br>真的<span class="grad">省事</span>。</h2>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card reveal">
+        <div class="n">↓80%</div>
+        <div class="l">人工催报时间</div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="n c2">↑5×</div>
+        <div class="l">报告产出效率</div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="n c3">100%</div>
+        <div class="l">任务留痕率</div>
+      </div>
+      <div class="kpi-card reveal">
+        <div class="n">0</div>
+        <div class="l">数据外泄风险</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section id="cta" class="cta-section">
+  <div class="container">
+    <div class="cta-box reveal">
+      <h2>从今天起，<br>督办 <span class="g">不再加班</span>。</h2>
+      <p>5 分钟部署 · 局域网即用 · 数据 100% 在本地</p>
+      <div class="cta-row">
+        <a href="#" class="btn btn-primary">立即上手 →</a>
+        <a href="#features" class="btn btn-ghost">回顾便捷</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 督办管理系统 · DUBAN MANAGEMENT SYSTEM · V 1.0
+</footer>
+
+<script>
+  // Nav scroll effect
+  const nav=document.getElementById('nav');
+  window.addEventListener('scroll',()=>{
+    if(window.scrollY>40)nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+  // Reveal on scroll
+  const io=new IntersectionObserver(es=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="以 AI 赋能办公室工作提质增效 —— 办公室人工智能应用探索展示首页">
+<title>AI 赋能办公室工作 · 展示首页</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============================================================
+     SECTION 1: HERO
+     ============================================================ -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-glow hero-glow--1"></div>
+    <div class="hero-glow hero-glow--2"></div>
+    <div class="hero-glow hero-glow--3"></div>
+    <div class="hero-orb"></div>
+    <div class="hero-grid"></div>
+  </div>
+
+  <div class="container hero-content">
+    <p class="hero-eyebrow" data-reveal>办公室人工智能应用探索</p>
+    <h1 class="hero-title" data-reveal data-delay="1">
+      以 AI 赋能办公室工作<br><span class="gradient-text">提质增效</span>
+    </h1>
+    <p class="hero-sub" data-reveal data-delay="2">
+      不是展示七个系统，而是展示办公室工作方式的一次 AI 化重构。
+    </p>
+
+    <!-- Key stats -->
+    <div class="hero-stats" data-reveal data-delay="2">
+      <div class="stat">
+        <span class="stat-num" data-count="7">0</span>
+        <span class="stat-label">个应用场景</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num" data-count="4">0</span>
+        <span class="stat-label">个核心转变</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat">
+        <span class="stat-num">100<small>%</small></span>
+        <span class="stat-label">本地部署</span>
+      </div>
+    </div>
+
+    <!-- Hero quote -->
+    <blockquote class="hero-quote" data-reveal data-delay="3">
+      把想法转化为<em>工具</em>，把经验转化为<em>流程</em>，把流程转化为<em>能力</em>
+    </blockquote>
+
+    <div class="hero-badges" data-reveal data-delay="3">
+      <!-- Row 1: 要效率 · 要体验 -->
+      <div class="badge-group">
+        <span class="badge-group-label">要效率 · 要体验</span>
+        <div class="badge" style="--badge-color: #E8920A; --badge-delay: 0">
+          <a class="badge-main" href="#project-insightflow">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 8-8 12-8-12z"/><path d="M4 10h16" opacity=".45"/><path d="M8.5 10L12 2l3.5 8" opacity=".45"/></svg>
+            <span class="badge-cn">凝识</span>
+            <span class="badge-en">InsightFlow</span>
+          </a>
+          <a class="badge-detail" href="projects/insightflow/index.html" aria-label="进入凝识单独展示页">→</a>
+        </div>
+        <div class="badge" style="--badge-color: #54d6bd; --badge-delay: 1">
+          <a class="badge-main" href="#project-listenmind">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="12" r="2" fill="currentColor" stroke="none"/><path d="M10 8a5.7 5.7 0 010 8"/><path d="M13.5 5a9.5 9.5 0 010 14" opacity=".55"/><path d="M17 2.5a13 13 0 010 19" opacity=".3"/></svg>
+            <span class="badge-cn">聆悟</span>
+            <span class="badge-en">ListenMind</span>
+          </a>
+          <a class="badge-detail" href="projects/listenmind/index.html" aria-label="进入聆悟单独展示页">→</a>
+        </div>
+        <div class="badge" style="--badge-color: #D4762E; --badge-delay: 2">
+          <a class="badge-main" href="#project-readmind">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4c3-.8 6-.5 10 1.5v15C8 18.5 5 18 2 19V4z"/><path d="M22 4c-3-.8-6-.5-10 1.5v15c4-2 7-2.5 10-1.5V4z"/><circle cx="18" cy="4" r="1.2" fill="currentColor" stroke="none" opacity=".7"/><path d="M18 1v1.2m2.2 1.8h-1.2M18 7V5.8m-2.2-1.8h1.2" stroke-width="1.3" opacity=".7"/></svg>
+            <span class="badge-cn">阅思</span>
+            <span class="badge-en">ReadMind</span>
+          </a>
+          <a class="badge-detail" href="projects/readmind/index.html" aria-label="进入阅思单独展示页">→</a>
+        </div>
+        <div class="badge" style="--badge-color: #48c6b6; --badge-delay: 3">
+          <a class="badge-main" href="#project-testmind">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M3 14c0-1.5.7-3 2-4l2 7H1l2-7z" opacity=".65"/><path d="M21 14c0-1.5-.7-3-2-4l-2 7h6l-2-7z" opacity=".65"/><circle cx="12" cy="3" r="1.5" fill="currentColor" stroke="none"/></svg>
+            <span class="badge-cn">知衡</span>
+            <span class="badge-en">TestMind</span>
+          </a>
+          <a class="badge-detail" href="projects/testmind/index.html" aria-label="进入知衡单独展示页">→</a>
+        </div>
+      </div>
+      <!-- Row 2: 要价值 · 要生态 -->
+      <div class="badge-group">
+        <span class="badge-group-label">要价值 · 要生态</span>
+        <div class="badge" style="--badge-color: #7c5cff; --badge-delay: 4">
+          <a class="badge-main" href="#project-officehub">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" opacity=".4"/><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="1.5"/><circle cx="20" cy="6" r="1.5"/><circle cx="4" cy="18" r="1.5"/><circle cx="20" cy="18" r="1.5"/><path d="M9.5 10L5.5 7M14.5 10l4-3M9.5 14L5.5 17M14.5 14l4 3" opacity=".5"/></svg>
+            <span class="badge-cn">办公室管理系统</span>
+            <span class="badge-en">OfficeHub</span>
+          </a>
+          <a class="badge-detail" href="projects/officehub/index.html" aria-label="进入办公室管理系统单独展示页">→</a>
+        </div>
+        <div class="badge" style="--badge-color: #00e5ff; --badge-delay: 5">
+          <a class="badge-main" href="#project-supervision">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+            <span class="badge-cn">督办管理系统</span>
+            <span class="badge-en">Supervision</span>
+          </a>
+          <a class="badge-detail" href="projects/supervision/index.html" aria-label="进入督办管理系统单独展示页">→</a>
+        </div>
+        <div class="badge" style="--badge-color: #6366f1; --badge-delay: 6">
+          <a class="badge-main" href="#project-ecoasset">
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 6.5A8 8 0 005.1 8"/><path d="M6.5 17.5A8 8 0 0018.9 16"/><path d="M2 8l3.1 0 0-3.1" stroke-width="1.8"/><path d="M22 16l-3.1 0 0 3.1" stroke-width="1.8"/><circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none" opacity=".35"/></svg>
+            <span class="badge-cn">环资流系统</span>
+            <span class="badge-en">EcoAsset</span>
+          </a>
+          <a class="badge-detail" href="projects/ecoasset/index.html" aria-label="进入环资流系统单独展示页">→</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a class="scroll-hint" href="#workflow" aria-label="向下滚动">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+  </a>
+</section>
+
+<!-- ============================================================
+     SECTION 2: WORKFLOW
+     ============================================================ -->
+<section class="workflow" id="workflow">
+  <div class="workflow-bg" aria-hidden="true">
+    <div class="workflow-glow workflow-glow--l"></div>
+    <div class="workflow-glow workflow-glow--r"></div>
+  </div>
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">办公室 AI 工作流</p>
+      <h2>AI 做重复与归纳，人做判断与定调</h2>
+    </div>
+
+    <div class="flow-pipeline" data-reveal data-delay="1">
+      <!-- Node 1 -->
+      <div class="flow-node" style="--node-c:#E8920A">
+        <div class="flow-ring">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="24" height="24" rx="3"/><path d="M4 12h24"/><path d="M12 12v16"/></svg>
+        </div>
+        <h3>工作输入</h3>
+        <div class="flow-kws">
+          <span>录音</span><span>碎片想法</span><span>制度资料</span><span>资产数据</span><span>督办台账</span>
+        </div>
+        <div class="flow-dots" aria-label="涉及项目：凝识、聆悟、阅思、知衡">
+          <span style="--dot-c:#E8920A" title="凝识"></span>
+          <span style="--dot-c:#54d6bd" title="聆悟"></span>
+          <span style="--dot-c:#D4762E" title="阅思"></span>
+          <span style="--dot-c:#48c6b6" title="知衡"></span>
+        </div>
+      </div>
+
+      <div class="flow-connector" aria-hidden="true"><div class="flow-pulse"></div></div>
+
+      <!-- Node 2 -->
+      <div class="flow-node" style="--node-c:#3b82f6">
+        <div class="flow-ring">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="12"/><path d="M16 10v6l4 4"/></svg>
+        </div>
+        <h3>AI 处理</h3>
+        <div class="flow-kws">
+          <span>转录</span><span>归集</span><span>匹配</span><span>拆分知识点</span><span>生成题库</span>
+        </div>
+        <div class="flow-dots" aria-label="涉及项目：凝识、聆悟、知衡、环资">
+          <span style="--dot-c:#E8920A" title="凝识"></span>
+          <span style="--dot-c:#54d6bd" title="聆悟"></span>
+          <span style="--dot-c:#48c6b6" title="知衡"></span>
+          <span style="--dot-c:#6366f1" title="环资"></span>
+        </div>
+      </div>
+
+      <div class="flow-connector" aria-hidden="true"><div class="flow-pulse"></div></div>
+
+      <!-- Node 3 -->
+      <div class="flow-node" style="--node-c:#06b6d4">
+        <div class="flow-ring">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4a8 8 0 0 1 0 16"/><path d="M16 4a8 8 0 0 0 0 16"/><circle cx="16" cy="16" r="3"/><path d="M16 24v4"/></svg>
+        </div>
+        <h3>人工把关</h3>
+        <div class="flow-kws">
+          <span>判断</span><span>取舍</span><span>复核</span><span>定调</span><span>审批</span>
+        </div>
+        <div class="flow-dots" aria-label="涉及项目：聆悟、环资、督见、枢务">
+          <span style="--dot-c:#54d6bd" title="聆悟"></span>
+          <span style="--dot-c:#6366f1" title="环资"></span>
+          <span style="--dot-c:#00e5ff" title="督见"></span>
+          <span style="--dot-c:#7c5cff" title="枢务"></span>
+        </div>
+      </div>
+
+      <div class="flow-connector" aria-hidden="true"><div class="flow-pulse"></div></div>
+
+      <!-- Node 4 -->
+      <div class="flow-node" style="--node-c:#8b5cf6">
+        <div class="flow-ring">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 28V12l10-8 10 8v16"/><path d="M12 28v-8h8v8"/></svg>
+        </div>
+        <h3>能力沉淀</h3>
+        <div class="flow-kws">
+          <span>规则库</span><span>知识库</span><span>题库</span><span>决策资产</span><span>组织记忆</span>
+        </div>
+        <div class="flow-dots" aria-label="涉及项目：凝识、阅思、环资、枢务">
+          <span style="--dot-c:#E8920A" title="凝识"></span>
+          <span style="--dot-c:#D4762E" title="阅思"></span>
+          <span style="--dot-c:#6366f1" title="环资"></span>
+          <span style="--dot-c:#7c5cff" title="枢务"></span>
+        </div>
+      </div>
+
+      <div class="flow-connector" aria-hidden="true"><div class="flow-pulse"></div></div>
+
+      <!-- Node 5 -->
+      <div class="flow-node" style="--node-c:#f59e0b">
+        <div class="flow-ring">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h20v20H6z"/><path d="M10 12h12M10 16h8M10 20h10"/></svg>
+        </div>
+        <h3>工作输出</h3>
+        <div class="flow-kws">
+          <span>报告</span><span>纪要</span><span>清单</span><span>制单</span><span>周总结</span>
+        </div>
+        <div class="flow-dots" aria-label="涉及项目：凝识、聆悟、督见、枢务">
+          <span style="--dot-c:#E8920A" title="凝识"></span>
+          <span style="--dot-c:#54d6bd" title="聆悟"></span>
+          <span style="--dot-c:#00e5ff" title="督见"></span>
+          <span style="--dot-c:#7c5cff" title="枢务"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2.5: FOUR DIRECTIONS ("四个向")
+     ============================================================ -->
+<section class="insights" id="insights">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">场景牵引</p>
+      <h2>坚持从真实需求出发，做到四个"向"</h2>
+    </div>
+
+    <div class="insight-grid">
+      <div class="insight-card" data-reveal data-delay="0" style="--insight-color: #3b82f6">
+        <span class="insight-num">01</span>
+        <h3>向重复性事务<br><em>要效率</em></h3>
+        <p>资料整理、信息归集、格式处理、台账匹配 —— 规则明确、重复度高的事项由 AI 先行处理，人工复核把关</p>
+      </div>
+
+      <div class="insight-card" data-reveal data-delay="1" style="--insight-color: #8b5cf6">
+        <span class="insight-num">02</span>
+        <h3>向干部职工需求<br><em>要体验</em></h3>
+        <p>AI 引导阅读与思考，"学习搭子"陪伴出题练习，让学习从被动接受变为主动建构</p>
+      </div>
+
+      <div class="insight-card" data-reveal data-delay="2" style="--insight-color: #06b6d4">
+        <span class="insight-num">03</span>
+        <h3>向基层业务流程<br><em>要价值</em></h3>
+        <p>从资产云数据匹配这一具体场景入手，实现从"多人重复处理"到"工具辅助 + 人工复核"的转变</p>
+      </div>
+
+      <div class="insight-card" data-reveal data-delay="3" style="--insight-color: #f59e0b">
+        <span class="insight-num">04</span>
+        <h3>向办公室管理变革<br><em>要生态</em></h3>
+        <p>建设更贴合自身的综合管理中台，让办公室的人事、行政、党群、后勤、督办形成有机整体</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3: PROJECT MATRIX
+     ============================================================ -->
+<section class="projects" id="projects">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">七个应用场景</p>
+      <h2>每一个项目，解决一类真实问题</h2>
+    </div>
+
+    <div class="project-grid">
+      <!-- 1. 凝识 InsightFlow -->
+      <a class="project-card" id="project-insightflow" href="projects/insightflow/index.html" data-reveal data-delay="0" style="--card-color: #E8920A">
+        <div class="card-preview" aria-hidden="true">
+          <svg viewBox="0 0 280 160" fill="none">
+            <rect width="280" height="160" rx="8" fill="#0c1019"/>
+            <!-- sidebar -->
+            <rect x="0" y="0" width="52" height="160" rx="8" fill="#111827"/>
+            <rect x="12" y="16" width="28" height="4" rx="2" fill="#E8920A" opacity=".5"/>
+            <rect x="12" y="30" width="20" height="3" rx="1.5" fill="#fff" opacity=".08"/>
+            <rect x="12" y="40" width="24" height="3" rx="1.5" fill="#fff" opacity=".08"/>
+            <!-- idea cards left -->
+            <rect x="64" y="16" width="80" height="36" rx="5" fill="#1a2235" stroke="#E8920A" stroke-width=".6"/>
+            <rect x="72" y="24" width="36" height="3" rx="1.5" fill="#E8920A" opacity=".45"/>
+            <rect x="72" y="32" width="60" height="2" rx="1" fill="#fff" opacity=".12"/>
+            <rect x="72" y="38" width="48" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="64" y="60" width="80" height="36" rx="5" fill="#1a2235" stroke="#E8920A" stroke-width=".4" opacity=".7"/>
+            <rect x="72" y="68" width="32" height="3" rx="1.5" fill="#E8920A" opacity=".35"/>
+            <rect x="72" y="76" width="52" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="64" y="104" width="80" height="36" rx="5" fill="#1a2235" stroke="#E8920A" stroke-width=".3" opacity=".5"/>
+            <rect x="72" y="112" width="40" height="3" rx="1.5" fill="#E8920A" opacity=".25"/>
+            <!-- arrow -->
+            <path d="M154 80h16m-4-4l4 4-4 4" stroke="#E8920A" stroke-width="1.2" opacity=".4"/>
+            <!-- organized output -->
+            <rect x="180" y="16" width="88" height="128" rx="6" fill="#111827"/>
+            <rect x="190" y="26" width="40" height="4" rx="2" fill="#E8920A" opacity=".4"/>
+            <rect x="190" y="40" width="68" height="22" rx="4" fill="#1a2235"/>
+            <rect x="196" y="46" width="40" height="3" rx="1.5" fill="#fff" opacity=".15"/>
+            <rect x="196" y="54" width="52" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="190" y="70" width="68" height="22" rx="4" fill="#1a2235"/>
+            <rect x="196" y="76" width="36" height="3" rx="1.5" fill="#fff" opacity=".15"/>
+            <rect x="196" y="84" width="48" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="190" y="100" width="68" height="22" rx="4" fill="#1a2235"/>
+            <rect x="196" y="106" width="44" height="3" rx="1.5" fill="#fff" opacity=".15"/>
+            <rect x="196" y="114" width="56" height="2" rx="1" fill="#fff" opacity=".08"/>
+          </svg>
+        </div>
+        <div class="card-logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 8-8 12-8-12z"/><path d="M4 10h16" opacity=".45"/><path d="M8.5 10L12 2l3.5 8" opacity=".45"/></svg></div>
+        <div class="card-body">
+          <h3 class="card-name-cn">凝识</h3>
+          <p class="card-name-en">InsightFlow</p>
+          <p class="card-desc">做你最贴心的材料搭子</p>
+          <div class="card-tags">
+            <span style="--tag-c:#E8920A">思路归集</span>
+            <span style="--tag-c:#E8920A">双向追溯</span>
+            <span style="--tag-c:#E8920A">智能汇报</span>
+          </div>
+        </div>
+        <span class="card-cta">查看详情 &rarr;</span>
+      </a>
+
+      <!-- 2. 聆悟 ListenMind -->
+      <a class="project-card" id="project-listenmind" href="projects/listenmind/index.html" data-reveal data-delay="1" style="--card-color: #54d6bd">
+        <div class="card-preview" aria-hidden="true">
+          <svg viewBox="0 0 280 160" fill="none">
+            <rect width="280" height="160" rx="8" fill="#0c1019"/>
+            <!-- sidebar -->
+            <rect x="0" y="0" width="52" height="160" rx="8" fill="#111827"/>
+            <rect x="12" y="16" width="28" height="4" rx="2" fill="#54d6bd" opacity=".5"/>
+            <rect x="12" y="30" width="20" height="3" rx="1.5" fill="#fff" opacity=".08"/>
+            <rect x="12" y="40" width="24" height="3" rx="1.5" fill="#fff" opacity=".08"/>
+            <rect x="8" y="64" width="36" height="20" rx="4" fill="#54d6bd" opacity=".1" stroke="#54d6bd" stroke-width=".4"/>
+            <!-- transcript panel -->
+            <rect x="60" y="12" width="108" height="136" rx="6" fill="#111827"/>
+            <rect x="70" y="20" width="48" height="4" rx="2" fill="#fff" opacity=".15"/>
+            <rect x="70" y="34" width="88" height="20" rx="3" fill="#1a2235"/>
+            <rect x="76" y="40" width="64" height="2" rx="1" fill="#fff" opacity=".12"/>
+            <rect x="76" y="46" width="72" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="70" y="62" width="88" height="20" rx="3" fill="#1a2235"/>
+            <rect x="76" y="68" width="56" height="2" rx="1" fill="#fff" opacity=".12"/>
+            <rect x="70" y="90" width="88" height="20" rx="3" fill="#1a2235"/>
+            <rect x="76" y="96" width="68" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <!-- AI analysis panel -->
+            <rect x="176" y="12" width="96" height="76" rx="6" fill="#111827"/>
+            <rect x="186" y="22" width="40" height="4" rx="2" fill="#54d6bd" opacity=".45"/>
+            <rect x="186" y="34" width="76" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="186" y="42" width="60" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="186" y="52" width="40" height="12" rx="3" fill="#54d6bd" opacity=".12" stroke="#54d6bd" stroke-width=".4"/>
+            <rect x="186" y="70" width="32" height="12" rx="3" fill="#54d6bd" opacity=".08" stroke="#54d6bd" stroke-width=".3"/>
+            <!-- AI chat bubble -->
+            <rect x="176" y="96" width="96" height="52" rx="6" fill="#0f2b28" stroke="#54d6bd" stroke-width=".5"/>
+            <rect x="186" y="106" width="52" height="3" rx="1.5" fill="#54d6bd" opacity=".4"/>
+            <rect x="186" y="114" width="76" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="186" y="122" width="64" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="186" y="132" width="48" height="10" rx="4" fill="#54d6bd" opacity=".2"/>
+          </svg>
+        </div>
+        <div class="card-logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="12" r="2" fill="currentColor" stroke="none"/><path d="M10 8a5.7 5.7 0 010 8"/><path d="M13.5 5a9.5 9.5 0 010 14" opacity=".55"/><path d="M17 2.5a13 13 0 010 19" opacity=".3"/></svg></div>
+        <div class="card-body">
+          <h3 class="card-name-cn">聆悟</h3>
+          <p class="card-name-en">ListenMind</p>
+          <p class="card-desc">做你最贴心的会议搭子</p>
+          <div class="card-tags">
+            <span style="--tag-c:#54d6bd">会中判断</span>
+            <span style="--tag-c:#54d6bd">辅助追问</span>
+            <span style="--tag-c:#54d6bd">决策沉淀</span>
+          </div>
+        </div>
+        <span class="card-cta">查看详情 &rarr;</span>
+      </a>
+
+      <!-- 3. 阅思 ReadMind -->
+      <a class="project-card" id="project-readmind" href="projects/readmind/index.html" data-reveal data-delay="2" style="--card-color: #D4762E">
+        <div class="card-preview" aria-hidden="true">
+          <svg viewBox="0 0 280 160" fill="none">
+            <rect width="280" height="160" rx="8" fill="#0c1019"/>
+            <!-- book page left -->
+            <rect x="16" y="12" width="120" height="136" rx="6" fill="#111827"/>
+            <rect x="28" y="24" width="60" height="4" rx="2" fill="#D4762E" opacity=".4"/>
+            <rect x="28" y="36" width="96" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="28" y="44" width="92" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="28" y="52" width="88" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <!-- highlighted line -->
+            <rect x="26" y="62" width="100" height="10" rx="2" fill="#D4762E" opacity=".08"/>
+            <rect x="28" y="65" width="96" height="2" rx="1" fill="#D4762E" opacity=".35"/>
+            <rect x="28" y="78" width="80" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="28" y="86" width="94" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="28" y="94" width="72" height="2" rx="1" fill="#fff" opacity=".06"/>
+            <!-- highlighted line 2 -->
+            <rect x="26" y="104" width="84" height="10" rx="2" fill="#D4762E" opacity=".06"/>
+            <rect x="28" y="107" width="80" height="2" rx="1" fill="#D4762E" opacity=".25"/>
+            <rect x="28" y="120" width="88" height="2" rx="1" fill="#fff" opacity=".06"/>
+            <rect x="28" y="128" width="76" height="2" rx="1" fill="#fff" opacity=".06"/>
+            <!-- annotation panel right -->
+            <rect x="144" y="12" width="124" height="136" rx="6" fill="#111827"/>
+            <rect x="156" y="22" width="48" height="4" rx="2" fill="#D4762E" opacity=".4"/>
+            <!-- knowledge card 1 -->
+            <rect x="156" y="36" width="100" height="36" rx="4" fill="#1a2235" stroke="#D4762E" stroke-width=".4"/>
+            <rect x="164" y="44" width="48" height="3" rx="1.5" fill="#D4762E" opacity=".3"/>
+            <rect x="164" y="52" width="80" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="164" y="60" width="64" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <!-- knowledge card 2 -->
+            <rect x="156" y="80" width="100" height="36" rx="4" fill="#1a2235" stroke="#D4762E" stroke-width=".3" opacity=".7"/>
+            <rect x="164" y="88" width="40" height="3" rx="1.5" fill="#D4762E" opacity=".25"/>
+            <rect x="164" y="96" width="72" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <!-- sparkle icon -->
+            <circle cx="246" y="130" r="4" fill="#D4762E" opacity=".15" stroke="#D4762E" stroke-width=".4"/>
+          </svg>
+        </div>
+        <div class="card-logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4c3-.8 6-.5 10 1.5v15C8 18.5 5 18 2 19V4z"/><path d="M22 4c-3-.8-6-.5-10 1.5v15c4-2 7-2.5 10-1.5V4z"/><circle cx="18" cy="4" r="1.2" fill="currentColor" stroke="none" opacity=".7"/><path d="M18 1v1.2m2.2 1.8h-1.2M18 7V5.8m-2.2-1.8h1.2" stroke-width="1.3" opacity=".7"/></svg></div>
+        <div class="card-body">
+          <h3 class="card-name-cn">阅思</h3>
+          <p class="card-name-en">ReadMind</p>
+          <p class="card-desc">做你最贴心的读书搭子</p>
+          <div class="card-tags">
+            <span style="--tag-c:#D4762E">灵感记录</span>
+            <span style="--tag-c:#D4762E">知识卡片</span>
+            <span style="--tag-c:#D4762E">深度笔记</span>
+          </div>
+        </div>
+        <span class="card-cta">查看详情 &rarr;</span>
+      </a>
+
+      <!-- 4. 知衡 TestMind -->
+      <a class="project-card" id="project-testmind" href="projects/testmind/index.html" data-reveal data-delay="3" style="--card-color: #48c6b6">
+        <div class="card-preview" aria-hidden="true">
+          <svg viewBox="0 0 280 160" fill="none">
+            <rect width="280" height="160" rx="8" fill="#0c1019"/>
+            <!-- progress bar -->
+            <rect x="20" y="14" width="240" height="6" rx="3" fill="#111827"/>
+            <rect x="20" y="14" width="160" height="6" rx="3" fill="#48c6b6" opacity=".4"/>
+            <rect x="20" y="14" width="160" height="6" rx="3" fill="url(#tm-g)"/>
+            <defs><linearGradient id="tm-g" x1="20" y1="17" x2="180" y2="17"><stop stop-color="#48c6b6" stop-opacity=".5"/><stop offset="1" stop-color="#48c6b6" stop-opacity=".2"/></linearGradient></defs>
+            <!-- question card -->
+            <rect x="20" y="30" width="240" height="50" rx="6" fill="#111827"/>
+            <rect x="32" y="38" width="28" height="4" rx="2" fill="#48c6b6" opacity=".4"/>
+            <rect x="68" y="39" width="20" height="3" rx="1.5" fill="#fff" opacity=".08"/>
+            <rect x="32" y="50" width="200" height="2" rx="1" fill="#fff" opacity=".12"/>
+            <rect x="32" y="58" width="180" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="32" y="66" width="140" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <!-- option A -->
+            <rect x="20" y="88" width="116" height="28" rx="5" fill="#111827" stroke="#48c6b6" stroke-width=".5"/>
+            <circle cx="36" cy="102" r="4" stroke="#48c6b6" stroke-width=".6" fill="none"/>
+            <rect x="46" y="100" width="72" height="3" rx="1.5" fill="#fff" opacity=".12"/>
+            <!-- option B (selected) -->
+            <rect x="144" y="88" width="116" height="28" rx="5" fill="#0f2b28" stroke="#48c6b6" stroke-width=".8"/>
+            <circle cx="160" cy="102" r="4" stroke="#48c6b6" stroke-width=".6" fill="#48c6b6" opacity=".4"/>
+            <circle cx="160" cy="102" r="2" fill="#48c6b6"/>
+            <rect x="170" y="100" width="68" height="3" rx="1.5" fill="#48c6b6" opacity=".3"/>
+            <!-- option C -->
+            <rect x="20" y="124" width="116" height="28" rx="5" fill="#111827" stroke="#48c6b6" stroke-width=".3" opacity=".6"/>
+            <circle cx="36" cy="138" r="4" stroke="#48c6b6" stroke-width=".4" fill="none" opacity=".6"/>
+            <rect x="46" y="136" width="64" height="3" rx="1.5" fill="#fff" opacity=".08"/>
+            <!-- option D -->
+            <rect x="144" y="124" width="116" height="28" rx="5" fill="#111827" stroke="#48c6b6" stroke-width=".3" opacity=".6"/>
+            <circle cx="160" cy="138" r="4" stroke="#48c6b6" stroke-width=".4" fill="none" opacity=".6"/>
+            <rect x="170" y="136" width="60" height="3" rx="1.5" fill="#fff" opacity=".08"/>
+          </svg>
+        </div>
+        <div class="card-logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M3 14c0-1.5.7-3 2-4l2 7H1l2-7z" opacity=".65"/><path d="M21 14c0-1.5-.7-3-2-4l-2 7h6l-2-7z" opacity=".65"/><circle cx="12" cy="3" r="1.5" fill="currentColor" stroke="none"/></svg></div>
+        <div class="card-body">
+          <h3 class="card-name-cn">知衡</h3>
+          <p class="card-name-en">TestMind</p>
+          <p class="card-desc">做你最贴心的学习搭子</p>
+          <div class="card-tags">
+            <span style="--tag-c:#48c6b6">资料解析</span>
+            <span style="--tag-c:#48c6b6">AI 题库</span>
+            <span style="--tag-c:#48c6b6">语音陪学</span>
+          </div>
+        </div>
+        <span class="card-cta">查看详情 &rarr;</span>
+      </a>
+
+      <!-- 5. 环资流系统 EcoAsset -->
+      <a class="project-card" id="project-ecoasset" href="projects/ecoasset/index.html" data-reveal data-delay="0" style="--card-color: #6366f1">
+        <div class="card-preview" aria-hidden="true">
+          <svg viewBox="0 0 280 160" fill="none">
+            <rect width="280" height="160" rx="8" fill="#0c1019"/>
+            <!-- left column: source data -->
+            <rect x="16" y="12" width="108" height="136" rx="6" fill="#111827"/>
+            <rect x="26" y="22" width="44" height="4" rx="2" fill="#6366f1" opacity=".4"/>
+            <rect x="26" y="36" width="88" height="14" rx="3" fill="#1a2235"/>
+            <rect x="32" y="41" width="60" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="26" y="56" width="88" height="14" rx="3" fill="#1a2235"/>
+            <rect x="32" y="61" width="52" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="26" y="76" width="88" height="14" rx="3" fill="#1a2235"/>
+            <rect x="32" y="81" width="68" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="26" y="96" width="88" height="14" rx="3" fill="#1a2235"/>
+            <rect x="32" y="101" width="56" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="26" y="116" width="88" height="14" rx="3" fill="#1a2235" opacity=".6"/>
+            <!-- matching lines -->
+            <line x1="124" y1="43" x2="156" y2="41" stroke="#6366f1" stroke-width="1" opacity=".35"/>
+            <line x1="124" y1="63" x2="156" y2="83" stroke="#6366f1" stroke-width="1" opacity=".25"/>
+            <line x1="124" y1="83" x2="156" y2="63" stroke="#6366f1" stroke-width="1" opacity=".3"/>
+            <line x1="124" y1="103" x2="156" y2="103" stroke="#6366f1" stroke-width="1" opacity=".2"/>
+            <!-- match indicators -->
+            <circle cx="140" cy="43" r="3" fill="#6366f1" opacity=".25"/>
+            <circle cx="140" cy="83" r="3" fill="#6366f1" opacity=".2"/>
+            <!-- right column: target data -->
+            <rect x="156" y="12" width="108" height="136" rx="6" fill="#111827"/>
+            <rect x="166" y="22" width="44" height="4" rx="2" fill="#6366f1" opacity=".35"/>
+            <rect x="166" y="36" width="88" height="14" rx="3" fill="#0f1a3a" stroke="#6366f1" stroke-width=".3"/>
+            <rect x="172" y="41" width="56" height="2" rx="1" fill="#6366f1" opacity=".2"/>
+            <rect x="166" y="56" width="88" height="14" rx="3" fill="#1a2235"/>
+            <rect x="172" y="61" width="64" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="166" y="76" width="88" height="14" rx="3" fill="#0f1a3a" stroke="#6366f1" stroke-width=".3"/>
+            <rect x="172" y="81" width="48" height="2" rx="1" fill="#6366f1" opacity=".2"/>
+            <rect x="166" y="96" width="88" height="14" rx="3" fill="#1a2235"/>
+            <rect x="172" y="101" width="60" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="166" y="116" width="88" height="14" rx="3" fill="#1a2235" opacity=".6"/>
+          </svg>
+        </div>
+        <div class="card-logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 6.5A8 8 0 005.1 8"/><path d="M6.5 17.5A8 8 0 0018.9 16"/><path d="M2 8l3.1 0 0-3.1" stroke-width="1.8"/><path d="M22 16l-3.1 0 0 3.1" stroke-width="1.8"/><circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none" opacity=".35"/></svg></div>
+        <div class="card-body">
+          <h3 class="card-name-cn">环资流系统</h3>
+          <p class="card-name-en">EcoAsset</p>
+          <p class="card-desc">个人经验变规则引擎</p>
+          <div class="card-tags">
+            <span style="--tag-c:#6366f1">本地脱敏</span>
+            <span style="--tag-c:#6366f1">规则沉淀</span>
+            <span style="--tag-c:#6366f1">覆盖率评估</span>
+          </div>
+        </div>
+        <span class="card-cta">查看详情 &rarr;</span>
+      </a>
+
+      <!-- 6. 督办管理系统 Supervision -->
+      <a class="project-card" id="project-supervision" href="projects/supervision/index.html" data-reveal data-delay="1" style="--card-color: #00e5ff">
+        <div class="card-preview" aria-hidden="true">
+          <svg viewBox="0 0 280 160" fill="none">
+            <rect width="280" height="160" rx="8" fill="#0c1019"/>
+            <!-- header bar -->
+            <rect x="16" y="12" width="248" height="24" rx="5" fill="#111827"/>
+            <rect x="26" y="20" width="48" height="4" rx="2" fill="#00e5ff" opacity=".4"/>
+            <rect x="200" y="18" width="52" height="12" rx="3" fill="#00e5ff" opacity=".12" stroke="#00e5ff" stroke-width=".4"/>
+            <!-- status cards row -->
+            <rect x="16" y="44" width="56" height="44" rx="5" fill="#111827"/>
+            <rect x="24" y="52" width="28" height="3" rx="1.5" fill="#fff" opacity=".1"/>
+            <rect x="24" y="62" width="20" height="10" rx="2" fill="#22c55e" opacity=".2"/>
+            <text x="28" y="71" font-size="8" fill="#22c55e" opacity=".6" font-family="sans-serif">12</text>
+            <rect x="80" y="44" width="56" height="44" rx="5" fill="#111827"/>
+            <rect x="88" y="52" width="28" height="3" rx="1.5" fill="#fff" opacity=".1"/>
+            <rect x="88" y="62" width="20" height="10" rx="2" fill="#f59e0b" opacity=".2"/>
+            <text x="93" y="71" font-size="8" fill="#f59e0b" opacity=".6" font-family="sans-serif">5</text>
+            <rect x="144" y="44" width="56" height="44" rx="5" fill="#111827"/>
+            <rect x="152" y="52" width="28" height="3" rx="1.5" fill="#fff" opacity=".1"/>
+            <rect x="152" y="62" width="20" height="10" rx="2" fill="#ef4444" opacity=".2"/>
+            <text x="157" y="71" font-size="8" fill="#ef4444" opacity=".6" font-family="sans-serif">2</text>
+            <rect x="208" y="44" width="56" height="44" rx="5" fill="#111827"/>
+            <rect x="216" y="52" width="28" height="3" rx="1.5" fill="#fff" opacity=".1"/>
+            <rect x="216" y="62" width="20" height="10" rx="2" fill="#00e5ff" opacity=".15"/>
+            <text x="219" y="71" font-size="8" fill="#00e5ff" opacity=".5" font-family="sans-serif">19</text>
+            <!-- table rows -->
+            <rect x="16" y="96" width="248" height="16" rx="3" fill="#111827"/>
+            <rect x="26" y="102" width="60" height="2" rx="1" fill="#fff" opacity=".1"/>
+            <rect x="180" y="100" width="32" height="8" rx="2" fill="#22c55e" opacity=".15"/>
+            <rect x="220" y="100" width="32" height="8" rx="2" fill="#00e5ff" opacity=".1"/>
+            <rect x="16" y="116" width="248" height="16" rx="3" fill="#0f1420"/>
+            <rect x="26" y="122" width="52" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="180" y="120" width="32" height="8" rx="2" fill="#f59e0b" opacity=".12"/>
+            <rect x="16" y="136" width="248" height="16" rx="3" fill="#111827"/>
+            <rect x="26" y="142" width="56" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="180" y="140" width="32" height="8" rx="2" fill="#22c55e" opacity=".12"/>
+          </svg>
+        </div>
+        <div class="card-logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg></div>
+        <div class="card-body">
+          <h3 class="card-name-cn">督办管理系统</h3>
+          <p class="card-name-en">Supervision</p>
+          <p class="card-desc">一张表搞定重点督办</p>
+          <div class="card-tags">
+            <span style="--tag-c:#00e5ff">Excel 导入</span>
+            <span style="--tag-c:#00e5ff">自动判定</span>
+            <span style="--tag-c:#00e5ff">一键报告</span>
+          </div>
+        </div>
+        <span class="card-cta">查看详情 &rarr;</span>
+      </a>
+
+      <!-- 7. 办公室管理系统 OfficeHub -->
+      <a class="project-card" id="project-officehub" href="projects/officehub/index.html" data-reveal data-delay="2" style="--card-color: #7c5cff">
+        <div class="card-preview" aria-hidden="true">
+          <svg viewBox="0 0 280 160" fill="none">
+            <rect width="280" height="160" rx="8" fill="#0c1019"/>
+            <!-- top search/AI bar -->
+            <rect x="16" y="12" width="248" height="28" rx="6" fill="#111827" stroke="#7c5cff" stroke-width=".3"/>
+            <rect x="28" y="22" width="80" height="3" rx="1.5" fill="#fff" opacity=".08"/>
+            <rect x="216" y="18" width="36" height="14" rx="4" fill="#7c5cff" opacity=".15"/>
+            <rect x="222" y="23" width="24" height="3" rx="1.5" fill="#7c5cff" opacity=".35"/>
+            <!-- 2x3 module grid -->
+            <rect x="16" y="50" width="76" height="46" rx="5" fill="#111827"/>
+            <rect x="26" y="58" width="32" height="4" rx="2" fill="#7c5cff" opacity=".35"/>
+            <rect x="26" y="68" width="56" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="26" y="76" width="48" height="2" rx="1" fill="#fff" opacity=".06"/>
+            <rect x="100" y="50" width="76" height="46" rx="5" fill="#111827"/>
+            <rect x="110" y="58" width="28" height="4" rx="2" fill="#54d6bd" opacity=".3"/>
+            <rect x="110" y="68" width="52" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="110" y="76" width="44" height="2" rx="1" fill="#fff" opacity=".06"/>
+            <rect x="184" y="50" width="80" height="46" rx="5" fill="#111827"/>
+            <rect x="194" y="58" width="36" height="4" rx="2" fill="#E8920A" opacity=".3"/>
+            <rect x="194" y="68" width="60" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="194" y="76" width="48" height="2" rx="1" fill="#fff" opacity=".06"/>
+            <rect x="16" y="104" width="76" height="46" rx="5" fill="#111827"/>
+            <rect x="26" y="112" width="40" height="4" rx="2" fill="#00e5ff" opacity=".3"/>
+            <rect x="26" y="122" width="48" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="100" y="104" width="76" height="46" rx="5" fill="#111827"/>
+            <rect x="110" y="112" width="32" height="4" rx="2" fill="#6366f1" opacity=".3"/>
+            <rect x="110" y="122" width="52" height="2" rx="1" fill="#fff" opacity=".08"/>
+            <rect x="184" y="104" width="80" height="46" rx="5" fill="#111827"/>
+            <rect x="194" y="112" width="28" height="4" rx="2" fill="#D4762E" opacity=".3"/>
+            <rect x="194" y="122" width="56" height="2" rx="1" fill="#fff" opacity=".08"/>
+          </svg>
+        </div>
+        <div class="card-logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" opacity=".4"/><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="1.5"/><circle cx="20" cy="6" r="1.5"/><circle cx="4" cy="18" r="1.5"/><circle cx="20" cy="18" r="1.5"/><path d="M9.5 10L5.5 7M14.5 10l4-3M9.5 14L5.5 17M14.5 14l4 3" opacity=".5"/></svg></div>
+        <div class="card-body">
+          <h3 class="card-name-cn">办公室管理系统</h3>
+          <p class="card-name-en">OfficeHub</p>
+          <p class="card-desc">办公室自己的智能工作台</p>
+          <div class="card-tags">
+            <span style="--tag-c:#7c5cff">七大板块</span>
+            <span style="--tag-c:#7c5cff">AI 问答</span>
+            <span style="--tag-c:#7c5cff">制度治理</span>
+          </div>
+        </div>
+        <span class="card-cta">查看详情 &rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 4: CORE CHANGES (Before → After)
+     ============================================================ -->
+<section class="changes" id="changes">
+  <div class="changes-bg" aria-hidden="true">
+    <div class="changes-glow"></div>
+  </div>
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">核心变化</p>
+      <h2>不是做了七个工具，是发生了四个变化</h2>
+    </div>
+
+    <div class="change-grid">
+      <div class="change-card" data-reveal data-delay="0" style="--change-c:#6366f1">
+        <div class="change-num">01</div>
+        <div class="change-flow">
+          <span class="change-before">个人记忆</span>
+          <span class="change-arrow" aria-hidden="true"></span>
+          <span class="change-after">规则引擎</span>
+        </div>
+        <div class="change-meta">
+          <span class="change-tag">环资流系统</span>
+          <span class="change-en">EcoAsset</span>
+        </div>
+      </div>
+
+      <div class="change-card" data-reveal data-delay="1" style="--change-c:#00e5ff">
+        <div class="change-num">02</div>
+        <div class="change-flow">
+          <span class="change-before">催进度</span>
+          <span class="change-arrow" aria-hidden="true"></span>
+          <span class="change-after">看进度</span>
+        </div>
+        <div class="change-meta">
+          <span class="change-tag">督办管理系统</span>
+          <span class="change-en">Supervision</span>
+        </div>
+      </div>
+
+      <div class="change-card" data-reveal data-delay="2" style="--change-c:#E8920A">
+        <div class="change-num">03</div>
+        <div class="change-flow">
+          <span class="change-before">碎片想法</span>
+          <span class="change-arrow" aria-hidden="true"></span>
+          <span class="change-after">组织记忆</span>
+        </div>
+        <div class="change-meta">
+          <span class="change-tag">凝识</span>
+          <span class="change-en">InsightFlow</span>
+        </div>
+      </div>
+
+      <div class="change-card" data-reveal data-delay="3" style="--change-c:#48c6b6">
+        <div class="change-num">04</div>
+        <div class="change-flow">
+          <span class="change-before">被动学习</span>
+          <span class="change-arrow" aria-hidden="true"></span>
+          <span class="change-after">能力链条</span>
+        </div>
+        <div class="change-meta">
+          <span class="change-tag">知衡</span>
+          <span class="change-en">TestMind</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5: SECURITY & BOUNDARIES
+     ============================================================ -->
+<section class="security" id="security">
+  <div class="security-bg" aria-hidden="true">
+    <div class="security-glow security-glow--l"></div>
+    <div class="security-glow security-glow--r"></div>
+  </div>
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">安全与边界</p>
+      <h2>AI 辅助判断，不替代管理责任</h2>
+    </div>
+
+    <div class="security-grid">
+      <div class="security-item" data-reveal data-delay="0" style="--sec-c:#06b6d4">
+        <div class="security-ring">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="18" width="28" height="18" rx="3"/><path d="M12 18v-6a8 8 0 0 1 16 0v6"/><circle cx="20" cy="28" r="2"/></svg>
+        </div>
+        <h3>本地部署</h3>
+        <p>全程本地运行，不联网、不上传、不调用外部服务</p>
+      </div>
+
+      <div class="security-item" data-reveal data-delay="1" style="--sec-c:#10b981">
+        <div class="security-ring">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4l14 7v11c0 8.5-6 15.5-14 18C12 37.5 6 30.5 6 22V11L20 4z"/><path d="M14 20l4 4 8-8"/></svg>
+        </div>
+        <h3>数据脱敏</h3>
+        <p>敏感数据不出域，处理前自动脱敏清洗</p>
+      </div>
+
+      <div class="security-item" data-reveal data-delay="2" style="--sec-c:#8b5cf6">
+        <div class="security-ring">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="16" r="6"/><path d="M8 36c0-6.627 5.373-12 12-12s12 5.373 12 12"/><path d="M28 16l4-4m0 0l4-4m-4 4l4 4m-4-4l-4-4"/></svg>
+        </div>
+        <h3>权限控制</h3>
+        <p>按岗位、按单位分级授权，操作全程留痕</p>
+      </div>
+
+      <div class="security-item" data-reveal data-delay="3" style="--sec-c:#3b82f6">
+        <div class="security-ring">
+          <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="14" r="8"/><path d="M20 22v6"/><path d="M14 34h12"/><path d="M20 6v2"/><circle cx="20" cy="14" r="2" fill="currentColor"/></svg>
+        </div>
+        <h3>人工复核</h3>
+        <p>AI 提供建议，人做最终决定，不替代组织判断</p>
+      </div>
+    </div>
+
+    <p class="security-footnote" data-reveal>所有系统均支持局域网部署，数据 100% 在本地。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5.5: CLOSING QUOTE
+     ============================================================ -->
+<section class="closing-quote-section" data-reveal>
+  <div class="container">
+    <blockquote class="closing-quote">
+      <p>AI 时代对办公室干部提出了更高要求：</p>
+      <p class="closing-quote-highlight">既要有<em>服务保障能力</em>，也要有<em>场景设计能力</em>、<em>流程再造能力</em>和<em>价值创造意识</em></p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 6: FOOTER / CLOSING
+     ============================================================ -->
+<footer class="closing" id="closing">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">快捷导航</p>
+      <h2>点击进入各项目详情</h2>
+    </div>
+
+    <div class="footer-nav" data-reveal data-delay="1">
+      <a href="projects/insightflow/index.html" class="footer-link" style="--link-c:#E8920A">
+        <svg class="footer-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 8-8 12-8-12z"/><path d="M4 10h16" opacity=".45"/><path d="M8.5 10L12 2l3.5 8" opacity=".45"/></svg>
+        凝识
+      </a>
+      <a href="projects/listenmind/index.html" class="footer-link" style="--link-c:#54d6bd">
+        <svg class="footer-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="12" r="2" fill="currentColor" stroke="none"/><path d="M10 8a5.7 5.7 0 010 8"/><path d="M13.5 5a9.5 9.5 0 010 14" opacity=".55"/><path d="M17 2.5a13 13 0 010 19" opacity=".3"/></svg>
+        聆悟
+      </a>
+      <a href="projects/readmind/index.html" class="footer-link" style="--link-c:#D4762E">
+        <svg class="footer-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4c3-.8 6-.5 10 1.5v15C8 18.5 5 18 2 19V4z"/><path d="M22 4c-3-.8-6-.5-10 1.5v15c4-2 7-2.5 10-1.5V4z"/><circle cx="18" cy="4" r="1.2" fill="currentColor" stroke="none" opacity=".7"/><path d="M18 1v1.2m2.2 1.8h-1.2M18 7V5.8m-2.2-1.8h1.2" stroke-width="1.3" opacity=".7"/></svg>
+        阅思
+      </a>
+      <a href="projects/testmind/index.html" class="footer-link" style="--link-c:#48c6b6">
+        <svg class="footer-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 7h14"/><path d="M3 14c0-1.5.7-3 2-4l2 7H1l2-7z" opacity=".65"/><path d="M21 14c0-1.5-.7-3-2-4l-2 7h6l-2-7z" opacity=".65"/><circle cx="12" cy="3" r="1.5" fill="currentColor" stroke="none"/></svg>
+        知衡
+      </a>
+      <a href="projects/officehub/index.html" class="footer-link" style="--link-c:#7c5cff">
+        <svg class="footer-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" opacity=".4"/><circle cx="12" cy="12" r="3"/><circle cx="4" cy="6" r="1.5"/><circle cx="20" cy="6" r="1.5"/><circle cx="4" cy="18" r="1.5"/><circle cx="20" cy="18" r="1.5"/><path d="M9.5 10L5.5 7M14.5 10l4-3M9.5 14L5.5 17M14.5 14l4 3" opacity=".5"/></svg>
+        办公室管理系统
+      </a>
+      <a href="projects/supervision/index.html" class="footer-link" style="--link-c:#00e5ff">
+        <svg class="footer-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+        督办管理系统
+      </a>
+      <a href="projects/ecoasset/index.html" class="footer-link" style="--link-c:#6366f1">
+        <svg class="footer-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 6.5A8 8 0 005.1 8"/><path d="M6.5 17.5A8 8 0 0018.9 16"/><path d="M2 8l3.1 0 0-3.1" stroke-width="1.8"/><path d="M22 16l-3.1 0 0 3.1" stroke-width="1.8"/><circle cx="12" cy="12" r="2.5" fill="currentColor" stroke="none" opacity=".35"/></svg>
+        环资流系统
+      </a>
+    </div>
+    <div class="footer-bottom" data-reveal data-delay="2">
+      <a href="#top" class="back-top">返回顶部 &uarr;</a>
+      <p class="footer-note">欢迎交流指正</p>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

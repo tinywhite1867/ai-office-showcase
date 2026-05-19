@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071715" />
+    <title>知衡 TestMind 产品展示</title>
+    <link rel="stylesheet" href="./leader.css" />
+  </head>
+  <body>
+    <canvas class="particle-field" id="particle-field" aria-hidden="true"></canvas>
+    <main class="experience-stage">
+      <header class="topline">
+        <a class="brand" href="#top" aria-label="知衡 TestMind">
+          <span>知</span>
+          <div>
+            <strong>知衡 TestMind</strong>
+            <small>知其所据，衡其所学</small>
+          </div>
+        </a>
+        <nav class="topnav" aria-label="页面导航">
+          <a href="#gallery">界面案例</a>
+          <a href="#experience">链路演示</a>
+          <a href="#voice">语音搭子</a>
+        </nav>
+      </header>
+
+      <section class="opening" id="top">
+        <div class="opening-copy" data-reveal>
+          <p class="eyebrow"><span class="pulse-dot"></span>产品展示 · 办公室 AI 应用探索</p>
+          <h1><span class="hero-line">做你最贴心的</span><span class="hero-line accent-line">学习搭子</span></h1>
+          <p class="lead">
+            一份脱敏制度资料进入知衡后，被拆成可学习的知识点、可训练的高质量题库、可听可聊的语音搭子，以及可复盘的学习报告。
+          </p>
+          <div class="hero-tags" aria-label="核心能力标签">
+            <span>资料解析</span>
+            <span>知识卡片</span>
+            <span>AI 题库</span>
+            <span>语音陪学</span>
+            <span>复盘沉淀</span>
+          </div>
+          <div class="hero-actions">
+            <a href="#gallery">查看界面案例</a>
+            <span>案例已脱敏，仅用于产品汇报展示</span>
+          </div>
+        </div>
+        <div class="case-card" id="case" data-reveal>
+          <div class="case-radar" aria-hidden="true">
+            <div class="radar-glow"></div>
+            <div class="radar-ring ring-one"></div>
+            <div class="radar-ring ring-two"></div>
+            <div class="radar-ring ring-three"></div>
+            <div class="radar-center"><span>AI</span><strong>学习闭环</strong></div>
+            <div class="radar-node node-one">资料</div>
+            <div class="radar-node node-two">知识</div>
+            <div class="radar-node node-three">题库</div>
+            <div class="radar-node node-four">语音</div>
+            <div class="radar-node node-five">报告</div>
+            <div class="radar-node node-six">复盘</div>
+          </div>
+          <div class="case-info">
+            <small>脱敏演示案例</small>
+            <strong id="case-title">正在读取制度学习包...</strong>
+            <div class="case-stats">
+              <article><b id="case-docs">0</b><span>资料</span></article>
+              <article><b id="case-cards">0</b><span>知识点</span></article>
+              <article><b id="case-questions">0</b><span>题库题</span></article>
+              <article><b id="case-mistakes">0</b><span>错题</span></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="product-summary" aria-label="产品能力概览">
+        <div class="summary-claim" data-reveal>
+          <span>核心判断</span>
+          <h2>不是多一个学习工具，而是把资料变成一条可持续训练的能力链。</h2>
+        </div>
+        <article data-reveal>
+          <span>01</span>
+          <h3>把资料转成知识点</h3>
+          <p>制度、附件、表格从“存起来”变成“能被学习”。</p>
+        </article>
+        <article data-reveal>
+          <span>02</span>
+          <h3>把知识点转成题库</h3>
+          <p>知识点生成题目，再经过质量门进入训练。</p>
+        </article>
+        <article data-reveal>
+          <span>03</span>
+          <h3>把学习过程沉淀</h3>
+          <p>作答、错题、语音讲解与报告持续回流。</p>
+        </article>
+      </section>
+
+      <section class="showcase-gallery" id="gallery" aria-label="实际界面案例展示">
+        <div class="section-heading" data-reveal>
+          <div>
+            <p class="eyebrow">实际界面式案例</p>
+            <h2>先看界面，再理解价值。</h2>
+          </div>
+          <p>以下以脱敏制度学习包为例，用真实系统画面串起资料解析、知识卡片、题库质量、语音搭子和学习报告。</p>
+        </div>
+        <div class="gallery-grid" id="gallery-grid"></div>
+      </section>
+
+      <section class="demo-experience" id="experience" aria-label="知衡案例体验">
+        <div class="experience-intro" data-reveal>
+          <p class="eyebrow">可点链路演示</p>
+        </div>
+        <aside class="journey-rail" aria-label="体验步骤">
+          <div class="journey-title">
+            <span>可点演示链路</span>
+            <strong>6 个界面串起真实流程</strong>
+          </div>
+          <button class="journey-step active" type="button" data-step="0">
+            <b>01</b><span>导入资料</span><small>资料库 / 解析状态</small>
+          </button>
+          <button class="journey-step" type="button" data-step="1">
+            <b>02</b><span>切知识点</span><small>知识卡片 / 原文依据</small>
+          </button>
+          <button class="journey-step" type="button" data-step="2">
+            <b>03</b><span>生成题库</span><small>质量门 / 审题通过</small>
+          </button>
+          <button class="journey-step" type="button" data-step="3">
+            <b>04</b><span>模拟做题</span><small>选择作答 / 即时解析</small>
+          </button>
+          <button class="journey-step" type="button" data-step="4">
+            <b>05</b><span>搭子陪学</span><small>听讲解 / 闲聊</small>
+          </button>
+          <button class="journey-step" type="button" data-step="5">
+            <b>06</b><span>报告沉淀</span><small>错题 / 掌握度 / 复用</small>
+          </button>
+        </aside>
+
+        <section class="system-frame" aria-label="知衡系统案例演示界面">
+          <div class="frame-chrome">
+            <div class="traffic"><span></span><span></span><span></span></div>
+            <strong id="frame-title">知衡 TestMind Pro</strong>
+            <small id="frame-status">案例演示环境</small>
+          </div>
+          <div class="app-shell-demo">
+            <aside class="app-sidebar">
+              <div class="app-logo"><span>知</span><b>TestMind Pro</b></div>
+              <button class="app-nav active" data-view-name="资料库">资料库</button>
+              <button class="app-nav" data-view-name="知识卡片">知识卡片</button>
+              <button class="app-nav" data-view-name="题库答案">题库答案</button>
+              <button class="app-nav" data-view-name="模拟考试">模拟考试</button>
+              <button class="app-nav" data-view-name="AI 学习搭子">AI 学习搭子</button>
+              <button class="app-nav" data-view-name="学习报告">学习报告</button>
+            </aside>
+            <main class="screen-content" id="screen-content" aria-live="polite"></main>
+            <aside class="guide-panel">
+              <small>本步体验</small>
+              <h2 id="guide-title">导入一份制度资料</h2>
+              <p id="guide-copy">系统先把资料、附件和图片解析成可学习的知识切片。</p>
+              <div class="guide-points" id="guide-points"></div>
+              <div class="guide-actions">
+                <button class="ghost-action" type="button" id="prev-step">上一步</button>
+                <button class="primary-action" type="button" id="next-step">下一步体验</button>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <script src="./leader.js" defer></script>
+  </body>
+</html>

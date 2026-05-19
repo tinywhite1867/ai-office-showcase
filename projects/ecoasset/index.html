@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>环资流 EcoAsset Flow — 资产分类智能治理平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#6366f1',
+                        accent: '#22d3ee',
+                        surface: '#0f172a',
+                        card: '#1e293b',
+                        glow: '#818cf8',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+
+        * { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+
+        body {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        /* Animated gradient background */
+        .hero-bg {
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(34, 211, 238, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
+        }
+
+        /* Grid pattern overlay */
+        .grid-overlay {
+            background-image:
+                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Glow effects */
+        .glow-border {
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.1), inset 0 0 20px rgba(99, 102, 241, 0.05);
+        }
+
+        .glow-text {
+            text-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Floating animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .float { animation: float 6s ease-in-out infinite; }
+        .float-delay { animation: float 6s ease-in-out infinite; animation-delay: -3s; }
+
+        /* Pulse animation */
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+
+        /* Flow line animation */
+        @keyframes flow {
+            0% { stroke-dashoffset: 100; }
+            100% { stroke-dashoffset: 0; }
+        }
+        .flow-line {
+            stroke-dasharray: 10 5;
+            animation: flow 2s linear infinite;
+        }
+
+        /* Fade in on scroll */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Counter animation */
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .count-up { animation: countUp 0.8s ease-out forwards; }
+
+        /* Card hover */
+        .hover-card {
+            transition: all 0.3s ease;
+        }
+        .hover-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
+            border-color: rgba(99, 102, 241, 0.5);
+        }
+
+        /* Progress bar */
+        @keyframes progress {
+            from { width: 0%; }
+            to { width: var(--target-width); }
+        }
+        .progress-bar {
+            animation: progress 2s ease-out forwards;
+            animation-play-state: paused;
+        }
+        .progress-bar.animate {
+            animation-play-state: running;
+        }
+
+        /* Node connector */
+        .node-line {
+            position: relative;
+        }
+        .node-line::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -24px;
+            width: 24px;
+            height: 2px;
+            background: linear-gradient(to right, rgba(99, 102, 241, 0.8), rgba(34, 211, 238, 0.4));
+        }
+
+        /* Typing effect */
+        @keyframes blink {
+            0%, 50% { border-color: #22d3ee; }
+            51%, 100% { border-color: transparent; }
+        }
+        .typing-cursor {
+            border-right: 2px solid #22d3ee;
+            animation: blink 1s infinite;
+        }
+
+        /* Scroll indicator */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+        .scroll-indicator { animation: bounce 2s ease-in-out infinite; }
+
+        /* Data flow particles */
+        @keyframes particle-flow {
+            0% { transform: translateX(-100%) translateY(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(400%) translateY(0); opacity: 0; }
+        }
+        .particle {
+            animation: particle-flow 4s linear infinite;
+        }
+        .particle:nth-child(2) { animation-delay: 1s; }
+        .particle:nth-child(3) { animation-delay: 2s; }
+        .particle:nth-child(4) { animation-delay: 3s; }
+    </style>
+</head>
+<body class="overflow-x-hidden">
+<a href="../../index.html" style="position:fixed;top:12px;left:16px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:999px;background:rgba(0,0,0,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);color:#e8ecf4;font-size:13px;font-weight:600;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(139,92,246,.35)'" onmouseout="this.style.background='rgba(0,0,0,.55)'">&larr; 返回首页</a>
+
+<!-- ==================== HERO SECTION ==================== -->
+<section class="hero-bg grid-overlay min-h-screen flex flex-col justify-center items-center relative px-6">
+    <!-- Decorative elements -->
+    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl float"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl float-delay"></div>
+
+    <div class="max-w-5xl mx-auto text-center relative z-10">
+        <!-- Project badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 mb-8">
+            <span class="w-2 h-2 rounded-full bg-accent pulse-glow"></span>
+            <span class="text-sm text-slate-300">办公室 AI 应用探索 · 资产分类治理</span>
+        </div>
+
+        <!-- Main title -->
+        <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+            <span class="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">环资流</span>
+            <span class="text-primary/80 text-3xl md:text-4xl ml-3 font-light">EcoAsset Flow</span>
+        </h1>
+
+        <!-- Tagline -->
+        <p class="text-xl md:text-2xl text-slate-300 mb-4 font-light leading-relaxed max-w-3xl mx-auto">
+            让资产分类经验从<span class="text-accent font-medium">个人记忆</span>走向<span class="text-primary font-medium">规则引擎</span>
+        </p>
+        <p class="text-base text-slate-400 mb-12 max-w-2xl mx-auto">
+            通过本地化规则沉淀与覆盖率评估，将分散在历史台账和个人经验中的分类知识，
+            转化为可量化、可复用、可持续改进的自动化能力
+        </p>
+
+        <!-- Key capability tags -->
+        <div class="flex flex-wrap justify-center gap-3 mb-16">
+            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">本地脱敏</span>
+            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">规则沉淀</span>
+            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">覆盖率评估</span>
+            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">批次制单</span>
+            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">人机协同</span>
+            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">数据安全</span>
+        </div>
+
+        <!-- Key metrics -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
+            <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-accent">280</div>
+                <div class="text-xs text-slate-400 mt-1">内部分类体系</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-primary">16+</div>
+                <div class="text-xs text-slate-400 mt-1">CLI 命令覆盖</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-accent">100%</div>
+                <div class="text-xs text-slate-400 mt-1">本地执行率</div>
+            </div>
+            <div class="text-center">
+                <div class="text-3xl md:text-4xl font-bold text-primary">75</div>
+                <div class="text-xs text-slate-400 mt-1">自动化测试用例</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator">
+        <svg class="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+        </svg>
+    </div>
+</section>
+
+<!-- ==================== PAIN POINTS ==================== -->
+<section class="py-24 px-6 relative">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">资产分类治理的现实困境</span>
+            </h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">资产云系统的三级分类与内部 280 类体系之间，长期存在映射断层</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+            <!-- Pain point cards -->
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
+                <div class="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold mb-2 text-white">分类映射靠人记</h3>
+                <p class="text-sm text-slate-400">资产云三级分类到内部编码的对应关系，全凭经手人的经验记忆，一旦换人就断档</p>
+            </div>
+
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
+                <div class="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold mb-2 text-white">重复劳动无沉淀</h3>
+                <p class="text-sm text-slate-400">每批次底单都要重新人工匹配分类，上次的判断结果无法自动复用到下一次</p>
+            </div>
+
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
+                <div class="w-12 h-12 rounded-lg bg-yellow-500/10 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold mb-2 text-white">制单流程长且碎</h3>
+                <p class="text-sm text-slate-400">从底单导入到打印单、汇总单、处置单、入库单，环节多、校验难、容易出错</p>
+            </div>
+
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
+                <div class="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold mb-2 text-white">数据安全难保障</h3>
+                <p class="text-sm text-slate-400">资产底单含敏感信息，传统方式需要发送原始文件给多方，泄露风险大</p>
+            </div>
+
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
+                <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold mb-2 text-white">覆盖缺口不可见</h3>
+                <p class="text-sm text-slate-400">规则库能覆盖多少分类、哪些是高频缺口、改进效果多大——缺乏量化手段</p>
+            </div>
+
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
+                <div class="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-4">
+                    <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold mb-2 text-white">新人上手周期长</h3>
+                <p class="text-sm text-slate-400">分类规则散落在个人经验中，新接手人员需要数月才能建立完整的映射认知</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== CORE CAPABILITIES ==================== -->
+<section class="py-24 px-6 relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent"></div>
+    <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">核心能力矩阵</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">四层能力体系，从数据安全到持续改进形成闭环</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8 fade-in">
+            <!-- Layer 1: Data Security -->
+            <div class="glow-border rounded-2xl p-8 bg-card/80 backdrop-blur">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                        <span class="text-emerald-400 font-bold text-sm">01</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">数据安全层</h3>
+                </div>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <span class="text-emerald-400 mt-0.5">&#9654;</span>
+                        <span>全程本地执行，不联网、不上传、不调用外部服务</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-emerald-400 mt-0.5">&#9654;</span>
+                        <span>敏感字段 SHA-256 哈希脱敏，编号类不保留原值</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-emerald-400 mt-0.5">&#9654;</span>
+                        <span>脱敏盐值本地管理，不入日志、不入代码库</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-emerald-400 mt-0.5">&#9654;</span>
+                        <span>字段审计 Sheet 记录处理方式，确保脱敏可追溯</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Layer 2: Rule Sedimentation -->
+            <div class="glow-border rounded-2xl p-8 bg-card/80 backdrop-blur">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                        <span class="text-primary font-bold text-sm">02</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">规则沉淀层</h3>
+                </div>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <span class="text-primary mt-0.5">&#9654;</span>
+                        <span>双路径规则提取：统计推断 + 精确 Hash Join</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-primary mt-0.5">&#9654;</span>
+                        <span>置信度分级：high / dominant / conflict 三档管理</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-primary mt-0.5">&#9654;</span>
+                        <span>人工确认闭环：所有候选规则须审核后方可入库</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-primary mt-0.5">&#9654;</span>
+                        <span>冲突不覆盖机制：异常流转管理保护已有规则</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Layer 3: Coverage Evaluation -->
+            <div class="glow-border rounded-2xl p-8 bg-card/80 backdrop-blur">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
+                        <span class="text-accent font-bold text-sm">03</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">覆盖率评估层</h3>
+                </div>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <span class="text-accent mt-0.5">&#9654;</span>
+                        <span>三维度指标：分类命中率 / 次数加权 / 原值加权</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-accent mt-0.5">&#9654;</span>
+                        <span>高频未命中自动排序，精准定位补规则优先级</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-accent mt-0.5">&#9654;</span>
+                        <span>冲突异常汇总，可视化规则库健康度</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-accent mt-0.5">&#9654;</span>
+                        <span>纯只读评估，不修改任何数据，可反复运行对比</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Layer 4: Batch Document Generation -->
+            <div class="glow-border rounded-2xl p-8 bg-card/80 backdrop-blur">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
+                        <span class="text-amber-400 font-bold text-sm">04</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white">批次制单层</h3>
+                </div>
+                <ul class="space-y-3 text-sm text-slate-300">
+                    <li class="flex items-start gap-2">
+                        <span class="text-amber-400 mt-0.5">&#9654;</span>
+                        <span>一键生成打印单、汇总单、处置单、入库单四份标准文件</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-amber-400 mt-0.5">&#9654;</span>
+                        <span>自动校验报告：数量/金额完整性检查 + 问题清单</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-amber-400 mt-0.5">&#9654;</span>
+                        <span>批次状态巡检，进度、异常一目了然</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <span class="text-amber-400 mt-0.5">&#9654;</span>
+                        <span>模板化输出，样式统一，合规可控</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== WORKFLOW ==================== -->
+<section class="py-24 px-6 relative overflow-hidden">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">智能治理工作流</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">从原始数据到规则沉淀，形成持续改进的正循环</p>
+        </div>
+
+        <!-- Main workflow -->
+        <div class="fade-in">
+            <!-- Flow visualization -->
+            <div class="relative bg-card/50 rounded-2xl border border-slate-700/50 p-8 md:p-12 overflow-hidden">
+                <!-- Background decoration -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+
+                <!-- Flow steps -->
+                <div class="grid md:grid-cols-5 gap-4 md:gap-2 relative z-10">
+                    <!-- Step 1 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 border border-slate-600 flex items-center justify-center mb-3 relative">
+                            <svg class="w-7 h-7 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                            <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
+                                <span class="text-[10px] font-bold text-white">1</span>
+                            </div>
+                        </div>
+                        <h4 class="text-sm font-semibold text-white mb-1">数据导入</h4>
+                        <p class="text-xs text-slate-400">资产云底单<br/>本地脱敏</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:flex items-center justify-center">
+                        <div class="w-full h-0.5 bg-gradient-to-r from-primary/60 to-accent/60 relative">
+                            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-accent/60 transform rotate-45"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center mb-3 relative">
+                            <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                            </svg>
+                            <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
+                                <span class="text-[10px] font-bold text-white">2</span>
+                            </div>
+                        </div>
+                        <h4 class="text-sm font-semibold text-white mb-1">分类复核</h4>
+                        <p class="text-xs text-slate-400">L1 自动匹配<br/>人工确认</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="hidden md:flex items-center justify-center">
+                        <div class="w-full h-0.5 bg-gradient-to-r from-accent/60 to-amber-400/60 relative">
+                            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-amber-400/60 transform rotate-45"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex flex-col items-center text-center">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-500/10 border border-amber-500/30 flex items-center justify-center mb-3 relative">
+                            <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            </svg>
+                            <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center">
+                                <span class="text-[10px] font-bold text-white">3</span>
+                            </div>
+                        </div>
+                        <h4 class="text-sm font-semibold text-white mb-1">单据生成</h4>
+                        <p class="text-xs text-slate-400">打印/汇总/处置<br/>入库/校验</p>
+                    </div>
+                </div>
+
+                <!-- Feedback loop -->
+                <div class="mt-12 pt-8 border-t border-slate-700/50">
+                    <div class="text-center mb-6">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-xs text-accent">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                            规则沉淀正循环
+                        </span>
+                    </div>
+                    <div class="grid md:grid-cols-4 gap-4">
+                        <div class="text-center p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
+                            <div class="text-accent text-2xl mb-2">&#9881;</div>
+                            <p class="text-xs text-slate-300 font-medium">历史数据脱敏</p>
+                            <p class="text-[10px] text-slate-500 mt-1">sanitize-history</p>
+                        </div>
+                        <div class="text-center p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
+                            <div class="text-primary text-2xl mb-2">&#9733;</div>
+                            <p class="text-xs text-slate-300 font-medium">候选规则提取</p>
+                            <p class="text-[10px] text-slate-500 mt-1">build-history-map</p>
+                        </div>
+                        <div class="text-center p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
+                            <div class="text-amber-400 text-2xl mb-2">&#10003;</div>
+                            <p class="text-xs text-slate-300 font-medium">人工审核入库</p>
+                            <p class="text-[10px] text-slate-500 mt-1">import-rules</p>
+                        </div>
+                        <div class="text-center p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
+                            <div class="text-emerald-400 text-2xl mb-2">&#9650;</div>
+                            <p class="text-xs text-slate-300 font-medium">覆盖率提升</p>
+                            <p class="text-[10px] text-slate-500 mt-1">evaluate-coverage</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== SCENARIO DEMO ==================== -->
+<section class="py-24 px-6 relative">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">场景对比</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">同样的工作，不同的方式</p>
+        </div>
+
+        <!-- Scenario 1 -->
+        <div class="mb-12 fade-in">
+            <h3 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-sm text-primary">1</span>
+                新批次资产分类
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Before -->
+                <div class="rounded-xl bg-red-500/5 border border-red-500/20 p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400 font-medium">使用前</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
+                            <span>逐条翻看历史台账找对应关系</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
+                            <span>询问有经验的同事确认编码</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
+                            <span>手动填写 Excel 逐行核对</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
+                            <span>同一分类每次重复判断</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-red-500/10 text-xs text-slate-500">
+                        耗时：3-5 个工作日 / 批次
+                    </div>
+                </div>
+
+                <!-- After -->
+                <div class="rounded-xl bg-emerald-500/5 border border-emerald-500/20 p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400 font-medium">使用后</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
+                            <span>导入底单自动匹配已知规则</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
+                            <span>仅需确认少量未命中项</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
+                            <span>确认结果自动沉淀为新规则</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
+                            <span>下批次同类资产自动命中</span>
+                        </li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-emerald-500/10 text-xs text-emerald-400/70">
+                        耗时：0.5-1 个工作日 / 批次（且越用越快）
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scenario 2 -->
+        <div class="mb-12 fade-in">
+            <h3 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-sm text-primary">2</span>
+                历史经验复用
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="rounded-xl bg-red-500/5 border border-red-500/20 p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400 font-medium">使用前</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
+                            <span>历史台账存在各人电脑，无法集中利用</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
+                            <span>同一资产多次被不同人分到不同编码</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
+                            <span>人员变动后历史判断记录丢失</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="rounded-xl bg-emerald-500/5 border border-emerald-500/20 p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400 font-medium">使用后</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
+                            <span>历史台账脱敏后自动提取映射规则</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
+                            <span>冲突自动标记，人工一次性裁决</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
+                            <span>规则入库后全员共享，新人直接受益</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scenario 3 -->
+        <div class="fade-in">
+            <h3 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                <span class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-sm text-primary">3</span>
+                规则库健康度评估
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="rounded-xl bg-red-500/5 border border-red-500/20 p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400 font-medium">使用前</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
+                            <span>不知道规则库覆盖了多少实际分类</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
+                            <span>不清楚哪些高频分类还需补规则</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
+                            <span>改进效果无法量化，缺乏说服力</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="rounded-xl bg-emerald-500/5 border border-emerald-500/20 p-6">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400 font-medium">使用后</span>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-300">
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
+                            <span>一键生成覆盖率报告：分类/次数/原值三维度</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
+                            <span>高频未命中自动排序，优先补规则方向清晰</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
+                            <span>每次导入新规则后可量化对比提升幅度</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== DATA DASHBOARD (Mock) ==================== -->
+<section class="py-24 px-6 relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-accent/3 to-transparent"></div>
+    <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">实际运行效果</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">以下为本地真实数据验证结果（示意）</p>
+        </div>
+
+        <div class="fade-in">
+            <!-- Dashboard grid -->
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <!-- Card 1: Coverage -->
+                <div class="rounded-xl bg-card border border-slate-700/50 p-6">
+                    <div class="text-sm text-slate-400 mb-2">规则覆盖率（分类维度）</div>
+                    <div class="text-4xl font-bold text-accent mb-4">76.8%</div>
+                    <div class="w-full h-2 rounded-full bg-slate-700 overflow-hidden">
+                        <div class="h-full rounded-full bg-gradient-to-r from-accent to-primary progress-bar" style="--target-width: 76.8%"></div>
+                    </div>
+                    <div class="text-xs text-slate-500 mt-2">249 / 324 分类已命中</div>
+                </div>
+
+                <!-- Card 2: Rules extracted -->
+                <div class="rounded-xl bg-card border border-slate-700/50 p-6">
+                    <div class="text-sm text-slate-400 mb-2">历史规则提取</div>
+                    <div class="text-4xl font-bold text-primary mb-4">61</div>
+                    <div class="grid grid-cols-3 gap-2 mt-3">
+                        <div class="text-center">
+                            <div class="text-lg font-semibold text-emerald-400">47</div>
+                            <div class="text-[10px] text-slate-500">high</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-lg font-semibold text-amber-400">5</div>
+                            <div class="text-[10px] text-slate-500">dominant</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-lg font-semibold text-red-400">9</div>
+                            <div class="text-[10px] text-slate-500">conflict</div>
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-500 mt-3">Hash Join 命中率 100%</div>
+                </div>
+
+                <!-- Card 3: Efficiency -->
+                <div class="rounded-xl bg-card border border-slate-700/50 p-6">
+                    <div class="text-sm text-slate-400 mb-2">效率提升预估</div>
+                    <div class="text-4xl font-bold text-emerald-400 mb-4">4x</div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-400">人工判断项减少</span>
+                            <span class="text-emerald-400">~77%</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-400">新人培训周期</span>
+                            <span class="text-emerald-400">降低 60%</span>
+                        </div>
+                        <div class="flex justify-between text-xs">
+                            <span class="text-slate-400">分类一致性</span>
+                            <span class="text-emerald-400">显著提升</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mock terminal output -->
+            <div class="rounded-xl bg-slate-900 border border-slate-700/50 p-6 font-mono text-sm overflow-hidden">
+                <div class="flex items-center gap-2 mb-4">
+                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+                    <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
+                    <span class="text-xs text-slate-500 ml-2">ecoflow build-history-map</span>
+                </div>
+                <div class="space-y-1 text-xs">
+                    <div><span class="text-slate-500">$</span> <span class="text-emerald-400">ecoflow build-history-map</span> 脱敏三级分类.xlsx 脱敏历史.xlsx</div>
+                    <div class="text-slate-400 mt-2">&#9656; 读取三级分类文件... <span class="text-emerald-400">324 条记录</span></div>
+                    <div class="text-slate-400">&#9656; 读取历史分类文件... <span class="text-emerald-400">1,247 条记录</span></div>
+                    <div class="text-slate-400">&#9656; Hash Join 对齐... <span class="text-accent">命中 1,247 / 1,247 (100%)</span></div>
+                    <div class="text-slate-400">&#9656; 分类映射分析...</div>
+                    <div class="text-slate-400 mt-2">  &#9500; <span class="text-emerald-400">high</span>: 47 条（置信度高，可直接确认）</div>
+                    <div class="text-slate-400">  &#9500; <span class="text-amber-400">dominant</span>: 5 条（主导映射占比 ≥ 85%）</div>
+                    <div class="text-slate-400">  &#9500; <span class="text-red-400">conflict</span>: 9 条（需人工判断）</div>
+                    <div class="text-slate-400">  &#9492; <span class="text-slate-500">invalid_name</span>: 0 条</div>
+                    <div class="text-emerald-400 mt-2">&#10003; 输出: 历史映射候选.xlsx (4 Sheets)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== VALUE SUMMARY ==================== -->
+<section class="py-24 px-6 relative">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">项目价值总结</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">不是替代人工判断，而是让每一次判断都被沉淀、复用、量化</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8 fade-in">
+            <div class="text-center">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/20 flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">效率跃升</h3>
+                <p class="text-sm text-slate-400">规则库覆盖的分类无需重复判断，<br/>人工精力聚焦于真正的疑难项</p>
+            </div>
+
+            <div class="text-center">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-emerald-500/20 border border-accent/20 flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">经验沉淀</h3>
+                <p class="text-sm text-slate-400">每次人工确认自动转化为规则，<br/>组织知识不再随人员变动流失</p>
+            </div>
+
+            <div class="text-center">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-primary/20 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">安全可控</h3>
+                <p class="text-sm text-slate-400">全程本地运行，敏感数据不出机，<br/>脱敏+审计双保障合规要求</p>
+            </div>
+        </div>
+
+        <!-- Additional value points -->
+        <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-4 fade-in">
+            <div class="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-slate-700/30">
+                <div class="w-2 h-2 rounded-full bg-accent"></div>
+                <span class="text-sm text-slate-300">覆盖率可量化</span>
+            </div>
+            <div class="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-slate-700/30">
+                <div class="w-2 h-2 rounded-full bg-primary"></div>
+                <span class="text-sm text-slate-300">改进效果可衡量</span>
+            </div>
+            <div class="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-slate-700/30">
+                <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
+                <span class="text-sm text-slate-300">冲突不覆盖机制</span>
+            </div>
+            <div class="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-slate-700/30">
+                <div class="w-2 h-2 rounded-full bg-amber-400"></div>
+                <span class="text-sm text-slate-300">异常可追溯处理</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== SYSTEM POSITIONING ==================== -->
+<section class="py-24 px-6 relative">
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent"></div>
+    <div class="max-w-6xl mx-auto relative z-10">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">在整体 AI 办公体系中的定位</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">环资流承担"资产分类治理"这一核心能力模块</p>
+        </div>
+
+        <div class="fade-in">
+            <div class="rounded-2xl bg-card/50 border border-slate-700/50 p-8 md:p-12">
+                <!-- Architecture diagram -->
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Left: Input layer -->
+                    <div class="space-y-4">
+                        <div class="text-xs text-slate-500 uppercase tracking-wider mb-3 text-center">数据输入</div>
+                        <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/50 text-center text-sm text-slate-300">
+                            资产云系统导出
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/50 text-center text-sm text-slate-300">
+                            历史分类台账
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/50 text-center text-sm text-slate-300">
+                            内部分类主数据
+                        </div>
+                        <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/50 text-center text-sm text-slate-300">
+                            博意报价文件
+                        </div>
+                    </div>
+
+                    <!-- Middle: Core engine -->
+                    <div class="flex flex-col items-center justify-center">
+                        <div class="w-full p-6 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-primary/30 text-center">
+                            <div class="text-xs text-primary uppercase tracking-wider mb-2">核心引擎</div>
+                            <div class="text-lg font-bold text-white mb-3">环资流</div>
+                            <div class="space-y-2 text-xs text-slate-400">
+                                <div class="py-1 px-2 rounded bg-slate-800/50">脱敏 & 清洗</div>
+                                <div class="py-1 px-2 rounded bg-slate-800/50">规则匹配 & 沉淀</div>
+                                <div class="py-1 px-2 rounded bg-slate-800/50">覆盖率评估</div>
+                                <div class="py-1 px-2 rounded bg-slate-800/50">批次制单</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Output layer -->
+                    <div class="space-y-4">
+                        <div class="text-xs text-slate-500 uppercase tracking-wider mb-3 text-center">能力输出</div>
+                        <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-center text-sm text-emerald-300">
+                            标准化制单文件
+                        </div>
+                        <div class="p-3 rounded-lg bg-primary/10 border border-primary/20 text-center text-sm text-primary">
+                            分类映射规则库
+                        </div>
+                        <div class="p-3 rounded-lg bg-accent/10 border border-accent/20 text-center text-sm text-accent">
+                            覆盖率评估报告
+                        </div>
+                        <div class="p-3 rounded-lg bg-amber-500/10 border border-amber-500/20 text-center text-sm text-amber-300">
+                            异常追溯记录
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FUTURE EXPANSION ==================== -->
+<section class="py-24 px-6 relative">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">未来扩展方向</h2>
+            <p class="text-slate-400 max-w-2xl mx-auto">当前版本已验证核心链路，后续可逐步扩展</p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
+                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
+                <h3 class="text-base font-semibold text-white mb-2">AI 辅助分类建议</h3>
+                <p class="text-sm text-slate-400">接入大模型对冲突项和新分类提供参考建议，辅助人工判断（仍需确认）</p>
+            </div>
+
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
+                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
+                <h3 class="text-base font-semibold text-white mb-2">多部门协同复核</h3>
+                <p class="text-sm text-slate-400">支持多人并行复核、审批流转，追踪每人确认进度</p>
+            </div>
+
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
+                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
+                <h3 class="text-base font-semibold text-white mb-2">Web 可视化看板</h3>
+                <p class="text-sm text-slate-400">规则库健康度、批次进度、覆盖率趋势的实时可视化仪表盘</p>
+            </div>
+
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
+                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
+                <h3 class="text-base font-semibold text-white mb-2">与资产云系统对接</h3>
+                <p class="text-sm text-slate-400">从手动导出 Excel 升级为 API 直连，实现自动化数据同步</p>
+            </div>
+
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
+                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
+                <h3 class="text-base font-semibold text-white mb-2">规则版本管理</h3>
+                <p class="text-sm text-slate-400">映射规则库支持版本回溯、变更记录、审批历史</p>
+            </div>
+
+            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
+                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
+                <h3 class="text-base font-semibold text-white mb-2">跨单位规则共享</h3>
+                <p class="text-sm text-slate-400">多单位间在脱敏前提下共享映射规则，加速整体覆盖提升</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="py-16 px-6 border-t border-slate-800">
+    <div class="max-w-6xl mx-auto text-center">
+        <div class="mb-6">
+            <span class="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">环资流</span>
+            <span class="text-slate-500 text-sm ml-2">EcoAsset Flow v0.1.1</span>
+        </div>
+        <p class="text-sm text-slate-500 max-w-lg mx-auto mb-6">
+            办公室 AI 应用探索 · 资产分类智能治理
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 text-xs text-slate-600">
+            <span>全程本地运行</span>
+            <span>·</span>
+            <span>不联网</span>
+            <span>·</span>
+            <span>不调用 AI</span>
+            <span>·</span>
+            <span>数据不出机</span>
+        </div>
+    </div>
+</footer>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+// Scroll-triggered fade-in animation
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            // Trigger progress bars
+            entry.target.querySelectorAll('.progress-bar').forEach(bar => {
+                bar.classList.add('animate');
+            });
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+</script>
+
+</body>
+</html>
