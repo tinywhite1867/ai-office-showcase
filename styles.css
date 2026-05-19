@@ -303,7 +303,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .badge {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 0;
   padding: 10px 24px 10px 16px;
@@ -319,15 +319,12 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .badge-main {
-  position: absolute;
-  inset: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 0 56px 0 16px;
-  border-radius: inherit;
+  min-height: 28px;
   min-width: 0;
-  z-index: 1;
+  flex: 1;
 }
 
 /* Shimmer effect on badges */
@@ -1350,8 +1347,14 @@ img, svg { display: block; max-width: 100%; }
     font-size: .98rem;
     margin-bottom: 32px;
   }
-  .hero-badges { gap: 14px; }
-  .badge-group { gap: 8px; }
+  .hero-badges {
+    width: 100%;
+    gap: 14px;
+  }
+  .badge-group {
+    width: 100%;
+    gap: 8px;
+  }
   .badge-group-label { width: 100%; text-align: center; }
   .badge {
     width: 100%;
