@@ -1,1038 +1,931 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>环资流 EcoAsset Flow — 资产分类智能治理平台</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#6366f1',
-                        accent: '#22d3ee',
-                        surface: '#0f172a',
-                        card: '#1e293b',
-                        glow: '#818cf8',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>环资流 EcoAsset Flow — 资产分类智能治理平台</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap');
 
-        * { font-family: 'Noto Sans SC', system-ui, sans-serif; }
+/* ===== VARIABLES ===== */
+:root {
+  --bg:        #0f172a;
+  --bg-card:   #1e293b;
+  --primary:   #6366f1;
+  --accent:    #22d3ee;
+  --emerald:   #34d399;
+  --amber:     #fbbf24;
+  --red:       #f87171;
+  --orange:    #fb923c;
+  --purple:    #a78bfa;
+  --blue:      #60a5fa;
 
-        body {
-            background: #0f172a;
-            color: #e2e8f0;
-        }
+  --text:   #e2e8f0;
+  --text-2: #94a3b8;
+  --text-3: #64748b;
+  --text-4: #475569;
 
-        /* Animated gradient background */
-        .hero-bg {
-            background:
-                radial-gradient(ellipse at 20% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 20%, rgba(34, 211, 238, 0.1) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
-        }
+  --border:       rgba(71,85,105,.5);
+  --border-light: rgba(71,85,105,.3);
 
-        /* Grid pattern overlay */
-        .grid-overlay {
-            background-image:
-                linear-gradient(rgba(99, 102, 241, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(99, 102, 241, 0.03) 1px, transparent 1px);
-            background-size: 60px 60px;
-        }
+  --title-size: clamp(2.4rem,6vw,5.5rem);
+  --h2-size:    clamp(1.5rem,3.2vw,2.5rem);
+  --h3-size:    1.25rem;
+  --sm:  .875rem;
+  --xs:  .75rem;
 
-        /* Glow effects */
-        .glow-border {
-            border: 1px solid rgba(99, 102, 241, 0.3);
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.1), inset 0 0 20px rgba(99, 102, 241, 0.05);
-        }
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+}
 
-        .glow-text {
-            text-shadow: 0 0 40px rgba(99, 102, 241, 0.5);
-        }
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    linear-gradient(rgba(99,102,241,.03) 1px,transparent 1px) 0 0/60px 60px,
+    linear-gradient(90deg,rgba(99,102,241,.03) 1px,transparent 1px) 0 0/60px 60px;
+}
+a{color:inherit;text-decoration:none;}
+ul{list-style:none;}
+img,svg{display:block;max-width:100%;}
 
-        /* Floating animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-        .float { animation: float 6s ease-in-out infinite; }
-        .float-delay { animation: float 6s ease-in-out infinite; animation-delay: -3s; }
+/* ===== LAYOUT ===== */
+.section{padding:96px 24px;position:relative;}
+.section-inner{max-width:1152px;margin:0 auto;position:relative;z-index:1;}
+.section-head{text-align:center;margin-bottom:64px;}
+.section-head h2{font-size:var(--h2-size);font-weight:700;margin-bottom:16px;color:#fff;}
+.section-head p{color:var(--text-2);max-width:560px;margin:0 auto;}
 
-        /* Pulse animation */
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 1; }
-        }
-        .pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
+.section-bg-accent::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom,transparent,rgba(99,102,241,.03),transparent);
+}
+.section-bg-teal::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom,transparent,rgba(34,211,238,.03),transparent);
+}
 
-        /* Flow line animation */
-        @keyframes flow {
-            0% { stroke-dashoffset: 100; }
-            100% { stroke-dashoffset: 0; }
-        }
-        .flow-line {
-            stroke-dasharray: 10 5;
-            animation: flow 2s linear infinite;
-        }
+/* ===== ANIMATIONS ===== */
+@keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@keyframes pulse-glow{0%,100%{opacity:.4;}50%{opacity:1;}}
+@keyframes flow{0%{stroke-dashoffset:100;}100%{stroke-dashoffset:0;}}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(8px);}}
+@keyframes blink{0%,50%{border-color:var(--accent);}51%,100%{border-color:transparent;}}
+@keyframes particle-flow{
+  0%{transform:translateX(-100%);opacity:0;}
+  10%{opacity:1;}90%{opacity:1;}
+  100%{transform:translateX(400%);opacity:0;}
+}
+@keyframes progress{from{width:0%;}to{width:var(--target-width);}}
 
-        /* Fade in on scroll */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+.fade-in{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .8s ease;}
+.fade-in.visible{opacity:1;transform:none;}
+.float{animation:float 6s ease-in-out infinite;}
+.float-delay{animation:float 6s ease-in-out infinite -3s;}
+.pulse-glow{animation:pulse-glow 3s ease-in-out infinite;}
+.flow-line{stroke-dasharray:10 5;animation:flow 2s linear infinite;}
+.particle{animation:particle-flow 4s linear infinite;}
+.particle:nth-child(2){animation-delay:1s;}
+.particle:nth-child(3){animation-delay:2s;}
+.particle:nth-child(4){animation-delay:3s;}
 
-        /* Counter animation */
-        @keyframes countUp {
-            from { opacity: 0; transform: scale(0.5); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .count-up { animation: countUp 0.8s ease-out forwards; }
+/* ===== SHARED COMPONENTS ===== */
+.hover-card{transition:transform .3s,box-shadow .3s,border-color .3s;}
+.hover-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(99,102,241,.15);border-color:rgba(99,102,241,.5);}
 
-        /* Card hover */
-        .hover-card {
-            transition: all 0.3s ease;
-        }
-        .hover-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15);
-            border-color: rgba(99, 102, 241, 0.5);
-        }
+.glow-border{border:1px solid rgba(99,102,241,.3);box-shadow:0 0 20px rgba(99,102,241,.1),inset 0 0 20px rgba(99,102,241,.05);}
 
-        /* Progress bar */
-        @keyframes progress {
-            from { width: 0%; }
-            to { width: var(--target-width); }
-        }
-        .progress-bar {
-            animation: progress 2s ease-out forwards;
-            animation-play-state: paused;
-        }
-        .progress-bar.animate {
-            animation-play-state: running;
-        }
+.progress-bar{animation:progress 2s ease-out forwards;animation-play-state:paused;}
+.progress-bar.animate{animation-play-state:running;}
 
-        /* Node connector */
-        .node-line {
-            position: relative;
-        }
-        .node-line::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            right: -24px;
-            width: 24px;
-            height: 2px;
-            background: linear-gradient(to right, rgba(99, 102, 241, 0.8), rgba(34, 211, 238, 0.4));
-        }
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  padding:80px 24px;position:relative;overflow:hidden;
+  background:
+    linear-gradient(rgba(99,102,241,.03) 1px,transparent 1px) 0 0/60px 60px,
+    linear-gradient(90deg,rgba(99,102,241,.03) 1px,transparent 1px) 0 0/60px 60px,
+    radial-gradient(ellipse at 20% 50%,rgba(99,102,241,.15) 0%,transparent 50%),
+    radial-gradient(ellipse at 80% 20%,rgba(34,211,238,.1) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 80%,rgba(139,92,246,.08) 0%,transparent 50%),
+    var(--bg);
+}
+.hero-deco{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;}
+.hero-deco-1{top:80px;left:40px;width:288px;height:288px;background:rgba(99,102,241,.05);animation:float 6s ease-in-out infinite;}
+.hero-deco-2{bottom:80px;right:40px;width:384px;height:384px;background:rgba(34,211,238,.05);animation:float 6s ease-in-out infinite -3s;}
+.hero-inner{max-width:960px;width:100%;margin:0 auto;text-align:center;position:relative;z-index:1;}
 
-        /* Typing effect */
-        @keyframes blink {
-            0%, 50% { border-color: #22d3ee; }
-            51%, 100% { border-color: transparent; }
-        }
-        .typing-cursor {
-            border-right: 2px solid #22d3ee;
-            animation: blink 1s infinite;
-        }
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 16px;border-radius:999px;
+  border:1px solid rgba(99,102,241,.3);background:rgba(99,102,241,.05);
+  margin-bottom:32px;
+}
+.hero-badge-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);}
+.hero-badge span{font-size:var(--sm);color:#cbd5e1;}
 
-        /* Scroll indicator */
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(8px); }
-        }
-        .scroll-indicator { animation: bounce 2s ease-in-out infinite; }
+.hero-title{font-size:var(--title-size);font-weight:900;line-height:1.1;margin-bottom:24px;}
+.hero-title-cn{background:linear-gradient(to right,#fff,#cbd5e1,#94a3b8);-webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero-title-en{color:rgba(99,102,241,.8);font-size:clamp(1.2rem,3vw,2.2rem);font-weight:300;margin-left:12px;}
 
-        /* Data flow particles */
-        @keyframes particle-flow {
-            0% { transform: translateX(-100%) translateY(0); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateX(400%) translateY(0); opacity: 0; }
-        }
-        .particle {
-            animation: particle-flow 4s linear infinite;
-        }
-        .particle:nth-child(2) { animation-delay: 1s; }
-        .particle:nth-child(3) { animation-delay: 2s; }
-        .particle:nth-child(4) { animation-delay: 3s; }
-    </style>
+.hero-tagline{font-size:clamp(1rem,2.2vw,1.4rem);color:#cbd5e1;margin:0 auto 16px;font-weight:300;line-height:1.6;max-width:720px;}
+.hero-tagline .em-accent{color:var(--accent);font-weight:500;}
+.hero-tagline .em-primary{color:var(--primary);font-weight:500;}
+
+.hero-desc{font-size:1rem;color:var(--text-2);margin:0 auto 48px;max-width:560px;}
+
+.hero-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:64px;}
+.hero-tag{padding:8px 16px;border-radius:var(--r-sm);background:var(--bg-card);border:1px solid #334155;font-size:var(--sm);color:#cbd5e1;}
+
+.hero-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;max-width:720px;margin:0 auto;}
+@media(max-width:560px){.hero-metrics{grid-template-columns:repeat(2,1fr);}}
+.hero-metric{text-align:center;}
+.hero-metric-num{display:block;font-size:clamp(1.5rem,3vw,2.25rem);font-weight:700;}
+.hero-metric-num.accent{color:var(--accent);}
+.hero-metric-num.primary{color:var(--primary);}
+.hero-metric-label{display:block;font-size:var(--xs);color:var(--text-2);margin-top:4px;}
+
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);animation:bounce 2s ease-in-out infinite;}
+.hero-scroll svg{width:24px;height:24px;color:#64748b;}
+
+/* ===== PAIN CARDS ===== */
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+@media(max-width:1024px){.pain-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.pain-grid{grid-template-columns:1fr;}}
+
+.pain-card{padding:24px;border-radius:var(--r-lg);background:var(--bg-card);border:1px solid rgba(71,85,105,.5);}
+.pain-icon{width:48px;height:48px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+.pain-icon svg{width:24px;height:24px;}
+.pain-card h3{font-size:var(--h3-size);font-weight:600;margin-bottom:8px;color:#fff;}
+.pain-card p{font-size:var(--sm);color:var(--text-2);}
+.icon-red{background:rgba(239,68,68,.1);}     .icon-red svg{color:var(--red);}
+.icon-orange{background:rgba(249,115,22,.1);}  .icon-orange svg{color:var(--orange);}
+.icon-yellow{background:rgba(234,179,8,.1);}   .icon-yellow svg{color:#facc15;}
+.icon-purple{background:rgba(168,85,247,.1);}  .icon-purple svg{color:var(--purple);}
+.icon-blue{background:rgba(59,130,246,.1);}    .icon-blue svg{color:var(--blue);}
+.icon-emerald{background:rgba(52,211,153,.1);} .icon-emerald svg{color:var(--emerald);}
+
+/* ===== CAPABILITY CARDS ===== */
+.capability-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px;}
+@media(max-width:768px){.capability-grid{grid-template-columns:1fr;}}
+
+.capability-card{padding:32px;border-radius:var(--r-xl);background:rgba(30,41,59,.8);backdrop-filter:blur(8px);}
+.layer-head{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+.layer-num{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:var(--sm);font-weight:700;}
+.layer-num.emerald{background:rgba(52,211,153,.2);color:var(--emerald);}
+.layer-num.primary{background:rgba(99,102,241,.2);color:var(--primary);}
+.layer-num.accent{background:rgba(34,211,238,.2);color:var(--accent);}
+.layer-num.amber{background:rgba(251,191,36,.2);color:var(--amber);}
+.capability-card h3{font-size:var(--h3-size);font-weight:700;color:#fff;}
+
+.cap-list{display:flex;flex-direction:column;gap:12px;}
+.cap-item{display:flex;align-items:flex-start;gap:8px;font-size:var(--sm);color:#cbd5e1;}
+.cap-arrow{margin-top:2px;flex-shrink:0;}
+.cap-arrow.emerald{color:var(--emerald);}
+.cap-arrow.primary{color:var(--primary);}
+.cap-arrow.accent{color:var(--accent);}
+.cap-arrow.amber{color:var(--amber);}
+
+/* ===== WORKFLOW ===== */
+.workflow-box{
+  position:relative;background:rgba(30,41,59,.5);
+  border-radius:var(--r-xl);border:1px solid var(--border);
+  padding:48px;overflow:hidden;
+}
+@media(max-width:768px){.workflow-box{padding:20px;}}
+.workflow-deco{position:absolute;top:0;right:0;width:256px;height:256px;background:rgba(99,102,241,.05);border-radius:50%;filter:blur(60px);pointer-events:none;}
+
+.workflow-steps{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:center;position:relative;z-index:1;}
+@media(max-width:768px){.workflow-steps{grid-template-columns:1fr;gap:16px;}}
+
+.wf-step{display:flex;flex-direction:column;align-items:center;text-align:center;}
+.wf-icon{width:64px;height:64px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin-bottom:12px;position:relative;}
+.wf-icon svg{width:28px;height:28px;}
+.wf-icon.slate{background:linear-gradient(135deg,#334155,#1e293b);border:1px solid #475569;}
+.wf-icon.slate svg{color:#cbd5e1;}
+.wf-icon.primary{background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(99,102,241,.1));border:1px solid rgba(99,102,241,.3);}
+.wf-icon.primary svg{color:var(--primary);}
+.wf-icon.amber{background:linear-gradient(135deg,rgba(245,158,11,.2),rgba(245,158,11,.1));border:1px solid rgba(245,158,11,.3);}
+.wf-icon.amber svg{color:var(--amber);}
+.wf-badge{position:absolute;top:-4px;right:-4px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;}
+.wf-badge.emerald{background:#10b981;}
+.wf-badge.primary{background:var(--primary);}
+.wf-badge.amber{background:#f59e0b;}
+.wf-step h4{font-size:var(--sm);font-weight:600;color:#fff;margin-bottom:4px;}
+.wf-step p{font-size:var(--xs);color:var(--text-2);}
+
+.wf-arrow{display:flex;align-items:center;justify-content:center;}
+@media(max-width:768px){.wf-arrow{display:none;}}
+.wf-arrow-line{width:100%;height:1px;position:relative;}
+.wf-arrow-line::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%) rotate(45deg);width:8px;height:8px;border-top:2px solid;border-right:2px solid;}
+.wf-arrow-line.pa{background:linear-gradient(to right,rgba(99,102,241,.6),rgba(34,211,238,.6));}
+.wf-arrow-line.pa::after{border-color:rgba(34,211,238,.6);}
+.wf-arrow-line.aa{background:linear-gradient(to right,rgba(34,211,238,.6),rgba(245,158,11,.6));}
+.wf-arrow-line.aa::after{border-color:rgba(245,158,11,.6);}
+
+.feedback-loop{margin-top:48px;padding-top:32px;border-top:1px solid var(--border);}
+.feedback-center{text-align:center;margin-bottom:24px;}
+.feedback-badge{display:inline-flex;align-items:center;gap:8px;padding:4px 12px;border-radius:999px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.2);font-size:var(--xs);color:var(--accent);}
+.feedback-badge svg{width:12px;height:12px;}
+.feedback-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+@media(max-width:768px){.feedback-grid{grid-template-columns:repeat(2,1fr);}}
+.feedback-item{text-align:center;padding:16px;border-radius:var(--r-lg);background:rgba(30,41,59,.5);border:1px solid rgba(71,85,105,.3);}
+.feedback-icon{font-size:24px;margin-bottom:8px;}
+.feedback-icon.accent{color:var(--accent);}
+.feedback-icon.primary{color:var(--primary);}
+.feedback-icon.amber{color:var(--amber);}
+.feedback-icon.emerald{color:var(--emerald);}
+.feedback-item h5{font-size:var(--xs);color:#cbd5e1;font-weight:500;}
+.feedback-item p{font-size:10px;color:var(--text-3);margin-top:4px;}
+
+/* ===== SCENARIOS ===== */
+.scenario{margin-bottom:48px;}
+.scenario-title{display:flex;align-items:center;gap:8px;font-size:var(--h3-size);font-weight:600;color:#fff;margin-bottom:24px;}
+.scenario-num{width:32px;height:32px;border-radius:var(--r-sm);background:rgba(99,102,241,.2);display:flex;align-items:center;justify-content:center;font-size:var(--sm);color:var(--primary);}
+
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+@media(max-width:640px){.compare-grid{grid-template-columns:1fr;}}
+.compare-card{padding:24px;border-radius:var(--r-lg);}
+.compare-card.before{background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);}
+.compare-card.after{background:rgba(52,211,153,.05);border:1px solid rgba(52,211,153,.2);}
+.compare-label{display:inline-flex;padding:2px 8px;border-radius:4px;font-size:var(--xs);font-weight:500;margin-bottom:16px;}
+.compare-label.before{background:rgba(239,68,68,.2);color:var(--red);}
+.compare-label.after{background:rgba(52,211,153,.2);color:var(--emerald);}
+.compare-items{display:flex;flex-direction:column;gap:12px;}
+.compare-item{display:flex;align-items:flex-start;gap:8px;font-size:var(--sm);}
+.compare-item.before{color:var(--text-2);}
+.compare-item.after{color:#cbd5e1;}
+.compare-x{color:var(--red);font-size:var(--xs);flex-shrink:0;margin-top:2px;}
+.compare-check{color:var(--emerald);font-size:var(--xs);flex-shrink:0;margin-top:2px;}
+.compare-footer{margin-top:16px;padding-top:16px;font-size:var(--xs);}
+.compare-card.before .compare-footer{border-top:1px solid rgba(239,68,68,.1);color:var(--text-3);}
+.compare-card.after .compare-footer{border-top:1px solid rgba(52,211,153,.1);color:rgba(52,211,153,.7);}
+
+/* ===== DASHBOARD ===== */
+.dashboard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:32px;}
+@media(max-width:768px){.dashboard-grid{grid-template-columns:1fr;}}
+.metric-card{padding:24px;border-radius:var(--r-lg);background:var(--bg-card);border:1px solid var(--border);}
+.metric-label{font-size:var(--sm);color:var(--text-2);margin-bottom:8px;}
+.metric-value{font-size:2.25rem;font-weight:700;margin-bottom:16px;}
+.metric-value.accent{color:var(--accent);}
+.metric-value.primary{color:var(--primary);}
+.metric-value.emerald{color:var(--emerald);}
+.metric-bar-track{width:100%;height:8px;border-radius:999px;background:#334155;overflow:hidden;margin-bottom:8px;}
+.metric-bar-fill{height:100%;border-radius:999px;background:linear-gradient(to right,var(--accent),var(--primary));}
+.metric-bar-note{font-size:var(--xs);color:var(--text-3);}
+.metric-sub-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px;}
+.metric-sub-item{text-align:center;}
+.metric-sub-num{font-size:1.125rem;font-weight:600;}
+.metric-sub-num.emerald{color:var(--emerald);}
+.metric-sub-num.amber{color:var(--amber);}
+.metric-sub-num.red{color:var(--red);}
+.metric-sub-label{font-size:10px;color:var(--text-3);}
+.efficiency-row{display:flex;justify-content:space-between;font-size:var(--xs);margin-top:8px;}
+.efficiency-row span:first-child{color:var(--text-2);}
+.efficiency-row span:last-child{color:var(--emerald);}
+
+.terminal{border-radius:var(--r-lg);background:#0f172a;border:1px solid var(--border);padding:24px;font-family:"SF Mono","Menlo","Monaco","Consolas",monospace;font-size:var(--sm);overflow:hidden;}
+.terminal-header{display:flex;align-items:center;gap:8px;margin-bottom:16px;}
+.t-dot{width:12px;height:12px;border-radius:50%;}
+.t-dot.red{background:rgba(239,68,68,.8);}
+.t-dot.yellow{background:rgba(234,179,8,.8);}
+.t-dot.emerald{background:rgba(52,211,153,.8);}
+.t-cmd-label{font-size:var(--xs);color:var(--text-3);margin-left:8px;}
+.terminal-body{display:flex;flex-direction:column;gap:4px;font-size:var(--xs);}
+.t-line{color:var(--text-2);}
+.t-prompt{color:var(--text-3);}
+.t-cmd-text{color:var(--emerald);}
+.hi-g{color:var(--emerald);}
+.hi-a{color:var(--accent);}
+.hi-y{color:var(--amber);}
+.hi-r{color:var(--red);}
+.hi-m{color:var(--text-3);}
+.t-success{color:var(--emerald);margin-top:8px;}
+
+/* ===== VALUE SUMMARY ===== */
+.value-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
+@media(max-width:768px){.value-grid{grid-template-columns:1fr;}}
+.value-card{text-align:center;}
+.value-icon{width:64px;height:64px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;}
+.value-icon svg{width:32px;height:32px;}
+.value-icon.vi-pi{background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(34,211,238,.2));border:1px solid rgba(99,102,241,.2);}
+.value-icon.vi-pi svg{color:var(--primary);}
+.value-icon.vi-ac{background:linear-gradient(135deg,rgba(34,211,238,.2),rgba(52,211,153,.2));border:1px solid rgba(34,211,238,.2);}
+.value-icon.vi-ac svg{color:var(--accent);}
+.value-icon.vi-em{background:linear-gradient(135deg,rgba(52,211,153,.2),rgba(99,102,241,.2));border:1px solid rgba(52,211,153,.2);}
+.value-icon.vi-em svg{color:var(--emerald);}
+.value-card h3{font-size:var(--h3-size);font-weight:600;color:#fff;margin-bottom:8px;}
+.value-card p{font-size:var(--sm);color:var(--text-2);}
+
+.feature-chips{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:64px;}
+@media(max-width:768px){.feature-chips{grid-template-columns:repeat(2,1fr);}}
+.chip{display:flex;align-items:center;gap:12px;padding:16px;border-radius:var(--r-sm);background:rgba(30,41,59,.5);border:1px solid rgba(71,85,105,.3);font-size:var(--sm);color:#cbd5e1;}
+.chip-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.chip-dot.accent{background:var(--accent);}
+.chip-dot.primary{background:var(--primary);}
+.chip-dot.emerald{background:var(--emerald);}
+.chip-dot.amber{background:var(--amber);}
+
+/* ===== ARCH (System positioning) ===== */
+.arch-box{padding:48px;border-radius:var(--r-xl);background:rgba(30,41,59,.5);border:1px solid var(--border);}
+@media(max-width:768px){.arch-box{padding:20px;}}
+.arch-diagram{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;}
+@media(max-width:768px){.arch-diagram{grid-template-columns:1fr;}}
+.arch-col-label{font-size:var(--xs);color:var(--text-3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;text-align:center;}
+.arch-items{display:flex;flex-direction:column;gap:16px;}
+.arch-item{padding:12px;border-radius:var(--r-sm);text-align:center;font-size:var(--sm);}
+.arch-item.slate{background:rgba(30,41,59,.8);border:1px solid var(--border);color:#cbd5e1;}
+.arch-item.em{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.2);color:#6ee7b7;}
+.arch-item.pr{background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.2);color:#a5b4fc;}
+.arch-item.ac{background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.2);color:#67e8f9;}
+.arch-item.am{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);color:#fcd34d;}
+.arch-engine{display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.arch-engine-card{width:100%;padding:24px;border-radius:var(--r-lg);background:linear-gradient(135deg,rgba(99,102,241,.1),rgba(34,211,238,.1));border:2px solid rgba(99,102,241,.3);text-align:center;}
+.arch-engine-lbl{font-size:var(--xs);color:var(--primary);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;}
+.arch-engine-name{font-size:1.125rem;font-weight:700;color:#fff;margin-bottom:12px;}
+.arch-engine-items{display:flex;flex-direction:column;gap:8px;}
+.arch-engine-item{padding:4px 8px;border-radius:4px;background:rgba(30,41,59,.5);font-size:var(--xs);color:var(--text-2);}
+
+/* ===== FUTURE ===== */
+.future-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+@media(max-width:1024px){.future-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:640px){.future-grid{grid-template-columns:1fr;}}
+.future-card{padding:24px;border-radius:var(--r-lg);background:var(--bg-card);border:1px dashed var(--border);}
+.future-tag{font-size:var(--xs);color:var(--text-3);margin-bottom:12px;}
+.future-card h3{font-size:1rem;font-weight:600;color:#fff;margin-bottom:8px;}
+.future-card p{font-size:var(--sm);color:var(--text-2);}
+
+/* ===== FOOTER ===== */
+.footer{padding:64px 24px;border-top:1px solid #1e293b;text-align:center;}
+.footer-brand{font-size:1.5rem;font-weight:700;background:linear-gradient(to right,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;}
+.footer-version{font-size:var(--sm);color:var(--text-3);margin-left:8px;}
+.footer-desc{font-size:var(--sm);color:var(--text-3);max-width:400px;margin:16px auto 24px;}
+.footer-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;font-size:var(--xs);color:#475569;}
+</style>
 </head>
-<body class="overflow-x-hidden">
+<body>
 <a href="../../index.html" style="position:fixed;top:12px;left:16px;z-index:9999;display:inline-flex;align-items:center;gap:6px;padding:6px 16px;border-radius:999px;background:rgba(0,0,0,.55);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.12);color:#e8ecf4;font-size:13px;font-weight:600;font-family:-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;text-decoration:none;transition:background .2s" onmouseover="this.style.background='rgba(139,92,246,.35)'" onmouseout="this.style.background='rgba(0,0,0,.55)'">&larr; 返回首页</a>
 
-<!-- ==================== HERO SECTION ==================== -->
-<section class="hero-bg grid-overlay min-h-screen flex flex-col justify-center items-center relative px-6">
-    <!-- Decorative elements -->
-    <div class="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl float"></div>
-    <div class="absolute bottom-20 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl float-delay"></div>
-
-    <div class="max-w-5xl mx-auto text-center relative z-10">
-        <!-- Project badge -->
-        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/5 mb-8">
-            <span class="w-2 h-2 rounded-full bg-accent pulse-glow"></span>
-            <span class="text-sm text-slate-300">办公室 AI 应用探索 · 资产分类治理</span>
-        </div>
-
-        <!-- Main title -->
-        <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
-            <span class="bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">环资流</span>
-            <span class="text-primary/80 text-3xl md:text-4xl ml-3 font-light">EcoAsset Flow</span>
-        </h1>
-
-        <!-- Tagline -->
-        <p class="text-xl md:text-2xl text-slate-300 mb-4 font-light leading-relaxed max-w-3xl mx-auto">
-            让资产分类经验从<span class="text-accent font-medium">个人记忆</span>走向<span class="text-primary font-medium">规则引擎</span>
-        </p>
-        <p class="text-base text-slate-400 mb-12 max-w-2xl mx-auto">
-            通过本地化规则沉淀与覆盖率评估，将分散在历史台账和个人经验中的分类知识，
-            转化为可量化、可复用、可持续改进的自动化能力
-        </p>
-
-        <!-- Key capability tags -->
-        <div class="flex flex-wrap justify-center gap-3 mb-16">
-            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">本地脱敏</span>
-            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">规则沉淀</span>
-            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">覆盖率评估</span>
-            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">批次制单</span>
-            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">人机协同</span>
-            <span class="px-4 py-2 rounded-lg bg-card border border-slate-700 text-sm text-slate-300">数据安全</span>
-        </div>
-
-        <!-- Key metrics -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-            <div class="text-center">
-                <div class="text-3xl md:text-4xl font-bold text-accent">280</div>
-                <div class="text-xs text-slate-400 mt-1">内部分类体系</div>
-            </div>
-            <div class="text-center">
-                <div class="text-3xl md:text-4xl font-bold text-primary">16+</div>
-                <div class="text-xs text-slate-400 mt-1">CLI 命令覆盖</div>
-            </div>
-            <div class="text-center">
-                <div class="text-3xl md:text-4xl font-bold text-accent">100%</div>
-                <div class="text-xs text-slate-400 mt-1">本地执行率</div>
-            </div>
-            <div class="text-center">
-                <div class="text-3xl md:text-4xl font-bold text-primary">75</div>
-                <div class="text-xs text-slate-400 mt-1">自动化测试用例</div>
-            </div>
-        </div>
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <span class="hero-badge-dot pulse-glow"></span>
+      <span>办公室 AI 应用探索 · 资产分类治理</span>
     </div>
-
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 scroll-indicator">
-        <svg class="w-6 h-6 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-        </svg>
+    <h1 class="hero-title">
+      <span class="hero-title-cn">环资流</span><span class="hero-title-en">EcoAsset Flow</span>
+    </h1>
+    <p class="hero-tagline">让资产分类经验从<span class="em-accent">个人记忆</span>走向<span class="em-primary">规则引擎</span></p>
+    <p class="hero-desc">通过本地化规则沉淀与覆盖率评估，将分散在历史台账和个人经验中的分类知识，转化为可量化、可复用、可持续改进的自动化能力</p>
+    <div class="hero-tags">
+      <span class="hero-tag">本地脱敏</span>
+      <span class="hero-tag">规则沉淀</span>
+      <span class="hero-tag">覆盖率评估</span>
+      <span class="hero-tag">批次制单</span>
+      <span class="hero-tag">人机协同</span>
+      <span class="hero-tag">数据安全</span>
     </div>
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <span class="hero-metric-num accent">280</span>
+        <span class="hero-metric-label">内部分类体系</span>
+      </div>
+      <div class="hero-metric">
+        <span class="hero-metric-num primary">16+</span>
+        <span class="hero-metric-label">CLI 命令覆盖</span>
+      </div>
+      <div class="hero-metric">
+        <span class="hero-metric-num accent">100%</span>
+        <span class="hero-metric-label">本地执行率</span>
+      </div>
+      <div class="hero-metric">
+        <span class="hero-metric-num primary">75</span>
+        <span class="hero-metric-label">自动化测试用例</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+    </svg>
+  </div>
 </section>
 
 <!-- ==================== PAIN POINTS ==================== -->
-<section class="py-24 px-6 relative">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16 fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">
-                <span class="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">资产分类治理的现实困境</span>
-            </h2>
-            <p class="text-slate-400 max-w-2xl mx-auto">资产云系统的三级分类与内部 280 类体系之间，长期存在映射断层</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
-            <!-- Pain point cards -->
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
-                <div class="w-12 h-12 rounded-lg bg-red-500/10 flex items-center justify-center mb-4">
-                    <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-semibold mb-2 text-white">分类映射靠人记</h3>
-                <p class="text-sm text-slate-400">资产云三级分类到内部编码的对应关系，全凭经手人的经验记忆，一旦换人就断档</p>
-            </div>
-
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
-                <div class="w-12 h-12 rounded-lg bg-orange-500/10 flex items-center justify-center mb-4">
-                    <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-semibold mb-2 text-white">重复劳动无沉淀</h3>
-                <p class="text-sm text-slate-400">每批次底单都要重新人工匹配分类，上次的判断结果无法自动复用到下一次</p>
-            </div>
-
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
-                <div class="w-12 h-12 rounded-lg bg-yellow-500/10 flex items-center justify-center mb-4">
-                    <svg class="w-6 h-6 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-semibold mb-2 text-white">制单流程长且碎</h3>
-                <p class="text-sm text-slate-400">从底单导入到打印单、汇总单、处置单、入库单，环节多、校验难、容易出错</p>
-            </div>
-
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
-                <div class="w-12 h-12 rounded-lg bg-purple-500/10 flex items-center justify-center mb-4">
-                    <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-semibold mb-2 text-white">数据安全难保障</h3>
-                <p class="text-sm text-slate-400">资产底单含敏感信息，传统方式需要发送原始文件给多方，泄露风险大</p>
-            </div>
-
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
-                <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center mb-4">
-                    <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-semibold mb-2 text-white">覆盖缺口不可见</h3>
-                <p class="text-sm text-slate-400">规则库能覆盖多少分类、哪些是高频缺口、改进效果多大——缺乏量化手段</p>
-            </div>
-
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50">
-                <div class="w-12 h-12 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-4">
-                    <svg class="w-6 h-6 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-semibold mb-2 text-white">新人上手周期长</h3>
-                <p class="text-sm text-slate-400">分类规则散落在个人经验中，新接手人员需要数月才能建立完整的映射认知</p>
-            </div>
-        </div>
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <h2 style="background:linear-gradient(to right,#f87171,#fb923c);-webkit-background-clip:text;background-clip:text;color:transparent">资产分类治理的现实困境</h2>
+      <p>资产云系统的三级分类与内部 280 类体系之间，长期存在映射断层</p>
     </div>
+    <div class="pain-grid fade-in">
+      <div class="pain-card hover-card">
+        <div class="pain-icon icon-red">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <h3>分类映射靠人记</h3>
+        <p>资产云三级分类到内部编码的对应关系，全凭经手人的经验记忆，一旦换人就断档</p>
+      </div>
+      <div class="pain-card hover-card">
+        <div class="pain-icon icon-orange">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+        </div>
+        <h3>重复劳动无沉淀</h3>
+        <p>每批次底单都要重新人工匹配分类，上次的判断结果无法自动复用到下一次</p>
+      </div>
+      <div class="pain-card hover-card">
+        <div class="pain-icon icon-yellow">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+        </div>
+        <h3>制单流程长且碎</h3>
+        <p>从底单导入到打印单、汇总单、处置单、入库单，环节多、校验难、容易出错</p>
+      </div>
+      <div class="pain-card hover-card">
+        <div class="pain-icon icon-purple">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+        </div>
+        <h3>数据安全难保障</h3>
+        <p>资产底单含敏感信息，传统方式需要发送原始文件给多方，泄露风险大</p>
+      </div>
+      <div class="pain-card hover-card">
+        <div class="pain-icon icon-blue">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <h3>覆盖缺口不可见</h3>
+        <p>规则库能覆盖多少分类、哪些是高频缺口、改进效果多大——缺乏量化手段</p>
+      </div>
+      <div class="pain-card hover-card">
+        <div class="pain-icon icon-emerald">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3>新人上手周期长</h3>
+        <p>分类规则散落在个人经验中，新接手人员需要数月才能建立完整的映射认知</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ==================== CORE CAPABILITIES ==================== -->
-<section class="py-24 px-6 relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent"></div>
-    <div class="max-w-6xl mx-auto relative z-10">
-        <div class="text-center mb-16 fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">核心能力矩阵</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto">四层能力体系，从数据安全到持续改进形成闭环</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 gap-8 fade-in">
-            <!-- Layer 1: Data Security -->
-            <div class="glow-border rounded-2xl p-8 bg-card/80 backdrop-blur">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                        <span class="text-emerald-400 font-bold text-sm">01</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white">数据安全层</h3>
-                </div>
-                <ul class="space-y-3 text-sm text-slate-300">
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-400 mt-0.5">&#9654;</span>
-                        <span>全程本地执行，不联网、不上传、不调用外部服务</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-400 mt-0.5">&#9654;</span>
-                        <span>敏感字段 SHA-256 哈希脱敏，编号类不保留原值</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-400 mt-0.5">&#9654;</span>
-                        <span>脱敏盐值本地管理，不入日志、不入代码库</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-emerald-400 mt-0.5">&#9654;</span>
-                        <span>字段审计 Sheet 记录处理方式，确保脱敏可追溯</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Layer 2: Rule Sedimentation -->
-            <div class="glow-border rounded-2xl p-8 bg-card/80 backdrop-blur">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                        <span class="text-primary font-bold text-sm">02</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white">规则沉淀层</h3>
-                </div>
-                <ul class="space-y-3 text-sm text-slate-300">
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary mt-0.5">&#9654;</span>
-                        <span>双路径规则提取：统计推断 + 精确 Hash Join</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary mt-0.5">&#9654;</span>
-                        <span>置信度分级：high / dominant / conflict 三档管理</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary mt-0.5">&#9654;</span>
-                        <span>人工确认闭环：所有候选规则须审核后方可入库</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-primary mt-0.5">&#9654;</span>
-                        <span>冲突不覆盖机制：异常流转管理保护已有规则</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Layer 3: Coverage Evaluation -->
-            <div class="glow-border rounded-2xl p-8 bg-card/80 backdrop-blur">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span class="text-accent font-bold text-sm">03</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white">覆盖率评估层</h3>
-                </div>
-                <ul class="space-y-3 text-sm text-slate-300">
-                    <li class="flex items-start gap-2">
-                        <span class="text-accent mt-0.5">&#9654;</span>
-                        <span>三维度指标：分类命中率 / 次数加权 / 原值加权</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-accent mt-0.5">&#9654;</span>
-                        <span>高频未命中自动排序，精准定位补规则优先级</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-accent mt-0.5">&#9654;</span>
-                        <span>冲突异常汇总，可视化规则库健康度</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-accent mt-0.5">&#9654;</span>
-                        <span>纯只读评估，不修改任何数据，可反复运行对比</span>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Layer 4: Batch Document Generation -->
-            <div class="glow-border rounded-2xl p-8 bg-card/80 backdrop-blur">
-                <div class="flex items-center gap-3 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center">
-                        <span class="text-amber-400 font-bold text-sm">04</span>
-                    </div>
-                    <h3 class="text-xl font-bold text-white">批次制单层</h3>
-                </div>
-                <ul class="space-y-3 text-sm text-slate-300">
-                    <li class="flex items-start gap-2">
-                        <span class="text-amber-400 mt-0.5">&#9654;</span>
-                        <span>一键生成打印单、汇总单、处置单、入库单四份标准文件</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-amber-400 mt-0.5">&#9654;</span>
-                        <span>自动校验报告：数量/金额完整性检查 + 问题清单</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-amber-400 mt-0.5">&#9654;</span>
-                        <span>批次状态巡检，进度、异常一目了然</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <span class="text-amber-400 mt-0.5">&#9654;</span>
-                        <span>模板化输出，样式统一，合规可控</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
+<section class="section section-bg-accent">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <h2>核心能力矩阵</h2>
+      <p>四层能力体系，从数据安全到持续改进形成闭环</p>
     </div>
+    <div class="capability-grid fade-in">
+      <div class="capability-card glow-border">
+        <div class="layer-head">
+          <div class="layer-num emerald">01</div>
+          <h3>数据安全层</h3>
+        </div>
+        <ul class="cap-list">
+          <li class="cap-item"><span class="cap-arrow emerald">&#9654;</span><span>全程本地执行，不联网、不上传、不调用外部服务</span></li>
+          <li class="cap-item"><span class="cap-arrow emerald">&#9654;</span><span>敏感字段 SHA-256 哈希脱敏，编号类不保留原值</span></li>
+          <li class="cap-item"><span class="cap-arrow emerald">&#9654;</span><span>脱敏盐值本地管理，不入日志、不入代码库</span></li>
+          <li class="cap-item"><span class="cap-arrow emerald">&#9654;</span><span>字段审计 Sheet 记录处理方式，确保脱敏可追溯</span></li>
+        </ul>
+      </div>
+      <div class="capability-card glow-border">
+        <div class="layer-head">
+          <div class="layer-num primary">02</div>
+          <h3>规则沉淀层</h3>
+        </div>
+        <ul class="cap-list">
+          <li class="cap-item"><span class="cap-arrow primary">&#9654;</span><span>双路径规则提取：统计推断 + 精确 Hash Join</span></li>
+          <li class="cap-item"><span class="cap-arrow primary">&#9654;</span><span>置信度分级：high / dominant / conflict 三档管理</span></li>
+          <li class="cap-item"><span class="cap-arrow primary">&#9654;</span><span>人工确认闭环：所有候选规则须审核后方可入库</span></li>
+          <li class="cap-item"><span class="cap-arrow primary">&#9654;</span><span>冲突不覆盖机制：异常流转管理保护已有规则</span></li>
+        </ul>
+      </div>
+      <div class="capability-card glow-border">
+        <div class="layer-head">
+          <div class="layer-num accent">03</div>
+          <h3>覆盖率评估层</h3>
+        </div>
+        <ul class="cap-list">
+          <li class="cap-item"><span class="cap-arrow accent">&#9654;</span><span>三维度指标：分类命中率 / 次数加权 / 原值加权</span></li>
+          <li class="cap-item"><span class="cap-arrow accent">&#9654;</span><span>高频未命中自动排序，精准定位补规则优先级</span></li>
+          <li class="cap-item"><span class="cap-arrow accent">&#9654;</span><span>冲突异常汇总，可视化规则库健康度</span></li>
+          <li class="cap-item"><span class="cap-arrow accent">&#9654;</span><span>纯只读评估，不修改任何数据，可反复运行对比</span></li>
+        </ul>
+      </div>
+      <div class="capability-card glow-border">
+        <div class="layer-head">
+          <div class="layer-num amber">04</div>
+          <h3>批次制单层</h3>
+        </div>
+        <ul class="cap-list">
+          <li class="cap-item"><span class="cap-arrow amber">&#9654;</span><span>一键生成打印单、汇总单、处置单、入库单四份标准文件</span></li>
+          <li class="cap-item"><span class="cap-arrow amber">&#9654;</span><span>自动校验报告：数量/金额完整性检查 + 问题清单</span></li>
+          <li class="cap-item"><span class="cap-arrow amber">&#9654;</span><span>批次状态巡检，进度、异常一目了然</span></li>
+          <li class="cap-item"><span class="cap-arrow amber">&#9654;</span><span>模板化输出，样式统一，合规可控</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ==================== WORKFLOW ==================== -->
-<section class="py-24 px-6 relative overflow-hidden">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16 fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">智能治理工作流</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto">从原始数据到规则沉淀，形成持续改进的正循环</p>
-        </div>
-
-        <!-- Main workflow -->
-        <div class="fade-in">
-            <!-- Flow visualization -->
-            <div class="relative bg-card/50 rounded-2xl border border-slate-700/50 p-8 md:p-12 overflow-hidden">
-                <!-- Background decoration -->
-                <div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
-
-                <!-- Flow steps -->
-                <div class="grid md:grid-cols-5 gap-4 md:gap-2 relative z-10">
-                    <!-- Step 1 -->
-                    <div class="flex flex-col items-center text-center">
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-700 to-slate-800 border border-slate-600 flex items-center justify-center mb-3 relative">
-                            <svg class="w-7 h-7 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                            </svg>
-                            <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
-                                <span class="text-[10px] font-bold text-white">1</span>
-                            </div>
-                        </div>
-                        <h4 class="text-sm font-semibold text-white mb-1">数据导入</h4>
-                        <p class="text-xs text-slate-400">资产云底单<br/>本地脱敏</p>
-                    </div>
-
-                    <!-- Arrow -->
-                    <div class="hidden md:flex items-center justify-center">
-                        <div class="w-full h-0.5 bg-gradient-to-r from-primary/60 to-accent/60 relative">
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-accent/60 transform rotate-45"></div>
-                        </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="flex flex-col items-center text-center">
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/30 flex items-center justify-center mb-3 relative">
-                            <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
-                            </svg>
-                            <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-primary flex items-center justify-center">
-                                <span class="text-[10px] font-bold text-white">2</span>
-                            </div>
-                        </div>
-                        <h4 class="text-sm font-semibold text-white mb-1">分类复核</h4>
-                        <p class="text-xs text-slate-400">L1 自动匹配<br/>人工确认</p>
-                    </div>
-
-                    <!-- Arrow -->
-                    <div class="hidden md:flex items-center justify-center">
-                        <div class="w-full h-0.5 bg-gradient-to-r from-accent/60 to-amber-400/60 relative">
-                            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-amber-400/60 transform rotate-45"></div>
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="flex flex-col items-center text-center">
-                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500/20 to-amber-500/10 border border-amber-500/30 flex items-center justify-center mb-3 relative">
-                            <svg class="w-7 h-7 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-                            </svg>
-                            <div class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center">
-                                <span class="text-[10px] font-bold text-white">3</span>
-                            </div>
-                        </div>
-                        <h4 class="text-sm font-semibold text-white mb-1">单据生成</h4>
-                        <p class="text-xs text-slate-400">打印/汇总/处置<br/>入库/校验</p>
-                    </div>
-                </div>
-
-                <!-- Feedback loop -->
-                <div class="mt-12 pt-8 border-t border-slate-700/50">
-                    <div class="text-center mb-6">
-                        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-xs text-accent">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                            规则沉淀正循环
-                        </span>
-                    </div>
-                    <div class="grid md:grid-cols-4 gap-4">
-                        <div class="text-center p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
-                            <div class="text-accent text-2xl mb-2">&#9881;</div>
-                            <p class="text-xs text-slate-300 font-medium">历史数据脱敏</p>
-                            <p class="text-[10px] text-slate-500 mt-1">sanitize-history</p>
-                        </div>
-                        <div class="text-center p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
-                            <div class="text-primary text-2xl mb-2">&#9733;</div>
-                            <p class="text-xs text-slate-300 font-medium">候选规则提取</p>
-                            <p class="text-[10px] text-slate-500 mt-1">build-history-map</p>
-                        </div>
-                        <div class="text-center p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
-                            <div class="text-amber-400 text-2xl mb-2">&#10003;</div>
-                            <p class="text-xs text-slate-300 font-medium">人工审核入库</p>
-                            <p class="text-[10px] text-slate-500 mt-1">import-rules</p>
-                        </div>
-                        <div class="text-center p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
-                            <div class="text-emerald-400 text-2xl mb-2">&#9650;</div>
-                            <p class="text-xs text-slate-300 font-medium">覆盖率提升</p>
-                            <p class="text-[10px] text-slate-500 mt-1">evaluate-coverage</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section class="section" style="overflow:hidden;">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <h2>智能治理工作流</h2>
+      <p>从原始数据到规则沉淀，形成持续改进的正循环</p>
     </div>
+    <div class="fade-in">
+      <div class="workflow-box">
+        <div class="workflow-deco"></div>
+        <div class="workflow-steps">
+          <div class="wf-step">
+            <div class="wf-icon slate">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+              <div class="wf-badge emerald">1</div>
+            </div>
+            <h4>数据导入</h4>
+            <p>资产云底单<br>本地脱敏</p>
+          </div>
+          <div class="wf-arrow"><div class="wf-arrow-line pa"></div></div>
+          <div class="wf-step">
+            <div class="wf-icon primary">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+              <div class="wf-badge primary">2</div>
+            </div>
+            <h4>分类复核</h4>
+            <p>L1 自动匹配<br>人工确认</p>
+          </div>
+          <div class="wf-arrow"><div class="wf-arrow-line aa"></div></div>
+          <div class="wf-step">
+            <div class="wf-icon amber">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+              <div class="wf-badge amber">3</div>
+            </div>
+            <h4>单据生成</h4>
+            <p>打印/汇总/处置<br>入库/校验</p>
+          </div>
+        </div>
+        <div class="feedback-loop">
+          <div class="feedback-center">
+            <div class="feedback-badge">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              规则沉淀正循环
+            </div>
+          </div>
+          <div class="feedback-grid">
+            <div class="feedback-item">
+              <div class="feedback-icon accent">&#9881;</div>
+              <h5>历史数据脱敏</h5>
+              <p>sanitize-history</p>
+            </div>
+            <div class="feedback-item">
+              <div class="feedback-icon primary">&#9733;</div>
+              <h5>候选规则提取</h5>
+              <p>build-history-map</p>
+            </div>
+            <div class="feedback-item">
+              <div class="feedback-icon amber">&#10003;</div>
+              <h5>人工审核入库</h5>
+              <p>import-rules</p>
+            </div>
+            <div class="feedback-item">
+              <div class="feedback-icon emerald">&#9650;</div>
+              <h5>覆盖率提升</h5>
+              <p>evaluate-coverage</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ==================== SCENARIO DEMO ==================== -->
-<section class="py-24 px-6 relative">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16 fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">场景对比</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto">同样的工作，不同的方式</p>
-        </div>
-
-        <!-- Scenario 1 -->
-        <div class="mb-12 fade-in">
-            <h3 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
-                <span class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-sm text-primary">1</span>
-                新批次资产分类
-            </h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Before -->
-                <div class="rounded-xl bg-red-500/5 border border-red-500/20 p-6">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400 font-medium">使用前</span>
-                    </div>
-                    <ul class="space-y-3 text-sm text-slate-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
-                            <span>逐条翻看历史台账找对应关系</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
-                            <span>询问有经验的同事确认编码</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
-                            <span>手动填写 Excel 逐行核对</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
-                            <span>同一分类每次重复判断</span>
-                        </li>
-                    </ul>
-                    <div class="mt-4 pt-4 border-t border-red-500/10 text-xs text-slate-500">
-                        耗时：3-5 个工作日 / 批次
-                    </div>
-                </div>
-
-                <!-- After -->
-                <div class="rounded-xl bg-emerald-500/5 border border-emerald-500/20 p-6">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400 font-medium">使用后</span>
-                    </div>
-                    <ul class="space-y-3 text-sm text-slate-300">
-                        <li class="flex items-start gap-2">
-                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
-                            <span>导入底单自动匹配已知规则</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
-                            <span>仅需确认少量未命中项</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
-                            <span>确认结果自动沉淀为新规则</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
-                            <span>下批次同类资产自动命中</span>
-                        </li>
-                    </ul>
-                    <div class="mt-4 pt-4 border-t border-emerald-500/10 text-xs text-emerald-400/70">
-                        耗时：0.5-1 个工作日 / 批次（且越用越快）
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Scenario 2 -->
-        <div class="mb-12 fade-in">
-            <h3 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
-                <span class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-sm text-primary">2</span>
-                历史经验复用
-            </h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="rounded-xl bg-red-500/5 border border-red-500/20 p-6">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400 font-medium">使用前</span>
-                    </div>
-                    <ul class="space-y-3 text-sm text-slate-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
-                            <span>历史台账存在各人电脑，无法集中利用</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
-                            <span>同一资产多次被不同人分到不同编码</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
-                            <span>人员变动后历史判断记录丢失</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="rounded-xl bg-emerald-500/5 border border-emerald-500/20 p-6">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400 font-medium">使用后</span>
-                    </div>
-                    <ul class="space-y-3 text-sm text-slate-300">
-                        <li class="flex items-start gap-2">
-                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
-                            <span>历史台账脱敏后自动提取映射规则</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
-                            <span>冲突自动标记，人工一次性裁决</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
-                            <span>规则入库后全员共享，新人直接受益</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <!-- Scenario 3 -->
-        <div class="fade-in">
-            <h3 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
-                <span class="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-sm text-primary">3</span>
-                规则库健康度评估
-            </h3>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="rounded-xl bg-red-500/5 border border-red-500/20 p-6">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="px-2 py-0.5 rounded text-xs bg-red-500/20 text-red-400 font-medium">使用前</span>
-                    </div>
-                    <ul class="space-y-3 text-sm text-slate-400">
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
-                            <span>不知道规则库覆盖了多少实际分类</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
-                            <span>不清楚哪些高频分类还需补规则</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-red-400 mt-0.5 text-xs">&#10005;</span>
-                            <span>改进效果无法量化，缺乏说服力</span>
-                        </li>
-                    </ul>
-                </div>
-                <div class="rounded-xl bg-emerald-500/5 border border-emerald-500/20 p-6">
-                    <div class="flex items-center gap-2 mb-4">
-                        <span class="px-2 py-0.5 rounded text-xs bg-emerald-500/20 text-emerald-400 font-medium">使用后</span>
-                    </div>
-                    <ul class="space-y-3 text-sm text-slate-300">
-                        <li class="flex items-start gap-2">
-                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
-                            <span>一键生成覆盖率报告：分类/次数/原值三维度</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
-                            <span>高频未命中自动排序，优先补规则方向清晰</span>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <span class="text-emerald-400 mt-0.5 text-xs">&#10003;</span>
-                            <span>每次导入新规则后可量化对比提升幅度</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <h2>场景对比</h2>
+      <p>同样的工作，不同的方式</p>
     </div>
+
+    <div class="scenario fade-in">
+      <h3 class="scenario-title"><span class="scenario-num">1</span>新批次资产分类</h3>
+      <div class="compare-grid">
+        <div class="compare-card before">
+          <span class="compare-label before">使用前</span>
+          <div class="compare-items">
+            <div class="compare-item before"><span class="compare-x">&#10005;</span><span>逐条翻看历史台账找对应关系</span></div>
+            <div class="compare-item before"><span class="compare-x">&#10005;</span><span>询问有经验的同事确认编码</span></div>
+            <div class="compare-item before"><span class="compare-x">&#10005;</span><span>手动填写 Excel 逐行核对</span></div>
+            <div class="compare-item before"><span class="compare-x">&#10005;</span><span>同一分类每次重复判断</span></div>
+          </div>
+          <div class="compare-footer">耗时：3-5 个工作日 / 批次</div>
+        </div>
+        <div class="compare-card after">
+          <span class="compare-label after">使用后</span>
+          <div class="compare-items">
+            <div class="compare-item after"><span class="compare-check">&#10003;</span><span>导入底单自动匹配已知规则</span></div>
+            <div class="compare-item after"><span class="compare-check">&#10003;</span><span>仅需确认少量未命中项</span></div>
+            <div class="compare-item after"><span class="compare-check">&#10003;</span><span>确认结果自动沉淀为新规则</span></div>
+            <div class="compare-item after"><span class="compare-check">&#10003;</span><span>下批次同类资产自动命中</span></div>
+          </div>
+          <div class="compare-footer">耗时：0.5-1 个工作日 / 批次（且越用越快）</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario fade-in">
+      <h3 class="scenario-title"><span class="scenario-num">2</span>历史经验复用</h3>
+      <div class="compare-grid">
+        <div class="compare-card before">
+          <span class="compare-label before">使用前</span>
+          <div class="compare-items">
+            <div class="compare-item before"><span class="compare-x">&#10005;</span><span>历史台账存在各人电脑，无法集中利用</span></div>
+            <div class="compare-item before"><span class="compare-x">&#10005;</span><span>同一资产多次被不同人分到不同编码</span></div>
+            <div class="compare-item before"><span class="compare-x">&#10005;</span><span>人员变动后历史判断记录丢失</span></div>
+          </div>
+        </div>
+        <div class="compare-card after">
+          <span class="compare-label after">使用后</span>
+          <div class="compare-items">
+            <div class="compare-item after"><span class="compare-check">&#10003;</span><span>历史台账脱敏后自动提取映射规则</span></div>
+            <div class="compare-item after"><span class="compare-check">&#10003;</span><span>冲突自动标记，人工一次性裁决</span></div>
+            <div class="compare-item after"><span class="compare-check">&#10003;</span><span>规则入库后全员共享，新人直接受益</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scenario fade-in" style="margin-bottom:0;">
+      <h3 class="scenario-title"><span class="scenario-num">3</span>规则库健康度评估</h3>
+      <div class="compare-grid">
+        <div class="compare-card before">
+          <span class="compare-label before">使用前</span>
+          <div class="compare-items">
+            <div class="compare-item before"><span class="compare-x">&#10005;</span><span>不知道规则库覆盖了多少实际分类</span></div>
+            <div class="compare-item before"><span class="compare-x">&#10005;</span><span>不清楚哪些高频分类还需补规则</span></div>
+            <div class="compare-item before"><span class="compare-x">&#10005;</span><span>改进效果无法量化，缺乏说服力</span></div>
+          </div>
+        </div>
+        <div class="compare-card after">
+          <span class="compare-label after">使用后</span>
+          <div class="compare-items">
+            <div class="compare-item after"><span class="compare-check">&#10003;</span><span>一键生成覆盖率报告：分类/次数/原值三维度</span></div>
+            <div class="compare-item after"><span class="compare-check">&#10003;</span><span>高频未命中自动排序，优先补规则方向清晰</span></div>
+            <div class="compare-item after"><span class="compare-check">&#10003;</span><span>每次导入新规则后可量化对比提升幅度</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ==================== DATA DASHBOARD (Mock) ==================== -->
-<section class="py-24 px-6 relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-accent/3 to-transparent"></div>
-    <div class="max-w-6xl mx-auto relative z-10">
-        <div class="text-center mb-16 fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">实际运行效果</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto">以下为本地真实数据验证结果（示意）</p>
-        </div>
-
-        <div class="fade-in">
-            <!-- Dashboard grid -->
-            <div class="grid md:grid-cols-3 gap-6 mb-8">
-                <!-- Card 1: Coverage -->
-                <div class="rounded-xl bg-card border border-slate-700/50 p-6">
-                    <div class="text-sm text-slate-400 mb-2">规则覆盖率（分类维度）</div>
-                    <div class="text-4xl font-bold text-accent mb-4">76.8%</div>
-                    <div class="w-full h-2 rounded-full bg-slate-700 overflow-hidden">
-                        <div class="h-full rounded-full bg-gradient-to-r from-accent to-primary progress-bar" style="--target-width: 76.8%"></div>
-                    </div>
-                    <div class="text-xs text-slate-500 mt-2">249 / 324 分类已命中</div>
-                </div>
-
-                <!-- Card 2: Rules extracted -->
-                <div class="rounded-xl bg-card border border-slate-700/50 p-6">
-                    <div class="text-sm text-slate-400 mb-2">历史规则提取</div>
-                    <div class="text-4xl font-bold text-primary mb-4">61</div>
-                    <div class="grid grid-cols-3 gap-2 mt-3">
-                        <div class="text-center">
-                            <div class="text-lg font-semibold text-emerald-400">47</div>
-                            <div class="text-[10px] text-slate-500">high</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-lg font-semibold text-amber-400">5</div>
-                            <div class="text-[10px] text-slate-500">dominant</div>
-                        </div>
-                        <div class="text-center">
-                            <div class="text-lg font-semibold text-red-400">9</div>
-                            <div class="text-[10px] text-slate-500">conflict</div>
-                        </div>
-                    </div>
-                    <div class="text-xs text-slate-500 mt-3">Hash Join 命中率 100%</div>
-                </div>
-
-                <!-- Card 3: Efficiency -->
-                <div class="rounded-xl bg-card border border-slate-700/50 p-6">
-                    <div class="text-sm text-slate-400 mb-2">效率提升预估</div>
-                    <div class="text-4xl font-bold text-emerald-400 mb-4">4x</div>
-                    <div class="space-y-2">
-                        <div class="flex justify-between text-xs">
-                            <span class="text-slate-400">人工判断项减少</span>
-                            <span class="text-emerald-400">~77%</span>
-                        </div>
-                        <div class="flex justify-between text-xs">
-                            <span class="text-slate-400">新人培训周期</span>
-                            <span class="text-emerald-400">降低 60%</span>
-                        </div>
-                        <div class="flex justify-between text-xs">
-                            <span class="text-slate-400">分类一致性</span>
-                            <span class="text-emerald-400">显著提升</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Mock terminal output -->
-            <div class="rounded-xl bg-slate-900 border border-slate-700/50 p-6 font-mono text-sm overflow-hidden">
-                <div class="flex items-center gap-2 mb-4">
-                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-emerald-500/80"></div>
-                    <span class="text-xs text-slate-500 ml-2">ecoflow build-history-map</span>
-                </div>
-                <div class="space-y-1 text-xs">
-                    <div><span class="text-slate-500">$</span> <span class="text-emerald-400">ecoflow build-history-map</span> 脱敏三级分类.xlsx 脱敏历史.xlsx</div>
-                    <div class="text-slate-400 mt-2">&#9656; 读取三级分类文件... <span class="text-emerald-400">324 条记录</span></div>
-                    <div class="text-slate-400">&#9656; 读取历史分类文件... <span class="text-emerald-400">1,247 条记录</span></div>
-                    <div class="text-slate-400">&#9656; Hash Join 对齐... <span class="text-accent">命中 1,247 / 1,247 (100%)</span></div>
-                    <div class="text-slate-400">&#9656; 分类映射分析...</div>
-                    <div class="text-slate-400 mt-2">  &#9500; <span class="text-emerald-400">high</span>: 47 条（置信度高，可直接确认）</div>
-                    <div class="text-slate-400">  &#9500; <span class="text-amber-400">dominant</span>: 5 条（主导映射占比 ≥ 85%）</div>
-                    <div class="text-slate-400">  &#9500; <span class="text-red-400">conflict</span>: 9 条（需人工判断）</div>
-                    <div class="text-slate-400">  &#9492; <span class="text-slate-500">invalid_name</span>: 0 条</div>
-                    <div class="text-emerald-400 mt-2">&#10003; 输出: 历史映射候选.xlsx (4 Sheets)</div>
-                </div>
-            </div>
-        </div>
+<!-- ==================== DATA DASHBOARD ==================== -->
+<section class="section section-bg-teal">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <h2>实际运行效果</h2>
+      <p>以下为本地真实数据验证结果（示意）</p>
     </div>
+    <div class="fade-in">
+      <div class="dashboard-grid">
+        <div class="metric-card">
+          <div class="metric-label">规则覆盖率（分类维度）</div>
+          <div class="metric-value accent">76.8%</div>
+          <div class="metric-bar-track">
+            <div class="metric-bar-fill progress-bar" style="--target-width:76.8%"></div>
+          </div>
+          <div class="metric-bar-note">249 / 324 分类已命中</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">历史规则提取</div>
+          <div class="metric-value primary">61</div>
+          <div class="metric-sub-grid">
+            <div class="metric-sub-item">
+              <div class="metric-sub-num emerald">47</div>
+              <div class="metric-sub-label">high</div>
+            </div>
+            <div class="metric-sub-item">
+              <div class="metric-sub-num amber">5</div>
+              <div class="metric-sub-label">dominant</div>
+            </div>
+            <div class="metric-sub-item">
+              <div class="metric-sub-num red">9</div>
+              <div class="metric-sub-label">conflict</div>
+            </div>
+          </div>
+          <div class="metric-bar-note" style="margin-top:12px;">Hash Join 命中率 100%</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">效率提升预估</div>
+          <div class="metric-value emerald">4x</div>
+          <div class="efficiency-row"><span>人工判断项减少</span><span>~77%</span></div>
+          <div class="efficiency-row"><span>新人培训周期</span><span>降低 60%</span></div>
+          <div class="efficiency-row"><span>分类一致性</span><span>显著提升</span></div>
+        </div>
+      </div>
+
+      <div class="terminal">
+        <div class="terminal-header">
+          <div class="t-dot red"></div>
+          <div class="t-dot yellow"></div>
+          <div class="t-dot emerald"></div>
+          <span class="t-cmd-label">ecoflow build-history-map</span>
+        </div>
+        <div class="terminal-body">
+          <div class="t-line"><span class="t-prompt">$</span> <span class="t-cmd-text">ecoflow build-history-map</span> 脱敏三级分类.xlsx 脱敏历史.xlsx</div>
+          <div class="t-line">&#9656; 读取三级分类文件... <span class="hi-g">324 条记录</span></div>
+          <div class="t-line">&#9656; 读取历史分类文件... <span class="hi-g">1,247 条记录</span></div>
+          <div class="t-line">&#9656; Hash Join 对齐... <span class="hi-a">命中 1,247 / 1,247 (100%)</span></div>
+          <div class="t-line">&#9656; 分类映射分析...</div>
+          <div class="t-line">&nbsp;&nbsp;&#9500; <span class="hi-g">high</span>: 47 条（置信度高，可直接确认）</div>
+          <div class="t-line">&nbsp;&nbsp;&#9500; <span class="hi-y">dominant</span>: 5 条（主导映射占比 ≥ 85%）</div>
+          <div class="t-line">&nbsp;&nbsp;&#9500; <span class="hi-r">conflict</span>: 9 条（需人工判断）</div>
+          <div class="t-line">&nbsp;&nbsp;&#9492; <span class="hi-m">invalid_name</span>: 0 条</div>
+          <div class="t-success">&#10003; 输出: 历史映射候选.xlsx (4 Sheets)</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ==================== VALUE SUMMARY ==================== -->
-<section class="py-24 px-6 relative">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16 fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">项目价值总结</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto">不是替代人工判断，而是让每一次判断都被沉淀、复用、量化</p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-8 fade-in">
-            <div class="text-center">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/20 flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-semibold text-white mb-2">效率跃升</h3>
-                <p class="text-sm text-slate-400">规则库覆盖的分类无需重复判断，<br/>人工精力聚焦于真正的疑难项</p>
-            </div>
-
-            <div class="text-center">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-emerald-500/20 border border-accent/20 flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-semibold text-white mb-2">经验沉淀</h3>
-                <p class="text-sm text-slate-400">每次人工确认自动转化为规则，<br/>组织知识不再随人员变动流失</p>
-            </div>
-
-            <div class="text-center">
-                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-primary/20 border border-emerald-500/20 flex items-center justify-center mx-auto mb-4">
-                    <svg class="w-8 h-8 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg font-semibold text-white mb-2">安全可控</h3>
-                <p class="text-sm text-slate-400">全程本地运行，敏感数据不出机，<br/>脱敏+审计双保障合规要求</p>
-            </div>
-        </div>
-
-        <!-- Additional value points -->
-        <div class="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-4 fade-in">
-            <div class="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-slate-700/30">
-                <div class="w-2 h-2 rounded-full bg-accent"></div>
-                <span class="text-sm text-slate-300">覆盖率可量化</span>
-            </div>
-            <div class="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-slate-700/30">
-                <div class="w-2 h-2 rounded-full bg-primary"></div>
-                <span class="text-sm text-slate-300">改进效果可衡量</span>
-            </div>
-            <div class="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-slate-700/30">
-                <div class="w-2 h-2 rounded-full bg-emerald-400"></div>
-                <span class="text-sm text-slate-300">冲突不覆盖机制</span>
-            </div>
-            <div class="flex items-center gap-3 p-4 rounded-lg bg-card/50 border border-slate-700/30">
-                <div class="w-2 h-2 rounded-full bg-amber-400"></div>
-                <span class="text-sm text-slate-300">异常可追溯处理</span>
-            </div>
-        </div>
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <h2>项目价值总结</h2>
+      <p>不是替代人工判断，而是让每一次判断都被沉淀、复用、量化</p>
     </div>
+    <div class="value-grid fade-in">
+      <div class="value-card">
+        <div class="value-icon vi-pi">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h3>效率跃升</h3>
+        <p>规则库覆盖的分类无需重复判断，<br>人工精力聚焦于真正的疑难项</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon vi-ac">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"/></svg>
+        </div>
+        <h3>经验沉淀</h3>
+        <p>每次人工确认自动转化为规则，<br>组织知识不再随人员变动流失</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon vi-em">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <h3>安全可控</h3>
+        <p>全程本地运行，敏感数据不出机，<br>脱敏+审计双保障合规要求</p>
+      </div>
+    </div>
+    <div class="feature-chips fade-in">
+      <div class="chip"><div class="chip-dot accent"></div>覆盖率可量化</div>
+      <div class="chip"><div class="chip-dot primary"></div>改进效果可衡量</div>
+      <div class="chip"><div class="chip-dot emerald"></div>冲突不覆盖机制</div>
+      <div class="chip"><div class="chip-dot amber"></div>异常可追溯处理</div>
+    </div>
+  </div>
 </section>
 
 <!-- ==================== SYSTEM POSITIONING ==================== -->
-<section class="py-24 px-6 relative">
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent"></div>
-    <div class="max-w-6xl mx-auto relative z-10">
-        <div class="text-center mb-16 fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">在整体 AI 办公体系中的定位</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto">环资流承担"资产分类治理"这一核心能力模块</p>
-        </div>
-
-        <div class="fade-in">
-            <div class="rounded-2xl bg-card/50 border border-slate-700/50 p-8 md:p-12">
-                <!-- Architecture diagram -->
-                <div class="grid md:grid-cols-3 gap-6">
-                    <!-- Left: Input layer -->
-                    <div class="space-y-4">
-                        <div class="text-xs text-slate-500 uppercase tracking-wider mb-3 text-center">数据输入</div>
-                        <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/50 text-center text-sm text-slate-300">
-                            资产云系统导出
-                        </div>
-                        <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/50 text-center text-sm text-slate-300">
-                            历史分类台账
-                        </div>
-                        <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/50 text-center text-sm text-slate-300">
-                            内部分类主数据
-                        </div>
-                        <div class="p-3 rounded-lg bg-slate-800/80 border border-slate-700/50 text-center text-sm text-slate-300">
-                            博意报价文件
-                        </div>
-                    </div>
-
-                    <!-- Middle: Core engine -->
-                    <div class="flex flex-col items-center justify-center">
-                        <div class="w-full p-6 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 border-2 border-primary/30 text-center">
-                            <div class="text-xs text-primary uppercase tracking-wider mb-2">核心引擎</div>
-                            <div class="text-lg font-bold text-white mb-3">环资流</div>
-                            <div class="space-y-2 text-xs text-slate-400">
-                                <div class="py-1 px-2 rounded bg-slate-800/50">脱敏 & 清洗</div>
-                                <div class="py-1 px-2 rounded bg-slate-800/50">规则匹配 & 沉淀</div>
-                                <div class="py-1 px-2 rounded bg-slate-800/50">覆盖率评估</div>
-                                <div class="py-1 px-2 rounded bg-slate-800/50">批次制单</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right: Output layer -->
-                    <div class="space-y-4">
-                        <div class="text-xs text-slate-500 uppercase tracking-wider mb-3 text-center">能力输出</div>
-                        <div class="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-center text-sm text-emerald-300">
-                            标准化制单文件
-                        </div>
-                        <div class="p-3 rounded-lg bg-primary/10 border border-primary/20 text-center text-sm text-primary">
-                            分类映射规则库
-                        </div>
-                        <div class="p-3 rounded-lg bg-accent/10 border border-accent/20 text-center text-sm text-accent">
-                            覆盖率评估报告
-                        </div>
-                        <div class="p-3 rounded-lg bg-amber-500/10 border border-amber-500/20 text-center text-sm text-amber-300">
-                            异常追溯记录
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<section class="section section-bg-accent">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <h2>在整体 AI 办公体系中的定位</h2>
+      <p>环资流承担"资产分类治理"这一核心能力模块</p>
     </div>
+    <div class="fade-in">
+      <div class="arch-box">
+        <div class="arch-diagram">
+          <div>
+            <div class="arch-col-label">数据输入</div>
+            <div class="arch-items">
+              <div class="arch-item slate">资产云系统导出</div>
+              <div class="arch-item slate">历史分类台账</div>
+              <div class="arch-item slate">内部分类主数据</div>
+              <div class="arch-item slate">博意报价文件</div>
+            </div>
+          </div>
+          <div class="arch-engine">
+            <div class="arch-engine-card">
+              <div class="arch-engine-lbl">核心引擎</div>
+              <div class="arch-engine-name">环资流</div>
+              <div class="arch-engine-items">
+                <div class="arch-engine-item">脱敏 &amp; 清洗</div>
+                <div class="arch-engine-item">规则匹配 &amp; 沉淀</div>
+                <div class="arch-engine-item">覆盖率评估</div>
+                <div class="arch-engine-item">批次制单</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="arch-col-label">能力输出</div>
+            <div class="arch-items">
+              <div class="arch-item em">标准化制单文件</div>
+              <div class="arch-item pr">分类映射规则库</div>
+              <div class="arch-item ac">覆盖率评估报告</div>
+              <div class="arch-item am">异常追溯记录</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ==================== FUTURE EXPANSION ==================== -->
-<section class="py-24 px-6 relative">
-    <div class="max-w-6xl mx-auto">
-        <div class="text-center mb-16 fade-in">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">未来扩展方向</h2>
-            <p class="text-slate-400 max-w-2xl mx-auto">当前版本已验证核心链路，后续可逐步扩展</p>
-        </div>
-
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 fade-in">
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
-                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
-                <h3 class="text-base font-semibold text-white mb-2">AI 辅助分类建议</h3>
-                <p class="text-sm text-slate-400">接入大模型对冲突项和新分类提供参考建议，辅助人工判断（仍需确认）</p>
-            </div>
-
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
-                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
-                <h3 class="text-base font-semibold text-white mb-2">多部门协同复核</h3>
-                <p class="text-sm text-slate-400">支持多人并行复核、审批流转，追踪每人确认进度</p>
-            </div>
-
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
-                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
-                <h3 class="text-base font-semibold text-white mb-2">Web 可视化看板</h3>
-                <p class="text-sm text-slate-400">规则库健康度、批次进度、覆盖率趋势的实时可视化仪表盘</p>
-            </div>
-
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
-                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
-                <h3 class="text-base font-semibold text-white mb-2">与资产云系统对接</h3>
-                <p class="text-sm text-slate-400">从手动导出 Excel 升级为 API 直连，实现自动化数据同步</p>
-            </div>
-
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
-                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
-                <h3 class="text-base font-semibold text-white mb-2">规则版本管理</h3>
-                <p class="text-sm text-slate-400">映射规则库支持版本回溯、变更记录、审批历史</p>
-            </div>
-
-            <div class="hover-card p-6 rounded-xl bg-card border border-slate-700/50 border-dashed">
-                <div class="text-xs text-slate-500 mb-3">可扩展方向</div>
-                <h3 class="text-base font-semibold text-white mb-2">跨单位规则共享</h3>
-                <p class="text-sm text-slate-400">多单位间在脱敏前提下共享映射规则，加速整体覆盖提升</p>
-            </div>
-        </div>
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head fade-in">
+      <h2>未来扩展方向</h2>
+      <p>当前版本已验证核心链路，后续可逐步扩展</p>
     </div>
+    <div class="future-grid fade-in">
+      <div class="future-card hover-card">
+        <div class="future-tag">可扩展方向</div>
+        <h3>AI 辅助分类建议</h3>
+        <p>接入大模型对冲突项和新分类提供参考建议，辅助人工判断（仍需确认）</p>
+      </div>
+      <div class="future-card hover-card">
+        <div class="future-tag">可扩展方向</div>
+        <h3>多部门协同复核</h3>
+        <p>支持多人并行复核、审批流转，追踪每人确认进度</p>
+      </div>
+      <div class="future-card hover-card">
+        <div class="future-tag">可扩展方向</div>
+        <h3>Web 可视化看板</h3>
+        <p>规则库健康度、批次进度、覆盖率趋势的实时可视化仪表盘</p>
+      </div>
+      <div class="future-card hover-card">
+        <div class="future-tag">可扩展方向</div>
+        <h3>与资产云系统对接</h3>
+        <p>从手动导出 Excel 升级为 API 直连，实现自动化数据同步</p>
+      </div>
+      <div class="future-card hover-card">
+        <div class="future-tag">可扩展方向</div>
+        <h3>规则版本管理</h3>
+        <p>映射规则库支持版本回溯、变更记录、审批历史</p>
+      </div>
+      <div class="future-card hover-card">
+        <div class="future-tag">可扩展方向</div>
+        <h3>跨单位规则共享</h3>
+        <p>多单位间在脱敏前提下共享映射规则，加速整体覆盖提升</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ==================== FOOTER ==================== -->
-<footer class="py-16 px-6 border-t border-slate-800">
-    <div class="max-w-6xl mx-auto text-center">
-        <div class="mb-6">
-            <span class="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">环资流</span>
-            <span class="text-slate-500 text-sm ml-2">EcoAsset Flow v0.1.1</span>
-        </div>
-        <p class="text-sm text-slate-500 max-w-lg mx-auto mb-6">
-            办公室 AI 应用探索 · 资产分类智能治理
-        </p>
-        <div class="flex flex-wrap justify-center gap-4 text-xs text-slate-600">
-            <span>全程本地运行</span>
-            <span>·</span>
-            <span>不联网</span>
-            <span>·</span>
-            <span>不调用 AI</span>
-            <span>·</span>
-            <span>数据不出机</span>
-        </div>
-    </div>
+<footer class="footer">
+  <div>
+    <span class="footer-brand">环资流</span>
+    <span class="footer-version">EcoAsset Flow v0.1.1</span>
+  </div>
+  <p class="footer-desc">办公室 AI 应用探索 · 资产分类智能治理</p>
+  <div class="footer-chips">
+    <span>全程本地运行</span>
+    <span>·</span>
+    <span>不联网</span>
+    <span>·</span>
+    <span>不调用 AI</span>
+    <span>·</span>
+    <span>数据不出机</span>
+  </div>
 </footer>
 
 <!-- ==================== SCRIPTS ==================== -->
 <script>
-// Scroll-triggered fade-in animation
 const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            // Trigger progress bars
-            entry.target.querySelectorAll('.progress-bar').forEach(bar => {
-                bar.classList.add('animate');
-            });
-        }
-    });
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      entry.target.querySelectorAll('.progress-bar').forEach(bar => {
+        bar.classList.add('animate');
+      });
+    }
+  });
 }, { threshold: 0.1 });
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  });
 });
 </script>
-
 </body>
 </html>

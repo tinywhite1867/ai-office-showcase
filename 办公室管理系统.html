@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>办公室管理系统 · 上线宣传册</title>
-<meta name="description" content="为我们自己量身定做的办公室管理工作台。七大业务板块贴合一线场景，AI 全库问答，制度治理自动查冲突。">
+<meta name="description" content="为我们自己量身定做的办公室管理工作台。九大业务板块贴合一线场景，AI 全库问答，制度治理自动查冲突。">
 <style>
 /* =====================================================
    办公室管理系统 — 上线宣传册 (Cyber Edition)
@@ -357,6 +357,54 @@ section {
 .center-head .section-title,
 .center-head .section-sub { margin-left: auto; margin-right: auto; text-align: center; }
 
+.section-feature-head {
+  text-align: center;
+  margin-bottom: 52px;
+}
+.section-feature-head .module-label {
+  margin-bottom: 18px;
+}
+.section-feature-head .module-label .m-zh {
+  font-size: clamp(34px, 5vw, 60px);
+  letter-spacing: 0;
+  line-height: 1.08;
+}
+.section-feature-head .module-label .m-en {
+  letter-spacing: 0;
+}
+.section-lead-title {
+  font-size: clamp(22px, 3vw, 34px);
+  font-weight: 800;
+  letter-spacing: 0;
+  line-height: 1.25;
+  max-width: 820px;
+  margin: 0 auto 14px;
+  color: var(--text);
+}
+.section-lead-title .g,
+.section-lead-title .grad {
+  background: var(--grad-1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.section-lead-title .g2,
+.section-lead-title .grad2 {
+  background: var(--grad-2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.section-feature-head .section-sub {
+  margin: 0 auto;
+  text-align: center;
+}
+@media (max-width: 640px) {
+  .section-feature-head .module-label .m-zh {
+    font-size: clamp(28px, 8.5vw, 36px);
+  }
+}
+
 /* ============ Compare ============ */
 .compare-grid {
   display: grid;
@@ -473,7 +521,7 @@ section {
   gap: 16px;
 }
 .seven-card {
-  grid-column: span 3;
+  grid-column: span 4;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: var(--r-md);
@@ -514,10 +562,7 @@ section {
 .seven-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
 .seven-card .s-desc { font-size: 13px; color: var(--text-2); line-height: 1.65; }
 
-/* 4+3 居中布局：第 5-7 个偏移 */
-.seven-grid > .seven-card:nth-child(5) { grid-column: 2 / span 3; }
-.seven-grid > .seven-card:nth-child(6) { grid-column: span 3; }
-.seven-grid > .seven-card:nth-child(7) { grid-column: span 3; }
+/* 9 卡片 = 3 列 × 3 行，每张占 4 栅格 */
 
 @media (max-width: 960px) {
   .seven-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1234,6 +1279,218 @@ section {
 .audit-report .row .v { color: var(--text); font-weight: 600; font-family: "SF Mono", monospace; }
 .audit-report .row .v.warn { color: var(--neon-3); }
 .audit-report .row .v.ok { color: var(--neon-4); }
+
+/* ============ HR (Lazycat) Section ============ */
+.hr-section {
+  padding: 130px 0 90px;
+  position: relative;
+  background:
+    radial-gradient(50% 50% at 80% 10%, rgba(124,92,255,.12), transparent 60%),
+    radial-gradient(40% 50% at 15% 90%, rgba(0,229,255,.10), transparent 60%);
+}
+.hr-section .head-wrap { text-align: center; margin-bottom: 56px; }
+.hr-section .hr-title {
+  font-size: clamp(30px, 4.6vw, 52px);
+  font-weight: 900; letter-spacing: -.025em;
+  line-height: 1.18; margin-bottom: 16px;
+}
+.hr-section .hr-title .g { background: var(--grad-1); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hr-section .hr-title .g2 { background: var(--grad-2); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.hr-block {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  padding: 44px;
+  margin-bottom: 28px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+.hr-block .num-bg {
+  position: absolute; top: 18px; right: 26px;
+  font-size: 72px; font-weight: 900; line-height: 1;
+  background: var(--grad-2); -webkit-background-clip: text; background-clip: text; color: transparent;
+  opacity: .14; font-family: "SF Mono","Menlo",monospace;
+}
+.hr-block .hr-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 12px; font-weight: 700;
+  color: var(--neon-1);
+  text-transform: uppercase; letter-spacing: .22em;
+  margin-bottom: 14px;
+}
+.hr-block.lazycat .hr-eyebrow { color: var(--neon-2); }
+.hr-block h3 {
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 800; letter-spacing: -.015em;
+  margin-bottom: 14px; line-height: 1.25;
+}
+.hr-block .hr-lead {
+  font-size: 14.5px; color: var(--text-2);
+  line-height: 1.75; max-width: 640px; margin-bottom: 22px;
+}
+
+.hr-block.split { display: grid; grid-template-columns: 1.05fr 1fr; gap: 44px; align-items: center; }
+@media (max-width: 980px) {
+  .hr-block.split { grid-template-columns: 1fr; gap: 28px; }
+  .hr-block { padding: 32px 26px; }
+}
+
+/* Roster roles list */
+.roster-roles { display: flex; flex-direction: column; gap: 12px; }
+.roster-roles .r-card {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.02);
+  transition: transform .25s, border-color .25s;
+}
+.roster-roles .r-card:hover { transform: translateX(4px); }
+.roster-roles .r-card .r-left { display: flex; align-items: center; gap: 12px; }
+.roster-roles .r-card .r-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.roster-roles .r-card .r-name { font-weight: 700; font-size: 14.5px; }
+.roster-roles .r-card .r-scope { font-size: 11.5px; color: var(--text-3); margin-top: 2px; letter-spacing: .03em; }
+.roster-roles .r-card .r-count {
+  font-family: "SF Mono","Menlo",monospace;
+  font-size: 13px; font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.roster-roles .r-card.hr { border-color: rgba(0,229,255,.4); background: rgba(0,229,255,.06); }
+.roster-roles .r-card.hr .r-dot { background: var(--neon-1); box-shadow: 0 0 8px var(--neon-1); }
+.roster-roles .r-card.hr .r-name { color: var(--neon-1); }
+.roster-roles .r-card.hr .r-count { color: var(--neon-1); }
+.roster-roles .r-card.union { border-color: rgba(255,183,77,.4); background: rgba(255,183,77,.05); }
+.roster-roles .r-card.union .r-dot { background: var(--neon-5); box-shadow: 0 0 8px var(--neon-5); }
+.roster-roles .r-card.union .r-name { color: var(--neon-5); }
+.roster-roles .r-card.union .r-count { color: var(--neon-5); }
+.roster-roles .r-card.party { border-color: rgba(255,92,179,.4); background: rgba(255,92,179,.05); }
+.roster-roles .r-card.party .r-dot { background: var(--neon-3); box-shadow: 0 0 8px var(--neon-3); }
+.roster-roles .r-card.party .r-name { color: var(--neon-3); }
+.roster-roles .r-card.party .r-count { color: var(--neon-3); }
+.roster-roles .r-card.dept { border-color: rgba(0,255,163,.35); background: rgba(0,255,163,.04); }
+.roster-roles .r-card.dept .r-dot { background: var(--neon-4); box-shadow: 0 0 8px var(--neon-4); }
+.roster-roles .r-card.dept .r-name { color: var(--neon-4); }
+.roster-roles .r-card.dept .r-count { color: var(--neon-4); }
+
+.roster-flow {
+  margin-top: 18px;
+  display: flex; align-items: center; gap: 10px; justify-content: center;
+  flex-wrap: wrap;
+  font-size: 12px; color: var(--text-3);
+}
+.roster-flow .arr {
+  font-family: "SF Mono","Menlo",monospace;
+  color: var(--neon-2);
+  font-weight: 700;
+}
+.roster-flow .chip {
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px dashed var(--line-strong);
+  color: var(--text-2);
+  background: rgba(255,255,255,.02);
+}
+.roster-flow .chip.hi { color: var(--neon-1); border-color: rgba(0,229,255,.5); }
+
+/* Lazycat mind map */
+.hr-block.lazycat {
+  background: linear-gradient(135deg, rgba(124,92,255,.07), rgba(0,229,255,.05));
+  border-color: rgba(124,92,255,.35);
+}
+.lazycat-mind {
+  position: relative;
+  min-height: 460px;
+  margin-top: 18px;
+  padding: 30px 10px;
+}
+.lazycat-mind svg.mind-svg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.lazycat-mind .mind-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 60px 200px;
+  z-index: 2;
+  min-height: 460px;
+  align-items: center;
+}
+.lazycat-mind .center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 150px; height: 150px;
+  border-radius: 50%;
+  background: var(--grad-2);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: #fff;
+  font-weight: 900;
+  box-shadow: 0 0 60px rgba(124,92,255,.5), inset 0 0 20px rgba(255,255,255,.15);
+  z-index: 3;
+}
+.lazycat-mind .center .cat { font-size: 36px; line-height: 1; margin-bottom: 4px; }
+.lazycat-mind .center .nm { font-size: 16px; letter-spacing: .05em; }
+.lazycat-mind .center .nz { font-size: 10.5px; opacity: .8; margin-top: 2px; letter-spacing: .1em; }
+
+.lazycat-mind .leaf {
+  background: rgba(10,15,36,.6);
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  padding: 18px 20px;
+  backdrop-filter: blur(8px);
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+}
+.lazycat-mind .leaf:hover {
+  transform: translateY(-4px);
+  border-color: var(--neon-2);
+  box-shadow: 0 18px 40px -18px rgba(124,92,255,.5);
+}
+.lazycat-mind .leaf .tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700;
+  color: var(--neon-2);
+  letter-spacing: .15em;
+  margin-bottom: 8px;
+}
+.lazycat-mind .leaf .tag .n {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: rgba(124,92,255,.2);
+  border: 1px solid rgba(124,92,255,.5);
+  color: var(--neon-2);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10.5px;
+}
+.lazycat-mind .leaf h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.lazycat-mind .leaf p { font-size: 12.5px; color: var(--text-3); line-height: 1.65; }
+.lazycat-mind .leaf .kw { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.lazycat-mind .leaf .kw span {
+  font-size: 10.5px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(124,92,255,.1);
+  color: var(--neon-2);
+  border: 1px solid rgba(124,92,255,.25);
+}
+.lazycat-mind .leaf.tl { grid-column: 1; grid-row: 1; }
+.lazycat-mind .leaf.tr { grid-column: 2; grid-row: 1; }
+.lazycat-mind .leaf.bl { grid-column: 1; grid-row: 2; }
+.lazycat-mind .leaf.br { grid-column: 2; grid-row: 2; }
+
+@media (max-width: 860px) {
+  .lazycat-mind .mind-grid { grid-template-columns: 1fr; gap: 18px; min-height: 0; }
+  .lazycat-mind svg.mind-svg { display: none; }
+  .lazycat-mind .center { position: static; transform: none; margin: 14px auto; width: 130px; height: 130px; }
+  .lazycat-mind .leaf.tl, .lazycat-mind .leaf.tr, .lazycat-mind .leaf.bl, .lazycat-mind .leaf.br { grid-column: 1; grid-row: auto; }
+}
 
 /* ============ AI section ============ */
 .ai-section {
@@ -2151,7 +2408,7 @@ h4,
     </a>
     <ul class="nav-links">
       <li><a href="#why">为什么</a></li>
-      <li><a href="#seven">七大板块</a></li>
+      <li><a href="#seven">九大板块</a></li>
       <li><a href="#policy">制度模块</a></li>
       <li><a href="#ai">AI 助手</a></li>
       <li><a href="#deploy">部署</a></li>
@@ -2179,7 +2436,7 @@ h4,
         每一个板块都按我们自己的工作流来设计。
       </p>
       <div class="hero-meta reveal reveal-d3" style="margin-top: 12px;">
-        <div><div class="num" data-count="7">0</div><div class="lbl">业务板块</div></div>
+        <div><div class="num" data-count="9">0</div><div class="lbl">业务板块</div></div>
         <div><div class="num" data-count="90" data-suffix="天">0</div><div class="lbl">合同提前提醒</div></div>
         <div><div class="num">全库</div><div class="lbl">AI 语义检索</div></div>
         <div><div class="num">本地</div><div class="lbl">数据自有可控</div></div>
@@ -2203,10 +2460,12 @@ h4,
               <div>后勤</div>
               <div>会议</div>
               <div>行程</div>
+              <div>督办</div>
               <div>宣传</div>
               <div>接待</div>
               <div>材料</div>
               <div>制度</div>
+              <div>人事</div>
             </div>
             <div class="mk-main">
               <div class="mk-stats">
@@ -2251,6 +2510,10 @@ h4,
           <li><span class="ic">×</span>合同服务何时临期，要等到出问题才想起来续签</li>
           <li><span class="ic">×</span>服务商联系方式散在各人手机，要用时互相问</li>
           <li><span class="ic">×</span>会议室预定和领导行程是两套表，没有联动</li>
+          <li><span class="ic">×</span>督办事项 Excel 群里传来传去，谁是最新版没人说得清</li>
+          <li><span class="ic">×</span>临期靠电话催、微信群里 @ 人，季度通报手抄两天才出稿</li>
+          <li><span class="ic">×</span>花名册一家一张表，工会一份、党群一份、部门一份，对不齐</li>
+          <li><span class="ic">×</span>薪酬考核方案依靠传统 Excel 费时费力，负责人薪酬要算到半夜</li>
           <li><span class="ic">×</span>制度之间冲突，全靠人工对照，几百份文档对到天荒地老</li>
         </ul>
       </div>
@@ -2265,6 +2528,10 @@ h4,
           <li><span class="ic">✓</span>合同服务临期前 90 天自动飘红，直接出现在工作台</li>
           <li><span class="ic">✓</span>每份合同的服务商联系方式透明可查，不再相互打听</li>
           <li><span class="ic">✓</span>行程导入后会议室自动联动，本周谁在哪开什么会一屏看完</li>
+          <li><span class="ic">✓</span>督办事项 Excel 一拖即入，临期超期自动标红，谁负责一目了然</li>
+          <li><span class="ic">✓</span>季度通报一键生成初稿，按时间 / 状态 / 单位自动组稿</li>
+          <li><span class="ic">✓</span>花名册一次录入，按口子分发——工会、党群、部门各看各的</li>
+          <li><span class="ic">✓</span>懒猫自动生成薪酬考核方案，负责人薪酬实时测算到分钟</li>
           <li><span class="ic">✓</span>制度治理自动比对，金额/流程冲突机器先标，再交给人</li>
         </ul>
       </div>
@@ -2286,7 +2553,7 @@ h4,
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         </div>
         <h3>一站整合</h3>
-        <p>七大板块同一入口，告别"打开十个文件夹"的旧习。一个地址，所有事情就在这里。</p>
+        <p>九大板块同一入口，告别"打开十个文件夹"的旧习。一个地址，所有事情就在这里。</p>
       </div>
       <div class="value-card reveal reveal-d1">
         <div class="value-icon">
@@ -2319,7 +2586,7 @@ h4,
     <div class="head-wrap reveal">
       <span class="eyebrow" style="justify-content:center;">业务矩阵</span>
       <h2 class="seven-title">
-        <span class="num-7">7</span>
+        <span class="num-7">9</span>
         <span class="lbl"> 大业务板块</span>
       </h2>
       <p class="sub">覆盖办公室全场景，每一个板块都按我们的真实工作流定做。</p>
@@ -2350,8 +2617,19 @@ h4,
         <h3>行程</h3>
         <div class="s-desc">一周会表自动导入，参会/调研年度统计自动生成</div>
       </div>
+
+      <!-- 督办（新增，位于行程之后） -->
       <div class="seven-card reveal reveal-d3">
         <div class="s-num">04</div>
+        <div class="s-ic">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <h3>督办</h3>
+        <div class="s-desc">Excel 一键导入，临期超期自动标红，季度报告一键生成</div>
+      </div>
+
+      <div class="seven-card reveal">
+        <div class="s-num">05</div>
         <div class="s-ic">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h18v18H3z"/><path d="M8 21V9M16 21V9M3 9h18"/></svg>
         </div>
@@ -2359,30 +2637,39 @@ h4,
         <div class="s-desc">宣传材料分区分类归档，全库 AI 检索覆盖</div>
       </div>
 
-      <!-- 第二行：5、6、7 居中 -->
-      <div class="seven-card reveal">
-        <div class="s-num">05</div>
+      <div class="seven-card reveal reveal-d1">
+        <div class="s-num">06</div>
         <div class="s-ic">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <h3>接待</h3>
         <div class="s-desc">按接待管理办法自动合规校验，凭证一并归档</div>
       </div>
-      <div class="seven-card reveal reveal-d1">
-        <div class="s-num">06</div>
+      <div class="seven-card reveal reveal-d2">
+        <div class="s-num">07</div>
         <div class="s-ic">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
         </div>
         <h3>材料</h3>
         <div class="s-desc">材料库统一归档，OCR 入索引，可按标签检索</div>
       </div>
-      <div class="seven-card reveal reveal-d2">
-        <div class="s-num">07</div>
+      <div class="seven-card reveal reveal-d3">
+        <div class="s-num">08</div>
         <div class="s-ic">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         </div>
         <h3>制度</h3>
         <div class="s-desc">制度归档 · 制度问答 · 制度治理（冲突自动标注）</div>
+      </div>
+
+      <!-- 人事（新增，含 lazycat 子能力） -->
+      <div class="seven-card reveal">
+        <div class="s-num">09</div>
+        <div class="s-ic">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 11l-3 3-2-2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>人事 <span style="font-size:12px;font-weight:600;color:var(--neon-2);margin-left:6px;">含 lazycat 懒猫</span></h3>
+        <div class="s-desc">花名册分权限分发（工会看工会、党群看党群）+ 懒猫智能薪酬考核</div>
       </div>
     </div>
   </div>
@@ -2497,6 +2784,72 @@ h4,
           </ul>
         </div>
         <div class="module-vis vis-trip">
+          <!-- 会议室预订小窗 -->
+          <div style="margin-bottom:18px;padding:14px 16px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid var(--line);font-size:11.5px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+              <div style="font-size:12px;font-weight:700;color:var(--text);letter-spacing:.05em;">各会议室预订情况</div>
+              <div style="display:flex;align-items:center;gap:6px;">
+                <span style="padding:2px 8px;border-radius:4px;border:1px solid var(--line);color:var(--text-3);font-size:10.5px;cursor:pointer;">上一周</span>
+                <span style="font-size:10.5px;color:var(--text-2);font-family:'SF Mono','Menlo',monospace;">5/11 - 5/17</span>
+                <span style="padding:2px 8px;border-radius:4px;border:1px solid var(--line);color:var(--text-3);font-size:10.5px;cursor:pointer;">下一周</span>
+                <span style="padding:2px 8px;border-radius:4px;background:rgba(0,229,255,.12);border:1px solid rgba(0,229,255,.4);color:var(--neon-1);font-size:10.5px;font-weight:700;">本周</span>
+              </div>
+            </div>
+            <!-- 表格 -->
+            <div style="border:1px solid var(--line);border-radius:8px;overflow:hidden;">
+              <!-- 表头 -->
+              <div style="display:grid;grid-template-columns:46px 38px repeat(3,1fr);background:rgba(124,92,255,.06);font-size:10.5px;font-weight:700;color:var(--text-2);">
+                <div style="padding:6px 4px;text-align:center;border-right:1px solid var(--line);">星期</div>
+                <div style="padding:6px 4px;text-align:center;border-right:1px solid var(--line);">时段</div>
+                <div style="padding:6px 4px;text-align:center;color:var(--neon-1);border-right:1px solid var(--line);">1806</div>
+                <div style="padding:6px 4px;text-align:center;color:var(--neon-1);border-right:1px solid var(--line);">1709</div>
+                <div style="padding:6px 4px;text-align:center;color:var(--neon-1);">1609</div>
+              </div>
+              <!-- 周一 -->
+              <div style="display:grid;grid-template-columns:46px 38px repeat(3,1fr);font-size:10px;color:var(--text-3);border-top:1px solid var(--line);">
+                <div style="grid-row:span 2;padding:8px 4px;text-align:center;font-weight:700;color:var(--text-2);border-right:1px solid var(--line);background:rgba(255,255,255,.02);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                  <div>周一</div><div style="font-size:9px;color:var(--text-3);">5/11</div>
+                </div>
+                <div style="padding:6px 4px;text-align:center;border-right:1px solid var(--line);">上午</div>
+                <div style="padding:6px 4px;text-align:center;border-right:1px solid var(--line);color:var(--text-3);">—</div>
+                <div style="padding:6px 4px;text-align:center;border-right:1px solid var(--line);color:var(--text-3);">—</div>
+                <!-- 周一上午 1609 预订 -->
+                <div style="padding:5px 6px;background:rgba(0,229,255,.1);border-left:3px solid var(--neon-1);">
+                  <div style="font-size:9.5px;color:var(--neon-1);font-weight:700;font-family:'SF Mono','Menlo',monospace;">09:00-11:00</div>
+                  <div style="font-size:10px;color:var(--text);font-weight:600;margin-top:1px;line-height:1.3;">绿色新材专题会</div>
+                  <div style="font-size:9px;color:var(--text-3);margin-top:1px;">召集：梁军</div>
+                </div>
+                <div style="padding:6px 4px;text-align:center;border-top:1px solid var(--line);border-right:1px solid var(--line);">下午</div>
+                <div style="padding:6px 4px;text-align:center;border-top:1px solid var(--line);border-right:1px solid var(--line);">—</div>
+                <div style="padding:6px 4px;text-align:center;border-top:1px solid var(--line);border-right:1px solid var(--line);">—</div>
+                <div style="padding:6px 4px;text-align:center;border-top:1px solid var(--line);">—</div>
+              </div>
+              <!-- 周五 -->
+              <div style="display:grid;grid-template-columns:46px 38px repeat(3,1fr);font-size:10px;color:var(--text-3);border-top:1px solid var(--line);">
+                <div style="grid-row:span 2;padding:8px 4px;text-align:center;font-weight:700;color:var(--text-2);border-right:1px solid var(--line);background:rgba(255,255,255,.02);display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                  <div>周五</div><div style="font-size:9px;color:var(--text-3);">5/15</div>
+                </div>
+                <div style="padding:6px 4px;text-align:center;border-right:1px solid var(--line);">上午</div>
+                <!-- 周五上午 1806 预订 -->
+                <div style="padding:5px 6px;background:rgba(124,92,255,.12);border-left:3px solid var(--neon-2);border-right:1px solid var(--line);">
+                  <div style="font-size:9.5px;color:var(--neon-2);font-weight:700;font-family:'SF Mono','Menlo',monospace;">09:00-11:00</div>
+                  <div style="font-size:10px;color:var(--text);font-weight:600;margin-top:1px;line-height:1.3;">春晖固废推进会</div>
+                  <div style="font-size:9px;color:var(--text-3);margin-top:1px;">召集：吴刚</div>
+                </div>
+                <div style="padding:6px 4px;text-align:center;border-right:1px solid var(--line);">—</div>
+                <div style="padding:6px 4px;text-align:center;">—</div>
+                <div style="padding:6px 4px;text-align:center;border-top:1px solid var(--line);border-right:1px solid var(--line);">下午</div>
+                <div style="padding:6px 4px;text-align:center;border-top:1px solid var(--line);border-right:1px solid var(--line);">—</div>
+                <div style="padding:6px 4px;text-align:center;border-top:1px solid var(--line);border-right:1px solid var(--line);">—</div>
+                <div style="padding:6px 4px;text-align:center;border-top:1px solid var(--line);">—</div>
+              </div>
+              <!-- 其余 -->
+              <div style="padding:6px 8px;font-size:10px;color:var(--text-3);text-align:center;border-top:1px dashed var(--line);background:rgba(0,0,0,.15);">
+                周二 / 周三 / 周四 / 周六 / 周日 · 无预订 · 点击格子即可发起
+              </div>
+            </div>
+          </div>
+
           <div class="name">
             <span class="avatar">张</span>
             <span>张领导 · 年度活动统计</span>
@@ -2523,6 +2876,340 @@ h4,
               <div class="bar c4" style="height: 20%;"></div>
               <div class="bar-lbl">接待外部单位</div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 督办（新增） -->
+      <div class="module-row reverse reveal">
+        <div>
+          <div class="module-label">
+            <div class="m-zh">督办</div>
+            <div class="m-en">SUPERVISION</div>
+          </div>
+          <h3>重点工作一张表，<span style="background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent">催进度变看进度</span></h3>
+          <p class="module-lead">
+            把传来传去的督办 Excel 收口到一张电子台账：
+            原 .xlsx <b>直接拖进来</b>，表头自动识别；
+            临期、超期由系统按完成日期<b>自动标红</b>，再不用人盯；
+            季度通报、月度汇总<b style="color:var(--neon-1)">一键成稿</b>，
+            各单位按授权只看自己那几条，互不打扰。
+          </p>
+          <ul class="feat-list">
+            <li><span class="dot">⇣</span><div><b>Excel 一键导入</b>：拖进来即成台账，0 录入。</div></li>
+            <li><span class="dot">⏱</span><div><b>状态自动判定</b>：推进中 / 临期 / 超期 / 已完成 自动着色。</div></li>
+            <li><span class="dot">✎</span><div><b>报告一键生成</b>：季度通报、月度汇总点一下出初稿。</div></li>
+            <li><span class="dot">▣</span><div><b>分单位授权</b>：各单位只看自己的，操作全程留痕。</div></li>
+          </ul>
+        </div>
+        <div class="module-vis vis-supervision">
+          <!-- 头部：总任务数 -->
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;">
+            <div style="font-size:11px;color:var(--text-3);letter-spacing:.15em;">▎ SUPERVISION · 督办全景</div>
+            <div style="font-size:10.5px;color:var(--text-3);font-family:'SF Mono','Menlo',monospace;">LIVE</div>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:18px;">
+            <div style="font-size:46px;font-weight:900;line-height:1;background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums;filter:drop-shadow(0 0 18px rgba(0,229,255,.35));">226</div>
+            <div style="display:flex;flex-direction:column;">
+              <span style="font-size:13px;color:var(--text);font-weight:700;">任务总数</span>
+              <span style="font-size:11px;color:var(--text-3);">本年度已导入</span>
+            </div>
+          </div>
+
+          <!-- 完成状态分布：环形 + 图例 -->
+          <div style="display:grid;grid-template-columns:118px 1fr;gap:18px;align-items:center;padding:16px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid var(--line);margin-bottom:14px;">
+            <div style="position:relative;width:118px;height:118px;">
+              <svg viewBox="0 0 42 42" width="118" height="118" style="transform:rotate(-90deg);">
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="6"/>
+                <!-- 推进中 75% (75% of 100 = 75) -->
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="#00e5ff" stroke-width="6" stroke-dasharray="75 25" stroke-dashoffset="0"/>
+                <!-- 已完成 16% (offset -75) -->
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="#00ffa3" stroke-width="6" stroke-dasharray="16 84" stroke-dashoffset="-75"/>
+                <!-- 临期 8% (offset -91) -->
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="#ffb74d" stroke-width="6" stroke-dasharray="8 92" stroke-dashoffset="-91"/>
+                <!-- 超期 1% (offset -99) -->
+                <circle cx="21" cy="21" r="15.915" fill="none" stroke="#ff5cb3" stroke-width="6" stroke-dasharray="1 99" stroke-dashoffset="-99"/>
+              </svg>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                <div style="font-size:11px;color:var(--text-3);letter-spacing:.05em;">状态分布</div>
+                <div style="font-size:18px;font-weight:900;color:var(--text);">226</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:7px;font-size:12px;">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:9px;height:9px;border-radius:3px;background:#00e5ff;box-shadow:0 0 6px #00e5ff;"></span>
+                <span style="flex:1;color:var(--text-2);">推进中</span>
+                <span style="color:var(--neon-1);font-weight:700;font-variant-numeric:tabular-nums;">170 · 75%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:9px;height:9px;border-radius:3px;background:#00ffa3;box-shadow:0 0 6px #00ffa3;"></span>
+                <span style="flex:1;color:var(--text-2);">已完成</span>
+                <span style="color:var(--neon-4);font-weight:700;font-variant-numeric:tabular-nums;">36 · 16%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:9px;height:9px;border-radius:3px;background:#ffb74d;box-shadow:0 0 6px #ffb74d;"></span>
+                <span style="flex:1;color:var(--text-2);">临期</span>
+                <span style="color:var(--neon-5);font-weight:700;font-variant-numeric:tabular-nums;">18 · 8%</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:9px;height:9px;border-radius:3px;background:#ff5cb3;box-shadow:0 0 6px #ff5cb3;"></span>
+                <span style="flex:1;color:var(--text-2);">超期</span>
+                <span style="color:var(--neon-3);font-weight:700;font-variant-numeric:tabular-nums;">2 · 1%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 各类别完成情况：迷你柱形 -->
+          <div style="padding:14px 16px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid var(--line);margin-bottom:14px;">
+            <div style="font-size:11.5px;font-weight:700;color:var(--text-2);margin-bottom:12px;letter-spacing:.05em;">各任务类别 · 完成率</div>
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <!-- 调研事项 -->
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px;">
+                  <span style="color:var(--text-2);">调研事项</span>
+                  <span style="color:var(--neon-4);font-weight:700;">100%</span>
+                </div>
+                <div style="height:8px;border-radius:4px;background:rgba(255,255,255,.04);overflow:hidden;">
+                  <div style="height:100%;width:100%;background:linear-gradient(90deg,#00e5ff,#00ffa3);border-radius:4px;"></div>
+                </div>
+              </div>
+              <!-- 领导班子碰头会 -->
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px;">
+                  <span style="color:var(--text-2);">领导班子碰头会</span>
+                  <span style="color:var(--neon-1);font-weight:700;">24%</span>
+                </div>
+                <div style="height:8px;border-radius:4px;background:rgba(255,255,255,.04);overflow:hidden;display:flex;">
+                  <div style="height:100%;width:24%;background:#00ffa3;"></div>
+                  <div style="height:100%;width:55%;background:#00e5ff;opacity:.8;"></div>
+                  <div style="height:100%;width:18%;background:#ffb74d;opacity:.8;"></div>
+                  <div style="height:100%;width:3%;background:#ff5cb3;"></div>
+                </div>
+              </div>
+              <!-- 重点工作清单 -->
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:11.5px;margin-bottom:4px;">
+                  <span style="color:var(--text-2);">重点工作清单</span>
+                  <span style="color:var(--neon-5);font-weight:700;">11%</span>
+                </div>
+                <div style="height:8px;border-radius:4px;background:rgba(255,255,255,.04);overflow:hidden;display:flex;">
+                  <div style="height:100%;width:11%;background:#00ffa3;"></div>
+                  <div style="height:100%;width:85%;background:#00e5ff;opacity:.8;"></div>
+                  <div style="height:100%;width:4%;background:#ffb74d;opacity:.8;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 各单位督办明细（双饼图 · 左右分布） -->
+          <div style="padding:14px 16px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid var(--line);">
+            <div style="display:flex;justify-content:space-between;font-size:11.5px;font-weight:700;color:var(--text-2);margin-bottom:12px;letter-spacing:.05em;">
+              <span>各单位督办明细</span>
+              <span style="color:var(--text-3);font-weight:500;">共 23 家 · 示例 2 家</span>
+            </div>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <!-- 综合办公室 -->
+              <div style="padding:10px 8px 8px;border-radius:10px;background:rgba(0,229,255,.04);border:1px solid rgba(0,229,255,.25);text-align:center;">
+                <div style="position:relative;width:78px;height:78px;margin:0 auto 8px;">
+                  <svg viewBox="0 0 42 42" width="78" height="78" style="transform:rotate(-90deg);">
+                    <circle cx="21" cy="21" r="15.915" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="6"/>
+                    <circle cx="21" cy="21" r="15.915" fill="none" stroke="#00ffa3" stroke-width="6" stroke-dasharray="78 22" stroke-dashoffset="0"/>
+                    <circle cx="21" cy="21" r="15.915" fill="none" stroke="#00e5ff" stroke-width="6" stroke-dasharray="22 78" stroke-dashoffset="-78"/>
+                  </svg>
+                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                    <div style="font-size:16px;font-weight:900;color:var(--text);line-height:1;">18</div>
+                    <div style="font-size:9px;color:var(--text-3);margin-top:1px;">下发</div>
+                  </div>
+                </div>
+                <div style="font-size:12.5px;font-weight:700;color:var(--neon-1);margin-bottom:6px;">综合办公室</div>
+                <div style="display:flex;flex-direction:column;gap:3px;font-size:10.5px;text-align:left;padding:0 6px;">
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="width:7px;height:7px;border-radius:2px;background:#00ffa3;box-shadow:0 0 4px #00ffa3;flex-shrink:0;"></span>
+                    <span style="flex:1;color:var(--text-2);">完成</span>
+                    <span style="color:var(--neon-4);font-weight:700;font-variant-numeric:tabular-nums;">14 · 78%</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="width:7px;height:7px;border-radius:2px;background:#00e5ff;box-shadow:0 0 4px #00e5ff;flex-shrink:0;"></span>
+                    <span style="flex:1;color:var(--text-2);">推进中</span>
+                    <span style="color:var(--neon-1);font-weight:700;font-variant-numeric:tabular-nums;">4 · 22%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 庆元抽蓄 -->
+              <div style="padding:10px 8px 8px;border-radius:10px;background:rgba(124,92,255,.04);border:1px solid rgba(124,92,255,.25);text-align:center;">
+                <div style="position:relative;width:78px;height:78px;margin:0 auto 8px;">
+                  <svg viewBox="0 0 42 42" width="78" height="78" style="transform:rotate(-90deg);">
+                    <circle cx="21" cy="21" r="15.915" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="6"/>
+                    <circle cx="21" cy="21" r="15.915" fill="none" stroke="#00ffa3" stroke-width="6" stroke-dasharray="77 23" stroke-dashoffset="0"/>
+                    <circle cx="21" cy="21" r="15.915" fill="none" stroke="#00e5ff" stroke-width="6" stroke-dasharray="14 86" stroke-dashoffset="-77"/>
+                    <circle cx="21" cy="21" r="15.915" fill="none" stroke="#ffb74d" stroke-width="6" stroke-dasharray="9 91" stroke-dashoffset="-91"/>
+                  </svg>
+                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                    <div style="font-size:16px;font-weight:900;color:var(--text);line-height:1;">22</div>
+                    <div style="font-size:9px;color:var(--text-3);margin-top:1px;">下发</div>
+                  </div>
+                </div>
+                <div style="font-size:12.5px;font-weight:700;color:var(--neon-2);margin-bottom:6px;">庆元抽蓄</div>
+                <div style="display:flex;flex-direction:column;gap:3px;font-size:10.5px;text-align:left;padding:0 6px;">
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="width:7px;height:7px;border-radius:2px;background:#00ffa3;box-shadow:0 0 4px #00ffa3;flex-shrink:0;"></span>
+                    <span style="flex:1;color:var(--text-2);">完成</span>
+                    <span style="color:var(--neon-4);font-weight:700;font-variant-numeric:tabular-nums;">17 · 77%</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="width:7px;height:7px;border-radius:2px;background:#00e5ff;box-shadow:0 0 4px #00e5ff;flex-shrink:0;"></span>
+                    <span style="flex:1;color:var(--text-2);">推进中</span>
+                    <span style="color:var(--neon-1);font-weight:700;font-variant-numeric:tabular-nums;">3 · 14%</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <span style="width:7px;height:7px;border-radius:2px;background:#ffb74d;box-shadow:0 0 4px #ffb74d;flex-shrink:0;"></span>
+                    <span style="flex:1;color:var(--text-2);">临期</span>
+                    <span style="color:var(--neon-5);font-weight:700;font-variant-numeric:tabular-nums;">2 · 9%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top:10px;padding-top:8px;border-top:1px dashed var(--line);font-size:10.5px;color:var(--text-3);text-align:center;">
+              … 其余 21 家单位均按相同视图展开
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 宣传（新增） -->
+      <div class="module-row reveal">
+        <div>
+          <div class="module-label">
+            <div class="m-zh">宣传</div>
+            <div class="m-en">PROMOTION</div>
+          </div>
+          <h3>官方素材<span style="background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent">版本统一</span>，全年宣传<span style="background:var(--grad-2);-webkit-background-clip:text;background-clip:text;color:transparent">一条时间线</span></h3>
+          <p class="module-lead">
+            宣传板块解决两件事：
+            <b style="color:var(--text)">一是官方素材版本管理</b>——
+            集团及各单位的宣传视频、VI、LOGO、通用 PPT 模板版本一多就乱，
+            大家在这里随时下载最新版，再不用对着群里旧版本将就；
+            <b style="color:var(--text)">二是一条时间线</b>——
+            全年宣传一屏看完，照片、视频、原文链接一并附上，<b style="color:var(--neon-1)">点击直达推文网页</b>。
+          </p>
+          <ul class="feat-list">
+            <li><span class="dot">🎬</span><div><b>官方素材库</b>：集团宣传视频、VI、LOGO、通用 PPT，<b>始终最新版</b>。</div></li>
+            <li><span class="dot">▤</span><div><b>时间线视图</b>：年度宣传一条线，按月分组、按事件展开。</div></li>
+            <li><span class="dot">🔗</span><div><b>一键直达推文</b>：每条事件挂原文链接，再不用翻群找。</div></li>
+            <li><span class="dot">▣</span><div><b>按单位归集</b>：每条事件挂到承办单位，方便回溯统计。</div></li>
+          </ul>
+
+          <!-- 集团宣传片（左列内嵌） -->
+          <div style="margin-top:22px;position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line-strong);background:#000;box-shadow:0 12px 28px -12px rgba(0,229,255,.3);">
+            <video src="图片/0440e4faaeb174f1de47b84b89fe5732.mp4"
+                   controls
+                   preload="metadata"
+                   playsinline
+                   style="width:100%;height:auto;display:block;background:#000;"></video>
+            <div style="position:absolute;top:10px;left:10px;display:flex;gap:6px;pointer-events:none;">
+              <span style="font-size:10.5px;padding:3px 9px;border-radius:4px;background:rgba(0,0,0,.6);color:var(--neon-1);border:1px solid rgba(0,229,255,.4);font-weight:600;letter-spacing:.05em;backdrop-filter:blur(4px);">🎬 集团宣传片</span>
+              <span style="font-size:10.5px;padding:3px 9px;border-radius:4px;background:rgba(124,92,255,.55);color:#fff;font-weight:700;letter-spacing:.05em;backdrop-filter:blur(4px);">LATEST</span>
+            </div>
+            <div style="padding:12px 16px;background:rgba(0,229,255,.04);border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;">
+              <div>
+                <div style="font-size:13px;font-weight:700;color:var(--text);">浙江环保集团 · 官方宣传视频</div>
+                <div style="font-size:11px;color:var(--text-3);margin-top:2px;">v 2026.05 · 60.1 MB · MP4 · 始终最新版</div>
+              </div>
+              <a href="图片/0440e4faaeb174f1de47b84b89fe5732.mp4" download style="font-size:12px;color:var(--neon-1);font-weight:700;white-space:nowrap;padding:6px 12px;border-radius:6px;border:1px solid rgba(0,229,255,.4);background:rgba(0,229,255,.08);">⇣ 下载</a>
+            </div>
+          </div>
+        </div>
+        <div class="module-vis">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+            <div style="font-size:11px;color:var(--text-3);letter-spacing:.15em;">▎ TIMELINE · 2026 宣传矩阵</div>
+            <div style="font-size:10.5px;color:var(--text-3);font-family:'SF Mono','Menlo',monospace;">MAY · 3 EVENTS</div>
+          </div>
+
+          <!-- 时间线 -->
+          <div style="position:relative;padding-left:30px;">
+            <!-- 竖线 -->
+            <div style="position:absolute;left:10px;top:10px;bottom:10px;width:2px;background:linear-gradient(180deg,var(--neon-1),var(--neon-2),var(--neon-3));opacity:.45;"></div>
+
+            <!-- 事件 1：5.08 -->
+            <div style="position:relative;margin-bottom:16px;">
+              <div style="position:absolute;left:-26px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg-1);border:2px solid var(--neon-1);box-shadow:0 0 10px var(--neon-1);"></div>
+              <div style="font-family:'SF Mono','Menlo',monospace;font-size:11px;color:var(--neon-1);letter-spacing:.1em;margin-bottom:6px;font-weight:700;">2026.05.08</div>
+              <div style="border-radius:12px;border:1px solid var(--line);background:rgba(0,229,255,.04);overflow:hidden;">
+                <div style="height:170px;position:relative;overflow:hidden;">
+                  <img src="图片/965b09d44cc9e962cc2c27c3a9b18182.jpg" alt="胡文豪总调研丽水环科" style="width:100%;height:100%;object-fit:cover;display:block;">
+                  <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55) 100%);pointer-events:none;"></div>
+                  <span style="position:absolute;top:8px;left:8px;font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(0,0,0,.55);color:var(--neon-1);border:1px solid rgba(0,229,255,.4);font-weight:600;letter-spacing:.05em;backdrop-filter:blur(4px);">📷 现场调研</span>
+                </div>
+                <div style="padding:10px 14px 12px;">
+                  <h5 style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px;">胡文豪总调研丽水环科</h5>
+                  <div style="font-size:11px;color:var(--text-3);margin-bottom:8px;">承办：丽水环科 · 环境监测站点检查</div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <div style="display:flex;gap:5px;font-size:10.5px;">
+                      <span style="padding:2px 7px;border-radius:4px;background:rgba(0,229,255,.12);color:var(--neon-1);border:1px solid rgba(0,229,255,.3);">📷 12 张</span>
+                      <span style="padding:2px 7px;border-radius:4px;background:rgba(0,255,163,.1);color:var(--neon-4);border:1px solid rgba(0,255,163,.3);">🎬 2 段</span>
+                    </div>
+                    <a href="#" style="font-size:11px;color:var(--neon-1);font-weight:700;">查看推文 →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 事件 2：5.13 -->
+            <div style="position:relative;margin-bottom:16px;">
+              <div style="position:absolute;left:-26px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg-1);border:2px solid var(--neon-2);box-shadow:0 0 10px var(--neon-2);"></div>
+              <div style="font-family:'SF Mono','Menlo',monospace;font-size:11px;color:var(--neon-2);letter-spacing:.1em;margin-bottom:6px;font-weight:700;">2026.05.13</div>
+              <div style="border-radius:12px;border:1px solid var(--line);background:rgba(124,92,255,.04);overflow:hidden;">
+                <div style="height:170px;position:relative;overflow:hidden;">
+                  <img src="图片/bc51c9fb7456082983702ac10e13ee9b.jpg" alt="庆元抽蓄党建带团建活动" style="width:100%;height:100%;object-fit:cover;display:block;">
+                  <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55) 100%);pointer-events:none;"></div>
+                  <span style="position:absolute;top:8px;left:8px;font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(0,0,0,.55);color:var(--neon-2);border:1px solid rgba(124,92,255,.4);font-weight:600;letter-spacing:.05em;backdrop-filter:blur(4px);">📷 团建合影</span>
+                </div>
+                <div style="padding:10px 14px 12px;">
+                  <h5 style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px;">庆元抽蓄 · 党建带团建活动</h5>
+                  <div style="font-size:11px;color:var(--text-3);margin-bottom:8px;">承办：庆元抽蓄工会委员会 · "蓄"势待发 探竹源</div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <div style="display:flex;gap:5px;font-size:10.5px;">
+                      <span style="padding:2px 7px;border-radius:4px;background:rgba(124,92,255,.12);color:var(--neon-2);border:1px solid rgba(124,92,255,.3);">📷 28 张</span>
+                      <span style="padding:2px 7px;border-radius:4px;background:rgba(0,255,163,.1);color:var(--neon-4);border:1px solid rgba(0,255,163,.3);">🎬 4 段</span>
+                      <span style="padding:2px 7px;border-radius:4px;background:rgba(255,183,77,.1);color:var(--neon-5);border:1px solid rgba(255,183,77,.3);">🎨 海报</span>
+                    </div>
+                    <a href="#" style="font-size:11px;color:var(--neon-2);font-weight:700;">查看推文 →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 事件 3：5.18 -->
+            <div style="position:relative;">
+              <div style="position:absolute;left:-26px;top:6px;width:14px;height:14px;border-radius:50%;background:var(--bg-1);border:2px solid var(--neon-3);box-shadow:0 0 10px var(--neon-3);"></div>
+              <div style="font-family:'SF Mono','Menlo',monospace;font-size:11px;color:var(--neon-3);letter-spacing:.1em;margin-bottom:6px;font-weight:700;">2026.05.18</div>
+              <div style="border-radius:12px;border:1px solid var(--line);background:rgba(255,92,179,.04);overflow:hidden;">
+                <div style="height:170px;position:relative;overflow:hidden;">
+                  <img src="图片/37447ab190fc8cb61022d8c611cf16a4.jpg" alt="班组故事：青田抽蓄工程管理部" style="width:100%;height:100%;object-fit:cover;display:block;">
+                  <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.55) 100%);pointer-events:none;"></div>
+                  <span style="position:absolute;top:8px;left:8px;font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(0,0,0,.6);color:var(--neon-3);border:1px solid rgba(255,92,179,.4);font-weight:600;letter-spacing:.05em;backdrop-filter:blur(4px);">🎬 工程现场</span>
+                </div>
+                <div style="padding:10px 14px 12px;">
+                  <h5 style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:5px;">班组故事：青田抽蓄工程管理部</h5>
+                  <div style="font-size:11px;color:var(--text-3);margin-bottom:8px;">承办：青田抽蓄 · 一线班组人物专题</div>
+                  <div style="display:flex;align-items:center;justify-content:space-between;">
+                    <div style="display:flex;gap:5px;font-size:10.5px;">
+                      <span style="padding:2px 7px;border-radius:4px;background:rgba(255,92,179,.12);color:var(--neon-3);border:1px solid rgba(255,92,179,.3);">📷 18 张</span>
+                      <span style="padding:2px 7px;border-radius:4px;background:rgba(0,255,163,.1);color:var(--neon-4);border:1px solid rgba(0,255,163,.3);">🎬 1 段</span>
+                      <span style="padding:2px 7px;border-radius:4px;background:rgba(255,255,255,.04);color:var(--text-2);border:1px solid var(--line);">📝 原稿</span>
+                    </div>
+                    <a href="#" style="font-size:11px;color:var(--neon-3);font-weight:700;">查看推文 →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:14px;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.02);border:1px dashed var(--line);font-size:11px;color:var(--text-3);text-align:center;line-height:1.6;">
+            📷 照片 · 🎬 视频 · 🎨 海报 · 📝 原稿 — 一并归档<br>点击「查看推文 →」自动跳转原文网页
           </div>
         </div>
       </div>
@@ -2758,12 +3445,184 @@ h4,
   </div>
 </section>
 
+<!-- ============ HR (Lazycat) Section · 独立大块 ============ -->
+<section id="hr" class="hr-section">
+  <div class="container">
+    <div class="section-feature-head reveal">
+      <div class="module-label">
+        <div class="m-zh">人事板块 · 一表两线</div>
+        <div class="m-en">ROSTER &amp; LAZYCAT</div>
+      </div>
+      <h2 class="section-lead-title">花名册<span class="g">按口子分发</span>，薪酬考核交给<span class="g2">懒猫</span>。</h2>
+      <p class="section-sub">人事板块拆成两条互不打架的线：一条解决"<b style="color:var(--text)">人</b>"的视图分发，一条解决"<b style="color:var(--text)">钱</b>"的方案与测算。</p>
+    </div>
+
+    <!-- 区一：花名册按口子分发 -->
+    <div class="hr-block split reveal">
+      <div class="num-bg">01</div>
+      <div>
+        <span class="hr-eyebrow">ROSTER · 花名册分权限</span>
+        <h3>一次录入，<span style="background:var(--grad-1);-webkit-background-clip:text;background-clip:text;color:transparent">按口子分发</span></h3>
+        <p class="hr-lead">
+          人事统一录入全员信息后，系统按"口子"分发视图——
+          工会口的同事只看得到<b style="color:var(--text)">工会会员</b>，
+          党群口的同事只看得到<b style="color:var(--text)">党群人员</b>，
+          各部门只看得到本部门，互不串台、互不打架。
+        </p>
+        <ul class="feat-list" style="margin-top:8px;list-style:none;padding:0;">
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:14px;color:var(--text-2);line-height:1.7;"><b style="color:var(--text);font-weight:600;">统一字段</b>：基本信息、组织关系、工会信息、党群信息一表收口，避免多套表打架。</li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:14px;color:var(--text-2);line-height:1.7;"><b style="color:var(--text);font-weight:600;">调岗即同步</b>：一次更新，相关花名册同步刷新，权限自动跟着走。</li>
+          <li style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:14px;color:var(--text-2);line-height:1.7;"><b style="color:var(--text);font-weight:600;">分级授权</b>：可按"看哪几家"细粒度授权，新增口子只要勾一勾。</li>
+          <li style="padding:10px 0;font-size:14px;color:var(--text-2);line-height:1.7;"><b style="color:var(--text);font-weight:600;">操作留痕</b>：谁、什么时候、看了/改了哪条，全程可追。</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size:11px;color:var(--text-3);letter-spacing:.15em;margin-bottom:14px;">▎ ROSTER · 分发示意</div>
+        <div class="roster-roles">
+          <div class="r-card hr">
+            <div class="r-left">
+              <span class="r-dot"></span>
+              <div>
+                <div class="r-name">人事 · 总账</div>
+                <div class="r-scope">全字段录入 / 维护</div>
+              </div>
+            </div>
+            <div class="r-count">412 人</div>
+          </div>
+          <div class="r-card union">
+            <div class="r-left">
+              <span class="r-dot"></span>
+              <div>
+                <div class="r-name">工会口</div>
+                <div class="r-scope">仅工会会员视图</div>
+              </div>
+            </div>
+            <div class="r-count">318 人</div>
+          </div>
+          <div class="r-card party">
+            <div class="r-left">
+              <span class="r-dot"></span>
+              <div>
+                <div class="r-name">党群口</div>
+                <div class="r-scope">仅党员 + 党组织关系</div>
+              </div>
+            </div>
+            <div class="r-count">96 人</div>
+          </div>
+          <div class="r-card dept">
+            <div class="r-left">
+              <span class="r-dot"></span>
+              <div>
+                <div class="r-name">部门负责人</div>
+                <div class="r-scope">本部门花名册</div>
+              </div>
+            </div>
+            <div class="r-count">本部门</div>
+          </div>
+        </div>
+        <div class="roster-flow">
+          <span class="chip hi">人事统一录入</span>
+          <span class="arr">→</span>
+          <span class="chip">权限引擎</span>
+          <span class="arr">→</span>
+          <span class="chip">各口子各看各的</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 区二：lazycat 懒猫 思维导图 -->
+    <div class="hr-block lazycat reveal">
+      <div class="num-bg">02</div>
+      <span class="hr-eyebrow">🐱 LAZYCAT · 智能薪酬考核助手</span>
+      <h3>把"做方案 + 算薪酬 + 理财务"，<br>从几周加班变成<span style="background:var(--grad-2);-webkit-background-clip:text;background-clip:text;color:transparent">几分钟出稿</span>。</h3>
+      <p class="hr-lead">
+        懒猫不替你拍板，但把所有<b style="color:var(--text)">能算清楚的事算清楚</b>——方案、薪酬、财务、决策四件事并联运行，你只管审核。
+      </p>
+
+      <div class="lazycat-mind">
+        <!-- 连线 SVG -->
+        <svg class="mind-svg" viewBox="0 0 1000 460" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="mline" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#7c5cff" stop-opacity=".15"/>
+              <stop offset=".5" stop-color="#7c5cff" stop-opacity=".75"/>
+              <stop offset="1" stop-color="#00e5ff" stop-opacity=".15"/>
+            </linearGradient>
+          </defs>
+          <!-- 左上 → 中心 -->
+          <path d="M 240 110 C 380 110, 420 230, 500 230" fill="none" stroke="url(#mline)" stroke-width="2"/>
+          <!-- 右上 → 中心 -->
+          <path d="M 760 110 C 620 110, 580 230, 500 230" fill="none" stroke="url(#mline)" stroke-width="2"/>
+          <!-- 左下 → 中心 -->
+          <path d="M 240 360 C 380 360, 420 230, 500 230" fill="none" stroke="url(#mline)" stroke-width="2"/>
+          <!-- 右下 → 中心 -->
+          <path d="M 760 360 C 620 360, 580 230, 500 230" fill="none" stroke="url(#mline)" stroke-width="2"/>
+          <!-- 中心节点光晕 -->
+          <circle cx="500" cy="230" r="80" fill="none" stroke="rgba(124,92,255,.25)" stroke-width="1" stroke-dasharray="3 5"/>
+          <circle cx="500" cy="230" r="100" fill="none" stroke="rgba(124,92,255,.15)" stroke-width="1" stroke-dasharray="2 6"/>
+        </svg>
+
+        <div class="mind-grid">
+          <div class="leaf tl">
+            <div class="tag"><span class="n">1</span> 方案生成</div>
+            <h4>薪酬考核方案 · 自动拼装</h4>
+            <p>按单位成本、年度调研、上级工资总额、重点任务自动出方案。</p>
+            <div class="kw">
+              <span>主体指标</span><span>个性化</span><span>约束性</span><span>党建 20%</span>
+            </div>
+          </div>
+          <div class="leaf tr">
+            <div class="tag"><span class="n">2</span> 实时预测</div>
+            <h4>负责人薪酬 · 实时测算</h4>
+            <p>结合实际财务与考核完成度，分类算奖扣，分钟级出明细。</p>
+            <div class="kw">
+              <span>奖金</span><span>扣减</span><span>同比</span><span>场景模拟</span>
+            </div>
+          </div>
+          <div class="leaf bl">
+            <div class="tag"><span class="n">3</span> 财务数据</div>
+            <h4>财务明细 · 多维归集</h4>
+            <p>收入、成本、三费、税金、减值、补贴按部门/项目/负责人沉淀。</p>
+            <div class="kw">
+              <span>月度更新</span><span>分类入账</span><span>对接测算</span>
+            </div>
+          </div>
+          <div class="leaf br">
+            <div class="tag"><span class="n">4</span> 决策支持</div>
+            <h4>问答清单 · 决策模拟</h4>
+            <p>标准问题清单辅助拿数；可模拟不同利润 / 完成度下的薪酬分布。</p>
+            <div class="kw">
+              <span>问题清单</span><span>What-if</span><span>分布对比</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="center" style="background:#ffffff;padding:0;overflow:hidden;box-shadow:0 0 60px rgba(124,92,255,.55),0 0 0 4px rgba(124,92,255,.35),inset 0 0 0 1px rgba(255,255,255,.5);">
+          <img src="图片/lazycat.jpg" alt="lazycat 懒猫" style="width:100%;height:100%;object-fit:cover;display:block;border-radius:50%;">
+        </div>
+        <div style="position:absolute;top:calc(50% + 95px);left:50%;transform:translateX(-50%);text-align:center;z-index:3;white-space:nowrap;">
+          <div style="font-size:14px;font-weight:800;color:var(--neon-2);letter-spacing:.05em;">lazycat · 懒猫</div>
+          <div style="font-size:10.5px;color:var(--text-3);margin-top:2px;letter-spacing:.12em;">智能薪酬考核助手 · v1</div>
+        </div>
+      </div>
+
+      <p style="margin-top:30px;font-size:13px;color:var(--text-3);text-align:center;line-height:1.7;">
+        目标 = <b style="color:var(--neon-2)">自动生成方案 + 实时预测薪酬 + 全面掌握成本</b>，形成一套可操作的薪酬管理闭环。
+      </p>
+    </div>
+
+  </div>
+</section>
+
 <!-- ============ Policy Module (单独大块) ============ -->
 <section id="policy" class="policy-section">
   <div class="container">
-    <div class="reveal">
-      <span class="eyebrow" style="color:var(--neon-3)">⌬ 制度模块 · 核心差异化</span>
-      <h2 class="section-title">把<span class="grad2">几百份制度</span>，<br>变成可问、可查、<span class="grad">可治理</span>的知识中枢。</h2>
+    <div class="section-feature-head reveal">
+      <div class="module-label">
+        <div class="m-zh">制度模块 · 核心差异化</div>
+        <div class="m-en">POLICY GOVERNANCE</div>
+      </div>
+      <h2 class="section-lead-title">把<span class="grad2">几百份制度</span>，变成可问、可查、<span class="grad">可治理</span>的知识中枢。</h2>
       <p class="section-sub">制度模块由三块组成：制度归档、制度问答、以及我们最得意的——<b style="color:var(--neon-3)">制度治理</b>。</p>
     </div>
 
@@ -2969,11 +3828,7 @@ h4,
       <br>这套系统不是终点，它是<b style="color:var(--text)">我们办公室进入 AI 时代的起点</b>。
     </p>
     <div class="cta-row">
-      <a href="/" class="btn btn-primary">
-        进入系统
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </a>
-      <a href="#seven" class="btn btn-ghost">回看七大板块</a>
+      <a href="#seven" class="btn btn-ghost">回看九大板块</a>
     </div>
   </div>
 </section>

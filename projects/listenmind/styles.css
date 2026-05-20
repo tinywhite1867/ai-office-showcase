@@ -226,7 +226,7 @@ button {
 .hero h1 {
   margin: 0;
   max-width: 900px;
-  font-size: 96px;
+  font-size: clamp(2.4rem, 6vw, 5.5rem);
   line-height: 0.98;
   letter-spacing: 0;
 }
@@ -259,8 +259,7 @@ button {
 }
 
 .hero-tags span,
-.status,
-.run-note span {
+.status {
   display: inline-flex;
   align-items: center;
   min-height: 30px;
@@ -757,28 +756,6 @@ button {
   max-width: 760px;
   color: var(--muted);
   font-size: 19px;
-}
-
-.run-note {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  justify-content: center;
-  margin-top: 30px;
-}
-
-.run-note code {
-  display: inline-flex;
-  min-height: 32px;
-  align-items: center;
-  padding: 5px 12px;
-  border: 1px solid rgba(84, 214, 189, 0.34);
-  border-radius: 999px;
-  background: rgba(84, 214, 189, 0.08);
-  color: var(--teal);
-  font-family: "SFMono-Regular", Consolas, monospace;
-  font-size: 13px;
 }
 
 .reveal {

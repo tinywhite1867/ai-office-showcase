@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>思路沉淀 InsightFlow</title>
+<title>文字工作流 InsightFlow</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
@@ -58,8 +58,10 @@ img,svg{display:block;max-width:100%}
 .title em{font-style:normal;background:linear-gradient(135deg,var(--amber),var(--amber-soft));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .h2{font-size:var(--h2-size);font-weight:700;line-height:1.1;letter-spacing:-.02em}
 .h2 em{font-style:normal;color:var(--amber)}
+.h2 .em-green{font-style:normal;color:var(--green)}
 .body{font-size:var(--body-size);color:var(--text2);line-height:1.5;max-width:540px}
 .tag{display:inline-flex;padding:4px 14px;border-radius:99px;font-size:var(--small-size);font-weight:600;border:1px solid rgba(232,146,10,.35);color:var(--amber);background:rgba(232,146,10,.06)}
+.tag--green{border-color:rgba(61,214,140,.35);color:var(--green);background:rgba(61,214,140,.06)}
 
 /* ===========================================
    BACKGROUNDS & DECORATIVE
@@ -67,7 +69,6 @@ img,svg{display:block;max-width:100%}
 .bg-grain{position:absolute;inset:0;pointer-events:none;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .bg-grid{position:absolute;inset:0;pointer-events:none;opacity:.035;background-image:linear-gradient(rgba(255,255,255,.4) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.4) 1px,transparent 1px);background-size:80px 80px}
 .bg-radial{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
-.deco-line{position:absolute;background:var(--amber);opacity:.12}
 
 /* ===========================================
    REVEAL ANIMATIONS
@@ -86,19 +87,16 @@ img,svg{display:block;max-width:100%}
    =========================================== */
 .hero{background:var(--bg)}
 .hero .slide-content{align-items:center;text-align:center}
-.hero__title{font-size:clamp(2.8rem,7.5vw,6.5rem);font-weight:700;line-height:1;letter-spacing:-.04em}
-.hero__sub{margin-top:clamp(12px,2vh,24px);font-size:clamp(1rem,2vw,1.4rem);color:var(--text2);max-width:500px;margin-left:auto;margin-right:auto}
+.hero__title{font-size:clamp(2.8rem,7.5vw,5.5rem);font-weight:700;line-height:1;letter-spacing:-.04em}
+.hero__sub{margin-top:clamp(12px,2vh,24px);font-size:clamp(1rem,2vw,1.4rem);color:var(--text2);max-width:560px;margin-left:auto;margin-right:auto}
 .hero__tags{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:clamp(24px,4vh,48px)}
-/* Big number watermark */
 .hero__watermark{position:absolute;bottom:-5%;right:-2%;font-size:clamp(12rem,35vw,30rem);font-weight:800;line-height:1;color:rgba(232,146,10,.04);letter-spacing:-.06em;pointer-events:none;z-index:1}
-/* Orbiting circles */
 .hero__orbit{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(70vw,600px);height:min(70vw,600px);pointer-events:none}
 .hero__orbit circle{fill:none;stroke-width:.6;opacity:.15}
 .hero__orbit .o1{stroke:var(--amber);r:35%;animation:spin 30s linear infinite}
 .hero__orbit .o2{stroke:var(--green);r:42%;animation:spin 22s linear infinite reverse}
 .hero__orbit .o3{stroke:var(--blue);r:49%;animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-/* Glow */
 .hero__glow{position:absolute;width:clamp(200px,40vw,500px);height:clamp(200px,40vw,500px);top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,var(--amber-glow),transparent 70%);animation:glowPulse 5s ease-in-out infinite;pointer-events:none}
 @keyframes glowPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(1)}50%{opacity:.7;transform:translate(-50%,-50%) scale(1.1)}}
 
@@ -120,109 +118,130 @@ img,svg{display:block;max-width:100%}
 .pain__sub{font-size:var(--small-size);color:var(--text3);margin-top:2px}
 
 /* ===========================================
-   SLIDE 3: PIPELINE
+   SLIDE 3: ARCHITECTURE (双轮驱动总览)
    =========================================== */
-.pipeline{background:var(--bg)}
-.pipe__track{display:flex;align-items:center;justify-content:center;margin-top:clamp(32px,5vh,64px);gap:0;position:relative}
-@media(max-width:768px){.pipe__track{flex-direction:column}}
-.pipe__node{text-align:center;flex:0 0 auto;position:relative;z-index:2}
-.pipe__dot{width:clamp(52px,7vw,72px);height:clamp(52px,7vw,72px);margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid rgba(232,146,10,.5);background:var(--bg2);box-shadow:0 0 24px rgba(232,146,10,.15);transition:transform .35s var(--ease,cubic-bezier(.22,.61,.36,1)),box-shadow .35s}
-.pipe__node:hover .pipe__dot{transform:scale(1.15);box-shadow:0 0 40px var(--amber-glow)}
-.pipe__dot svg{width:clamp(22px,3vw,30px);height:clamp(22px,3vw,30px);color:var(--amber)}
-.pipe__node--end .pipe__dot{border-color:var(--green);box-shadow:0 0 24px var(--green-glow)}
-.pipe__node--end .pipe__dot svg{color:var(--green)}
-.pipe__name{margin-top:clamp(8px,1.2vh,14px);font-size:var(--small-size);font-weight:700;white-space:nowrap}
-.pipe__desc{font-size:clamp(.55rem,.8vw,.7rem);color:var(--text3);margin-top:2px;white-space:nowrap}
-/* Connector */
-.pipe__conn{width:clamp(32px,5vw,64px);height:2px;background:linear-gradient(90deg,rgba(232,146,10,.5),rgba(232,146,10,.1));position:relative;flex-shrink:0}
-.pipe__conn::before{content:"";position:absolute;width:6px;height:6px;border-radius:50%;background:var(--amber);top:-2px;left:0;animation:dotTravel 2.5s ease-in-out infinite}
-@keyframes dotTravel{0%{left:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
-@media(max-width:768px){.pipe__conn{width:2px;height:clamp(24px,3vh,40px);margin:0 auto}.pipe__conn::before{top:0;left:-2px;animation:dotTravelV 2.5s ease-in-out infinite}@keyframes dotTravelV{0%{top:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{top:100%;opacity:0}}}
-/* Animated beam under track */
-.pipe__beam{position:absolute;top:50%;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,var(--amber-glow),transparent);opacity:.3;z-index:1}
-@media(max-width:768px){.pipe__beam{display:none}}
-
-/* ===========================================
-   SLIDE 4: DIMENSIONS
-   =========================================== */
-.dims{background:var(--bg2)}
-.dims__orbit{position:relative;width:clamp(300px,52vmin,500px);height:clamp(300px,52vmin,500px);margin:clamp(12px,3vh,32px) auto 0}
-.dims__ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;border:1px dashed rgba(232,146,10,.1)}
-.dims__ring--inner{width:55%;height:55%}
-.dims__ring--outer{width:92%;height:92%;animation:spin 80s linear infinite}
-.dims__hub{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:clamp(60px,10vmin,90px);height:clamp(60px,10vmin,90px);border-radius:50%;border:2px solid rgba(232,146,10,.35);display:flex;align-items:center;justify-content:center;flex-direction:column;background:var(--bg3);box-shadow:0 0 40px rgba(232,146,10,.1);z-index:3}
-.dims__hub-text{font-size:clamp(.6rem,1.2vmin,.8rem);font-weight:700;color:var(--amber);text-align:center;line-height:1.3}
-.dims__lines{position:absolute;inset:0;z-index:1}
-.dims__lines line{stroke:rgba(232,146,10,.08);stroke-width:1;stroke-dasharray:4 4}
-.dim{position:absolute;transform:translate(-50%,-50%);z-index:2;text-align:center;width:clamp(90px,14vmin,130px);transition:transform .35s}
-.dim:hover{transform:translate(-50%,-50%) scale(1.1)}
-.dim__icon{width:clamp(34px,5.5vmin,46px);height:clamp(34px,5.5vmin,46px);margin:0 auto clamp(4px,.6vh,8px);border-radius:50%;background:rgba(232,146,10,.08);display:flex;align-items:center;justify-content:center;border:1px solid rgba(232,146,10,.2);transition:box-shadow .3s}
-.dim:hover .dim__icon{box-shadow:0 0 20px rgba(232,146,10,.2)}
-.dim__icon svg{width:clamp(16px,2.5vmin,22px);height:clamp(16px,2.5vmin,22px);color:var(--amber)}
-.dim__label{font-size:var(--small-size);font-weight:700;white-space:nowrap}
-.dim__sub{font-size:clamp(.5rem,.8vmin,.65rem);color:var(--text3);margin-top:2px;white-space:nowrap}
-@media(max-width:600px){
-  .dims__orbit{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:auto;height:auto;max-width:min(90vw,400px)}
-  .dims__ring,.dims__hub,.dims__lines{display:none}
-  .dim{position:static;transform:none;width:auto;padding:clamp(12px,2vh,20px) clamp(10px,1.5vw,16px);background:var(--bg3);border:1px solid rgba(255,255,255,.04);border-radius:12px}
-  .dim:hover{transform:none}
+.arch{background:var(--bg)}
+.arch__diagram{display:flex;flex-direction:column;gap:clamp(16px,2.5vh,28px);margin-top:clamp(20px,3vh,36px);max-width:min(94vw,900px);margin-left:auto;margin-right:auto}
+/* Each lane */
+.arch__lane{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(8px,1.5vw,20px);align-items:center}
+.arch__box{padding:clamp(14px,2vh,22px) clamp(16px,2vw,24px);border-radius:clamp(10px,1.2vw,14px);border:1px solid;text-align:center;transition:transform .3s,box-shadow .3s}
+.arch__box:hover{transform:translateY(-2px)}
+.arch__box-title{font-size:var(--body-size);font-weight:700;margin-bottom:4px}
+.arch__box-desc{font-size:var(--small-size);color:var(--text3);line-height:1.4}
+.arch__box--amber{background:rgba(232,146,10,.05);border-color:rgba(232,146,10,.25)}
+.arch__box--amber .arch__box-title{color:var(--amber)}
+.arch__box--amber:hover{box-shadow:0 0 24px rgba(232,146,10,.12)}
+.arch__box--green{background:rgba(61,214,140,.05);border-color:rgba(61,214,140,.25)}
+.arch__box--green .arch__box-title{color:var(--green)}
+.arch__box--green:hover{box-shadow:0 0 24px rgba(61,214,140,.12)}
+.arch__box--blue{background:rgba(91,156,245,.05);border-color:rgba(91,156,245,.25)}
+.arch__box--blue .arch__box-title{color:var(--blue)}
+.arch__arrow{display:flex;align-items:center;justify-content:center;gap:4px;color:var(--text3)}
+.arch__arrow svg{width:clamp(24px,3vw,36px);height:clamp(24px,3vw,36px)}
+.arch__arrow--amber svg{color:var(--amber);animation:arrowPulse 2s ease-in-out infinite}
+.arch__arrow--green svg{color:var(--green);animation:arrowPulse 2s ease-in-out infinite .5s}
+@keyframes arrowPulse{0%,100%{opacity:.5;transform:translateX(0)}50%{opacity:1;transform:translateX(3px)}}
+/* Converge section */
+.arch__converge{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:clamp(8px,1.5vw,16px);align-items:center}
+.arch__engine{padding:clamp(18px,2.5vh,28px) clamp(20px,2.5vw,32px);border-radius:50%;border:2px solid rgba(232,146,10,.4);background:rgba(232,146,10,.06);text-align:center;min-width:clamp(100px,14vw,140px);min-height:clamp(100px,14vw,140px);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(232,146,10,.1);transition:box-shadow .3s}
+.arch__engine:hover{box-shadow:0 0 60px rgba(232,146,10,.2)}
+.arch__engine-title{font-size:var(--body-size);font-weight:800;color:var(--amber)}
+.arch__engine-sub{font-size:var(--small-size);color:var(--text3);margin-top:2px}
+.arch__output{display:flex;flex-direction:column;gap:clamp(8px,1vh,12px)}
+.arch__output-item{padding:clamp(10px,1.3vh,14px) clamp(12px,1.5vw,18px);border-radius:8px;font-size:var(--small-size);font-weight:600;text-align:center;border:1px solid}
+.arch__output-item--draft{background:rgba(86,212,224,.05);border-color:rgba(86,212,224,.25);color:var(--cyan)}
+.arch__output-item--human{background:rgba(91,156,245,.05);border-color:rgba(91,156,245,.25);color:var(--blue)}
+.arch__output-item--final{background:rgba(61,214,140,.05);border-color:rgba(61,214,140,.25);color:var(--green)}
+.arch__inputs{display:flex;flex-direction:column;gap:clamp(8px,1vh,12px);align-items:center}
+.arch__input-label{font-size:var(--small-size);font-weight:700;padding:clamp(8px,1vh,12px) clamp(12px,1.5vw,18px);border-radius:8px;border:1px solid rgba(255,255,255,.08);background:var(--bg3);text-align:center;width:100%}
+.arch__input-label--amber{color:var(--amber);border-color:rgba(232,146,10,.2)}
+.arch__input-label--green{color:var(--green);border-color:rgba(61,214,140,.2)}
+@media(max-width:768px){
+  .arch__lane{grid-template-columns:1fr;gap:8px}
+  .arch__arrow svg{transform:rotate(90deg)}
+  .arch__converge{grid-template-columns:1fr;gap:10px}
+  .arch__engine{border-radius:16px;min-width:auto;min-height:auto;padding:16px}
 }
 
 /* ===========================================
-   SLIDE 5: TRACEABILITY
+   SLIDE 4: RULES (规则蒸馏)
    =========================================== */
-.trace{background:var(--bg)}
-.trace__layout{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:center;margin-top:clamp(24px,5vh,56px);max-width:min(92vw,1000px);margin-left:auto;margin-right:auto}
-@media(max-width:800px){.trace__layout{grid-template-columns:1fr;gap:clamp(16px,2vh,24px)}}
-.trace__col{display:flex;flex-direction:column;gap:clamp(10px,1.8vh,18px)}
-.trace__col-head{font-size:var(--small-size);font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:center;margin-bottom:clamp(4px,1vh,10px)}
-.trace__col-head--blue{color:var(--blue)}
-.trace__col-head--amber{color:var(--amber)}
-.trace__col-head--green{color:var(--green)}
-.trace__card{padding:clamp(10px,1.5vh,16px) clamp(14px,1.5vw,20px);border-radius:clamp(8px,1vw,12px);font-size:var(--small-size);font-weight:600;border:1px solid;display:flex;align-items:center;gap:clamp(6px,0.8vw,10px);transition:transform .3s,box-shadow .3s}
-.trace__card:hover{transform:translateX(4px)}
-.trace__card--src{background:rgba(91,156,245,.05);border-color:rgba(91,156,245,.25);color:var(--blue)}
-.trace__card--list{background:rgba(232,146,10,.05);border-color:rgba(232,146,10,.25);color:var(--amber)}
-.trace__card--out{background:rgba(61,214,140,.05);border-color:rgba(61,214,140,.25);color:var(--green)}
-.trace__card svg{width:clamp(14px,1.8vw,18px);height:clamp(14px,1.8vw,18px);flex-shrink:0;opacity:.6}
-/* Arrows between columns */
-.trace__arrows{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(6px,1vh,12px);padding:0 clamp(8px,1.5vw,20px)}
-@media(max-width:800px){.trace__arrows{flex-direction:row;padding:0}}
-.trace__arrow-line{display:flex;align-items:center;gap:4px;color:var(--text3)}
-.trace__arrow-line svg{width:clamp(20px,2.5vw,28px);height:clamp(20px,2.5vw,28px)}
-.trace__arrow-line--fwd svg{color:var(--amber);animation:arrowFwd 2s ease-in-out infinite}
-.trace__arrow-line--rev svg{color:var(--text3);opacity:.4;animation:arrowFwd 2s ease-in-out infinite reverse}
-@keyframes arrowFwd{0%,100%{opacity:.4;transform:translateX(0)}50%{opacity:1;transform:translateX(3px)}}
-.trace__arrow-label{font-size:clamp(.55rem,.7vw,.65rem);color:var(--text3);text-align:center;white-space:nowrap}
-/* Animated connection dots */
-.trace__dot-track{position:relative;height:2px;width:100%;background:linear-gradient(90deg,transparent,rgba(232,146,10,.2),transparent);margin:clamp(4px,.8vh,8px) 0;overflow:hidden}
-.trace__dot-track::after{content:"";position:absolute;width:8px;height:8px;border-radius:50%;background:var(--amber);top:-3px;animation:dotRun 3s ease-in-out infinite}
-@keyframes dotRun{0%{left:-8px;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
-.trace__dot-track--rev{transform:scaleX(-1)}
-.trace__dot-track--rev::after{background:var(--green)}
-.trace__note{margin-top:clamp(16px,3vh,32px);text-align:center;font-size:var(--small-size);color:var(--text3);max-width:min(90vw,560px);margin-left:auto;margin-right:auto}
+.rules{background:var(--bg2)}
+.rules__flow{display:grid;grid-template-columns:1fr auto 1fr;gap:clamp(12px,2vw,28px);align-items:start;margin-top:clamp(20px,3vh,36px);max-width:min(92vw,880px);margin-left:auto;margin-right:auto}
+@media(max-width:768px){.rules__flow{grid-template-columns:1fr;gap:12px}}
+.rules__col{display:flex;flex-direction:column;gap:clamp(8px,1.2vh,14px)}
+.rules__col-head{font-size:var(--small-size);font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-align:center;margin-bottom:clamp(4px,1vh,8px)}
+.rules__col-head--amber{color:var(--amber)}
+.rules__col-head--blue{color:var(--blue)}
+.rules__card{padding:clamp(12px,1.8vh,18px) clamp(14px,1.8vw,22px);border-radius:clamp(8px,1vw,12px);border:1px solid;display:flex;align-items:center;gap:clamp(8px,1vw,14px);transition:transform .3s}
+.rules__card:hover{transform:translateX(4px)}
+.rules__card--src{background:rgba(91,156,245,.05);border-color:rgba(91,156,245,.2);color:var(--blue)}
+.rules__card--rule{background:rgba(232,146,10,.05);border-color:rgba(232,146,10,.2);color:var(--amber)}
+.rules__card svg{width:clamp(16px,2vw,20px);height:clamp(16px,2vw,20px);flex-shrink:0;opacity:.6}
+.rules__card-text{font-size:var(--small-size);font-weight:600}
+.rules__card-sub{font-size:clamp(.55rem,.75vw,.65rem);color:var(--text3);margin-top:2px;font-weight:400}
+.rules__arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0 clamp(4px,1vw,12px)}
+.rules__arrow svg{width:clamp(24px,3vw,32px);height:clamp(24px,3vw,32px);color:var(--amber);animation:arrowPulse 2s ease-in-out infinite}
+.rules__arrow-label{font-size:clamp(.55rem,.7vw,.65rem);color:var(--text3);white-space:nowrap}
+@media(max-width:768px){
+  .rules__arrow{flex-direction:row;padding:4px 0}
+  .rules__arrow svg{transform:rotate(90deg)}
+}
+.rules__note{margin-top:clamp(16px,2.5vh,28px);text-align:center;font-size:var(--small-size);color:var(--text3);max-width:min(90vw,560px);margin-left:auto;margin-right:auto;padding:clamp(10px,1.5vh,14px);border-radius:10px;background:rgba(232,146,10,.03);border:1px solid rgba(232,146,10,.08)}
+.rules__note strong{color:var(--amber)}
 
 /* ===========================================
-   SLIDE 6: SUMMARY
+   SLIDE 5: CORPUS (语料沉淀)
    =========================================== */
-.summ{background:var(--bg2)}
-.summ__cascade{display:flex;flex-direction:column;align-items:stretch;margin-top:clamp(20px,3vh,40px);max-width:min(90vw,640px);margin-left:auto;margin-right:auto;text-align:left}
-.summ__stage{display:grid;grid-template-columns:clamp(36px,5vw,48px) 1fr;gap:clamp(12px,2vw,20px);align-items:start}
-.summ__num{width:clamp(36px,5vw,48px);height:clamp(36px,5vw,48px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--body-size);flex-shrink:0;border:2px solid;position:relative;z-index:2}
-.summ__num--1{border-color:var(--blue);color:var(--blue);background:rgba(91,156,245,.08)}
-.summ__num--2{border-color:var(--amber);color:var(--amber);background:rgba(232,146,10,.08)}
-.summ__num--3{border-color:var(--green);color:var(--green);background:rgba(61,214,140,.08)}
-.summ__stage-title{font-size:var(--body-size);font-weight:700;margin-bottom:clamp(6px,.8vh,10px)}
-.summ__stage-title--blue{color:var(--blue)}
-.summ__stage-title--amber{color:var(--amber)}
-.summ__stage-title--green{color:var(--green)}
-.summ__pills{display:flex;flex-wrap:wrap;gap:clamp(4px,.5vh,6px) clamp(6px,.8vw,10px)}
-.summ__pill{padding:clamp(6px,.8vh,10px) clamp(10px,1.2vw,14px);border-radius:clamp(6px,.7vw,8px);font-size:var(--small-size);background:var(--bg);border:1px solid rgba(255,255,255,.04);color:var(--text2)}
-.summ__pill--ai{background:rgba(232,146,10,.06);border-color:rgba(232,146,10,.18);color:var(--amber);font-weight:600}
-.summ__pill--out{background:rgba(61,214,140,.05);border-color:rgba(61,214,140,.18);color:var(--green)}
-.summ__conn{width:2px;height:clamp(14px,2vh,24px);background:linear-gradient(to bottom,rgba(232,146,10,.25),rgba(232,146,10,.05));margin-left:calc(clamp(36px,5vw,48px)/2 - 1px);flex-shrink:0}
-.summ__note{margin-top:clamp(16px,2.5vh,28px);text-align:center;font-size:var(--body-size);color:var(--text3);padding:clamp(10px,1.5vh,16px);border-radius:10px;background:rgba(232,146,10,.04);border:1px solid rgba(232,146,10,.1);max-width:min(90vw,640px);margin-left:auto;margin-right:auto}
-.summ__note strong{color:var(--amber)}
+.corpus{background:var(--bg)}
+/* Pipeline (reuse pipe styles) */
+.pipe__track{display:flex;align-items:center;justify-content:center;margin-top:clamp(24px,3vh,40px);gap:0;position:relative}
+@media(max-width:768px){.pipe__track{flex-direction:column}}
+.pipe__node{text-align:center;flex:0 0 auto;position:relative;z-index:2}
+.pipe__dot{width:clamp(46px,6vw,62px);height:clamp(46px,6vw,62px);margin:0 auto;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid rgba(61,214,140,.5);background:var(--bg2);box-shadow:0 0 24px rgba(61,214,140,.15);transition:transform .35s,box-shadow .35s}
+.pipe__node:hover .pipe__dot{transform:scale(1.15);box-shadow:0 0 40px var(--green-glow)}
+.pipe__dot svg{width:clamp(18px,2.5vw,24px);height:clamp(18px,2.5vw,24px);color:var(--green)}
+.pipe__node--end .pipe__dot{border-color:var(--amber);box-shadow:0 0 24px var(--amber-glow)}
+.pipe__node--end .pipe__dot svg{color:var(--amber)}
+.pipe__name{margin-top:clamp(6px,1vh,10px);font-size:var(--small-size);font-weight:700;white-space:nowrap}
+.pipe__desc{font-size:clamp(.55rem,.8vw,.7rem);color:var(--text3);margin-top:2px;white-space:nowrap}
+.pipe__conn{width:clamp(24px,3.5vw,48px);height:2px;background:linear-gradient(90deg,rgba(61,214,140,.5),rgba(61,214,140,.1));position:relative;flex-shrink:0}
+.pipe__conn::before{content:"";position:absolute;width:6px;height:6px;border-radius:50%;background:var(--green);top:-2px;left:0;animation:dotTravel 2.5s ease-in-out infinite}
+@keyframes dotTravel{0%{left:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{left:100%;opacity:0}}
+@media(max-width:768px){.pipe__conn{width:2px;height:clamp(16px,2vh,28px);margin:0 auto}.pipe__conn::before{top:0;left:-2px;animation:dotTravelV 2.5s ease-in-out infinite}@keyframes dotTravelV{0%{top:0;opacity:0}15%{opacity:1}85%{opacity:1}100%{top:100%;opacity:0}}}
+.pipe__beam{position:absolute;top:50%;left:8%;right:8%;height:1px;background:linear-gradient(90deg,transparent,var(--green-glow),transparent);opacity:.3;z-index:1}
+@media(max-width:768px){.pipe__beam{display:none}}
+/* Dimension chips */
+.corpus__dims{display:flex;flex-wrap:wrap;gap:clamp(6px,.8vh,10px);justify-content:center;margin-top:clamp(16px,2.5vh,28px);max-width:min(90vw,700px);margin-left:auto;margin-right:auto}
+.corpus__dim{padding:clamp(8px,1vh,12px) clamp(14px,1.5vw,20px);border-radius:10px;font-size:var(--small-size);font-weight:600;background:var(--bg2);border:1px solid rgba(61,214,140,.15);color:var(--green);display:flex;align-items:center;gap:clamp(6px,.8vw,10px);transition:border-color .3s,background .3s}
+.corpus__dim:hover{border-color:rgba(61,214,140,.4);background:rgba(61,214,140,.04)}
+.corpus__dim svg{width:clamp(14px,1.8vw,18px);height:clamp(14px,1.8vw,18px);opacity:.6}
+.corpus__note{margin-top:clamp(12px,2vh,20px);text-align:center;font-size:var(--small-size);color:var(--text3);max-width:min(90vw,500px);margin-left:auto;margin-right:auto}
+
+/* ===========================================
+   SLIDE 6: ENGINE (AI写作引擎)
+   =========================================== */
+.engine{background:var(--bg2)}
+.engine__cascade{display:flex;flex-direction:column;align-items:stretch;margin-top:clamp(20px,3vh,36px);max-width:min(90vw,640px);margin-left:auto;margin-right:auto;text-align:left}
+.engine__stage{display:grid;grid-template-columns:clamp(36px,5vw,48px) 1fr;gap:clamp(12px,2vw,20px);align-items:start}
+.engine__num{width:clamp(36px,5vw,48px);height:clamp(36px,5vw,48px);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:var(--body-size);flex-shrink:0;border:2px solid;position:relative;z-index:2}
+.engine__num--1{border-color:var(--amber);color:var(--amber);background:rgba(232,146,10,.08)}
+.engine__num--2{border-color:var(--green);color:var(--green);background:rgba(61,214,140,.08)}
+.engine__num--3{border-color:var(--cyan);color:var(--cyan);background:rgba(86,212,224,.08)}
+.engine__num--4{border-color:var(--blue);color:var(--blue);background:rgba(91,156,245,.08)}
+.engine__stage-title{font-size:var(--body-size);font-weight:700;margin-bottom:clamp(6px,.8vh,10px)}
+.engine__stage-title--amber{color:var(--amber)}
+.engine__stage-title--green{color:var(--green)}
+.engine__stage-title--cyan{color:var(--cyan)}
+.engine__stage-title--blue{color:var(--blue)}
+.engine__pills{display:flex;flex-wrap:wrap;gap:clamp(4px,.5vh,6px) clamp(6px,.8vw,10px)}
+.engine__pill{padding:clamp(6px,.8vh,10px) clamp(10px,1.2vw,14px);border-radius:clamp(6px,.7vw,8px);font-size:var(--small-size);background:var(--bg);border:1px solid rgba(255,255,255,.04);color:var(--text2)}
+.engine__pill--amber{background:rgba(232,146,10,.06);border-color:rgba(232,146,10,.18);color:var(--amber);font-weight:600}
+.engine__pill--green{background:rgba(61,214,140,.05);border-color:rgba(61,214,140,.18);color:var(--green);font-weight:600}
+.engine__pill--out{background:rgba(91,156,245,.05);border-color:rgba(91,156,245,.18);color:var(--blue)}
+.engine__conn{width:2px;height:clamp(14px,2vh,24px);background:linear-gradient(to bottom,rgba(232,146,10,.25),rgba(232,146,10,.05));margin-left:calc(clamp(36px,5vw,48px)/2 - 1px);flex-shrink:0}
+.engine__note{margin-top:clamp(16px,2.5vh,28px);text-align:center;font-size:var(--body-size);color:var(--text3);padding:clamp(10px,1.5vh,16px);border-radius:10px;background:rgba(232,146,10,.04);border:1px solid rgba(232,146,10,.1);max-width:min(90vw,640px);margin-left:auto;margin-right:auto}
+.engine__note strong{color:var(--amber)}
 
 /* ===========================================
    SLIDE 7: VALUES
@@ -254,10 +273,8 @@ img,svg{display:block;max-width:100%}
 .nav-dots{position:fixed;right:clamp(12px,2vw,24px);top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;z-index:100}
 .nav-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);border:none;cursor:pointer;transition:background .3s,transform .3s;padding:0}
 .nav-dot.active{background:var(--amber);transform:scale(1.3);box-shadow:0 0 12px var(--amber-glow)}
-/* Keyboard hint */
 .kbd-hint{position:fixed;bottom:clamp(12px,2vh,24px);left:50%;transform:translateX(-50%);font-size:var(--small-size);color:var(--text3);z-index:100;opacity:.5;transition:opacity .3s}
 .kbd-hint.hidden{opacity:0}
-/* Slide counter */
 .slide-counter{position:fixed;top:clamp(12px,2vh,24px);right:clamp(12px,2vw,24px);font-size:var(--small-size);color:var(--text3);z-index:100;font-variant-numeric:tabular-nums}
 
 /* ===========================================
@@ -265,7 +282,6 @@ img,svg{display:block;max-width:100%}
    =========================================== */
 @media(max-width:600px){
   :root{--body-size:0.85rem;--small-size:0.72rem;--h2-size:clamp(1.3rem,5.5vw,1.8rem)}
-  /* Proximity snap — allow natural scrolling for tall slides */
   html{scroll-snap-type:y proximity}
   .slide{height:auto;min-height:100dvh;overflow:visible}
   .slide-content{overflow:visible;padding:clamp(1rem,4vw,1.5rem)}
@@ -274,59 +290,49 @@ img,svg{display:block;max-width:100%}
   .nav-dots{right:6px;gap:10px}
   .nav-dot{width:8px;height:8px}
 
-  /* S1 Hero */
   .hero__title{font-size:clamp(2rem,9vw,3rem)}
   .hero__watermark{font-size:clamp(8rem,28vw,12rem)}
 
-  /* S2 Pain — chaos smaller, stack full width */
   .pain__chaos{max-width:160px;height:140px;aspect-ratio:auto}
   .pain__frag{font-size:0.65rem;padding:4px 8px}
   .pain__item{padding:8px 10px;gap:8px}
   .pain__idx{font-size:1rem;min-width:1.4em}
 
-  /* S3 Pipeline — compact vertical */
-  .pipe__track{margin-top:clamp(12px,2vh,24px)}
-  .pipe__dot{width:38px;height:38px}
-  .pipe__dot svg{width:16px;height:16px}
-  .pipe__conn{height:14px}
+  .arch__diagram{margin-top:clamp(10px,2vh,20px)}
+  .arch__box{padding:10px 12px}
+  .arch__engine{min-width:auto;min-height:auto;border-radius:16px;padding:14px}
+
+  .rules__card{padding:8px 10px;gap:6px}
+  .rules__card svg{width:14px;height:14px}
+
+  .pipe__track{margin-top:clamp(12px,2vh,20px)}
+  .pipe__dot{width:36px;height:36px}
+  .pipe__dot svg{width:14px;height:14px}
+  .pipe__conn{height:12px}
   .pipe__name{font-size:0.68rem;margin-top:4px}
   .pipe__desc{font-size:0.55rem}
+  .corpus__dims{gap:6px}
+  .corpus__dim{padding:6px 10px;font-size:0.68rem}
 
-  /* S4 Dimensions — already handled by 600px grid fallback */
+  .engine__cascade{margin-top:clamp(10px,2vh,20px)}
+  .engine__conn{height:10px}
+  .engine__pill{padding:5px 8px}
 
-  /* S5 Traceability — single column, arrows point down */
-  .trace__layout{gap:10px}
-  .trace__card{padding:8px 10px;gap:6px}
-  .trace__card svg{width:14px;height:14px}
-  .trace__arrows{flex-direction:column;align-items:center;padding:4px 0;gap:2px;transform:none}
-  .trace__dot-track{display:none}
-  .trace__arrow-line--rev{display:none}
-  .trace__arrow-label:last-child{display:none}
-  .trace__arrow-line svg{width:20px;height:20px;transform:rotate(90deg)}
-
-  /* S6 Summary — already vertical, just tighten */
-  .summ__cascade{margin-top:clamp(12px,2vh,24px)}
-  .summ__conn{height:10px}
-  .summ__pill{padding:5px 8px}
-
-  /* S7 Values — tighter rows */
   .vals__list{margin-top:clamp(12px,2vh,24px);gap:6px}
   .val{padding:8px 10px;gap:6px}
   .val__num{font-size:1.2rem}
 
-  /* S8 Closing */
   .closing__quote{font-size:clamp(0.9rem,3.8vw,1.15rem);line-height:1.5}
   .closing__tags{gap:6px}
   .tag{padding:3px 10px;font-size:0.65rem}
 }
 
-/* Landscape phone — avoid oversized hero */
 @media(max-height:450px) and (orientation:landscape){
   .hero__title{font-size:clamp(1.5rem,5vw,2.5rem)}
   .hero__orbit{width:50vw;height:50vw}
   .hero__glow{width:30vw;height:30vw}
-  .pipe__dot{width:36px;height:36px}
-  .pipe__conn{width:24px}
+  .pipe__dot{width:32px;height:32px}
+  .pipe__conn{width:20px}
 }
 </style>
 </head>
@@ -341,11 +347,11 @@ img,svg{display:block;max-width:100%}
   <svg class="hero__orbit" viewBox="0 0 600 600"><g transform="translate(300,300)"><circle class="o1" cx="0" cy="0" transform-origin="0 0"/><circle class="o2" cx="0" cy="0" transform-origin="0 0"/><circle class="o3" cx="0" cy="0" transform-origin="0 0"/></g></svg>
   <div class="hero__watermark" aria-hidden="true">IF</div>
   <div class="slide-content">
-    <div class="eyebrow" data-r>思路沉淀 · INSIGHTFLOW</div>
-    <h1 class="hero__title" data-r data-d="1">从<em>碎片记录</em><br/>到组织知识库</h1>
-    <p class="hero__sub" data-r data-d="2">AI 辅助思路整理与知识沉淀工作流</p>
+    <div class="eyebrow" data-r>文字工作流 · INSIGHTFLOW</div>
+    <h1 class="hero__title" data-r data-d="1"><em>规则+语料</em><br/>双轮驱动</h1>
+    <p class="hero__sub" data-r data-d="2">大幅压缩从白纸起草到成稿交付的周期</p>
     <div class="hero__tags" data-r data-d="3">
-      <span class="tag">归集</span><span class="tag">追溯</span><span class="tag">沉淀</span><span class="tag">复盘</span><span class="tag">汇报</span>
+      <span class="tag">规则蒸馏</span><span class="tag tag--green">语料沉淀</span><span class="tag">智能起草</span><span class="tag">人工精调</span><span class="tag tag--green">双向追溯</span>
     </div>
   </div>
 </section>
@@ -356,33 +362,157 @@ img,svg{display:block;max-width:100%}
   <div class="bg-radial" style="width:500px;height:500px;top:-20%;right:-10%;background:radial-gradient(circle,rgba(232,146,10,.06),transparent 70%)"></div>
   <div class="slide-content">
     <div class="eyebrow" data-r>痛点</div>
-    <h2 class="h2" data-r data-d="1">办公室材料工作的<em>五个困境</em></h2>
+    <h2 class="h2" data-r data-d="1">办公室文字材料的<em>五个困境</em></h2>
     <div class="pain__split" data-r data-d="2">
       <div class="pain__chaos">
-        <div class="pain__frag" style="top:2%;left:5%;--rot:-7deg;--d:0s;--c:var(--blue)">录音在手机里</div>
-        <div class="pain__frag" style="top:22%;right:0;--rot:5deg;--d:.6s;--c:var(--amber)">材料在邮件中</div>
-        <div class="pain__frag" style="top:44%;left:8%;--rot:-11deg;--d:1.2s;--c:var(--green)">督办在表格里</div>
-        <div class="pain__frag" style="top:64%;right:5%;--rot:8deg;--d:1.8s;--c:var(--cyan)">笔记在本子上</div>
-        <div class="pain__frag" style="bottom:2%;left:15%;--rot:-4deg;--d:2.4s;--c:rgba(255,100,100,.8)">原话找不到了</div>
+        <div class="pain__frag" style="top:2%;left:5%;--rot:-7deg;--d:0s;--c:var(--blue)">每次从头写</div>
+        <div class="pain__frag" style="top:22%;right:0;--rot:5deg;--d:.6s;--c:var(--amber)">素材找不到</div>
+        <div class="pain__frag" style="top:44%;left:8%;--rot:-11deg;--d:1.2s;--c:var(--green)">风格不统一</div>
+        <div class="pain__frag" style="top:64%;right:5%;--rot:8deg;--d:1.8s;--c:var(--cyan)">重复劳动多</div>
+        <div class="pain__frag" style="bottom:2%;left:15%;--rot:-4deg;--d:2.4s;--c:rgba(255,100,100,.8)">经验带不走</div>
       </div>
       <div class="pain__stack">
-        <div class="pain__item"><div class="pain__idx">01</div><div><div class="pain__label">总是翻找</div><div class="pain__sub">领导说过什么、在哪说的——翻遍文件夹</div></div></div>
-        <div class="pain__item"><div class="pain__idx">02</div><div><div class="pain__label">总是重来</div><div class="pain__sub">周总结、季度总结，每次从零开始</div></div></div>
-        <div class="pain__item"><div class="pain__idx">03</div><div><div class="pain__label">总是断层</div><div class="pain__sub">人员调整后，前任积累无法传承</div></div></div>
-        <div class="pain__item"><div class="pain__idx">04</div><div><div class="pain__label">总是散落</div><div class="pain__sub">录音、邮件、表格、笔记——四处分散</div></div></div>
-        <div class="pain__item"><div class="pain__idx">05</div><div><div class="pain__label">总是遗忘</div><div class="pain__sub">工作要求随时间淡忘，缺少跟踪机制</div></div></div>
+        <div class="pain__item"><div class="pain__idx">01</div><div><div class="pain__label">每次从头写</div><div class="pain__sub">没有积累的写作规则，每篇材料从零起步</div></div></div>
+        <div class="pain__item"><div class="pain__idx">02</div><div><div class="pain__label">素材找不到</div><div class="pain__sub">领导讲话、重点工作散落各处，写时无从调用</div></div></div>
+        <div class="pain__item"><div class="pain__idx">03</div><div><div class="pain__label">风格不统一</div><div class="pain__sub">不同人写出的材料风格各异，缺少规范约束</div></div></div>
+        <div class="pain__item"><div class="pain__idx">04</div><div><div class="pain__label">重复劳动</div><div class="pain__sub">类似材料反复写，没有模板和语料复用机制</div></div></div>
+        <div class="pain__item"><div class="pain__idx">05</div><div><div class="pain__label">传承断层</div><div class="pain__sub">写作经验在人脑中，人员调整后经验随人走</div></div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============ SLIDE 3: PIPELINE ============ -->
-<section class="slide pipeline" id="s3">
+<!-- ============ SLIDE 3: ARCHITECTURE ============ -->
+<section class="slide arch" id="s3">
   <div class="bg-grain"></div>
   <div class="bg-grid"></div>
   <div class="slide-content" style="align-items:center;text-align:center">
-    <div class="eyebrow" data-r>核心工作流</div>
-    <h2 class="h2" data-r data-d="1">碎片到知识的<em>炼化管线</em></h2>
+    <div class="eyebrow" data-r>核心架构</div>
+    <h2 class="h2" data-r data-d="1"><em>规则</em>+<span class="em-green">语料</span>，双轮汇聚写作引擎</h2>
+    <div class="arch__diagram" data-r data-d="2">
+      <!-- 规则轮 lane -->
+      <div class="arch__lane">
+        <div class="arch__box arch__box--blue">
+          <div class="arch__box-title">成熟材料</div>
+          <div class="arch__box-desc">历年优秀文稿脱敏</div>
+        </div>
+        <div class="arch__arrow arch__arrow--amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="12" x2="18" y2="12"/><polyline points="13 7 18 12 13 17"/></svg>
+          <div style="font-size:clamp(.55rem,.7vw,.65rem);color:var(--text3);white-space:nowrap">蒸馏</div>
+        </div>
+        <div class="arch__box arch__box--amber">
+          <div class="arch__box-title">规则库</div>
+          <div class="arch__box-desc">行文规范 · 结构模板 · 表达标准 · 文风特征</div>
+        </div>
+      </div>
+      <!-- 语料轮 lane -->
+      <div class="arch__lane">
+        <div class="arch__box arch__box--blue">
+          <div class="arch__box-title">每周信息流</div>
+          <div class="arch__box-desc">重点工作 · 重要讲话脱敏</div>
+        </div>
+        <div class="arch__arrow arch__arrow--green">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="12" x2="18" y2="12"/><polyline points="13 7 18 12 13 17"/></svg>
+          <div style="font-size:clamp(.55rem,.7vw,.65rem);color:var(--text3);white-space:nowrap">提炼</div>
+        </div>
+        <div class="arch__box arch__box--green">
+          <div class="arch__box-title">语料库</div>
+          <div class="arch__box-desc">事实 · 数据 · 表述 · 六维归集</div>
+        </div>
+      </div>
+      <!-- 汇聚 → 写作引擎 → 输出 -->
+      <div class="arch__converge">
+        <div class="arch__inputs">
+          <div class="arch__input-label arch__input-label--amber">规则库</div>
+          <div class="arch__input-label arch__input-label--green">语料库</div>
+        </div>
+        <div class="arch__arrow arch__arrow--amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="12" x2="18" y2="12"/><polyline points="13 7 18 12 13 17"/></svg>
+        </div>
+        <div class="arch__engine">
+          <div class="arch__engine-title">AI 写作引擎</div>
+          <div class="arch__engine-sub">规则 + 语料</div>
+        </div>
+        <div class="arch__arrow arch__arrow--amber">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="12" x2="18" y2="12"/><polyline points="13 7 18 12 13 17"/></svg>
+        </div>
+        <div class="arch__output">
+          <div class="arch__output-item arch__output-item--draft">AI 生成初稿</div>
+          <div class="arch__output-item arch__output-item--human">人工补充 + 精调</div>
+          <div class="arch__output-item arch__output-item--final">成稿交付</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4: RULES ============ -->
+<section class="slide rules" id="s4">
+  <div class="bg-grain"></div>
+  <div class="bg-radial" style="width:600px;height:600px;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(232,146,10,.05),transparent 70%)"></div>
+  <div class="slide-content" style="align-items:center;text-align:center">
+    <div class="eyebrow" data-r>规则轮</div>
+    <h2 class="h2" data-r data-d="1">成熟材料蒸馏为<em>写作规则</em></h2>
+    <div class="rules__flow" data-r data-d="2">
+      <!-- 左列：输入材料 -->
+      <div class="rules__col">
+        <div class="rules__col-head rules__col-head--blue">成熟材料（脱敏）</div>
+        <div class="rules__card rules__card--src">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <div><div class="rules__card-text">汇报材料</div><div class="rules__card-sub">年度汇报、专题报告</div></div>
+        </div>
+        <div class="rules__card rules__card--src">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <div><div class="rules__card-text">工作方案</div><div class="rules__card-sub">活动方案、实施计划</div></div>
+        </div>
+        <div class="rules__card rules__card--src">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <div><div class="rules__card-text">讲话稿</div><div class="rules__card-sub">领导讲话、主持致辞</div></div>
+        </div>
+        <div class="rules__card rules__card--src">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <div><div class="rules__card-text">正式发文</div><div class="rules__card-sub">通知、意见、决定</div></div>
+        </div>
+      </div>
+      <!-- 箭头 -->
+      <div class="rules__arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="12" x2="18" y2="12"/><polyline points="13 7 18 12 13 17"/></svg>
+        <div class="rules__arrow-label">AI 分析蒸馏</div>
+      </div>
+      <!-- 右列：规则库 -->
+      <div class="rules__col">
+        <div class="rules__col-head rules__col-head--amber">规则库</div>
+        <div class="rules__card rules__card--rule">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          <div><div class="rules__card-text">结构规则</div><div class="rules__card-sub">各文种固定框架与段落逻辑</div></div>
+        </div>
+        <div class="rules__card rules__card--rule">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          <div><div class="rules__card-text">表达规则</div><div class="rules__card-sub">常用句式、过渡语、开合方式</div></div>
+        </div>
+        <div class="rules__card rules__card--rule">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <div><div class="rules__card-text">文风特征</div><div class="rules__card-sub">用词偏好、语气基调、行文节奏</div></div>
+        </div>
+        <div class="rules__card rules__card--rule">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          <div><div class="rules__card-text">排版规则</div><div class="rules__card-sub">版式规范、字号行距、层级标题</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="rules__note" data-r data-d="3">
+      <strong>脱敏处理是前提和红线</strong> — 成熟材料经脱敏后，AI 提取行文模式，而非复制具体内容
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5: CORPUS ============ -->
+<section class="slide corpus" id="s5">
+  <div class="bg-grain"></div>
+  <div class="bg-grid"></div>
+  <div class="slide-content" style="align-items:center;text-align:center">
+    <div class="eyebrow" data-r>语料轮</div>
+    <h2 class="h2" data-r data-d="1">每周信息流提炼为<span class="em-green">可调用语料</span></h2>
     <div class="pipe__track" data-r data-d="2">
       <div class="pipe__beam"></div>
       <div class="pipe__node">
@@ -405,170 +535,110 @@ img,svg{display:block;max-width:100%}
       <div class="pipe__conn"></div>
       <div class="pipe__node">
         <div class="pipe__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
-        <div class="pipe__name">链接编织</div>
-        <div class="pipe__desc">双向追溯</div>
-      </div>
-      <div class="pipe__conn"></div>
-      <div class="pipe__node">
-        <div class="pipe__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
-        <div class="pipe__name">周总结</div>
-        <div class="pipe__desc">AI 底稿 + 人工定稿</div>
+        <div class="pipe__name">双向链接</div>
+        <div class="pipe__desc">来源可追溯</div>
       </div>
       <div class="pipe__conn"></div>
       <div class="pipe__node pipe__node--end">
         <div class="pipe__dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-        <div class="pipe__name">知识库</div>
-        <div class="pipe__desc">可追溯 / 可复盘</div>
+        <div class="pipe__name">语料库</div>
+        <div class="pipe__desc">可检索 / 可调用</div>
       </div>
     </div>
+    <!-- 六维度标签 -->
+    <div class="corpus__dims" data-r data-d="3">
+      <div class="corpus__dim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        技术关注
+      </div>
+      <div class="corpus__dim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        战略判断
+      </div>
+      <div class="corpus__dim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        原话金句
+      </div>
+      <div class="corpus__dim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        问题痛点
+      </div>
+      <div class="corpus__dim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        案例参考
+      </div>
+      <div class="corpus__dim">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        待跟进
+      </div>
+    </div>
+    <p class="corpus__note" data-r data-d="4">双向链接 · 清单→原文精确定位 · 原文→清单反向引用 · 来源永不丢失</p>
   </div>
 </section>
 
-<!-- ============ SLIDE 4: DIMENSIONS ============ -->
-<section class="slide dims" id="s4">
-  <div class="bg-grain"></div>
-  <div class="bg-radial" style="width:600px;height:600px;bottom:-30%;left:-15%;background:radial-gradient(circle,rgba(232,146,10,.05),transparent 70%)"></div>
-  <div class="slide-content" style="align-items:center;text-align:center">
-    <div class="eyebrow" data-r>结构化归集</div>
-    <h2 class="h2" data-r data-d="1"><em>六个维度</em>，混杂信息变结构化知识</h2>
-    <div class="dims__orbit" data-r data-d="2">
-      <div class="dims__ring dims__ring--inner"></div>
-      <div class="dims__ring dims__ring--outer"></div>
-      <div class="dims__hub"><div class="dims__hub-text">六维<br/>归集</div></div>
-      <svg class="dims__lines" viewBox="0 0 500 500"><line x1="250" y1="250" x2="250" y2="25"/><line x1="250" y1="250" x2="445" y2="138"/><line x1="250" y1="250" x2="445" y2="362"/><line x1="250" y1="250" x2="250" y2="475"/><line x1="250" y1="250" x2="55" y2="362"/><line x1="250" y1="250" x2="55" y2="138"/></svg>
-      <div class="dim" style="top:4%;left:50%">
-        <div class="dim__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-        <div class="dim__label">技术关注</div>
-        <div class="dim__sub">方向与工具创新</div>
-      </div>
-      <div class="dim" style="top:25%;left:93%">
-        <div class="dim__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
-        <div class="dim__label">战略判断</div>
-        <div class="dim__sub">方向表态与布局</div>
-      </div>
-      <div class="dim" style="top:75%;left:93%">
-        <div class="dim__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <div class="dim__label">原话金句</div>
-        <div class="dim__sub">核心表达与高频词</div>
-      </div>
-      <div class="dim" style="top:96%;left:50%">
-        <div class="dim__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-        <div class="dim__label">问题痛点</div>
-        <div class="dim__sub">风险与瓶颈</div>
-      </div>
-      <div class="dim" style="top:75%;left:7%">
-        <div class="dim__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-        <div class="dim__label">案例参考</div>
-        <div class="dim__sub">标杆与可借鉴经验</div>
-      </div>
-      <div class="dim" style="top:25%;left:7%">
-        <div class="dim__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
-        <div class="dim__label">待跟进</div>
-        <div class="dim__sub">行动事项与节点</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ SLIDE 5: TRACEABILITY ============ -->
-<section class="slide trace" id="s5">
-  <div class="bg-grain"></div>
-  <div class="bg-grid"></div>
-  <div class="slide-content" style="align-items:center;text-align:center">
-    <div class="eyebrow" data-r>来源追溯</div>
-    <h2 class="h2" data-r data-d="1">每条结论<em>可回溯原文</em></h2>
-    <div class="trace__layout" data-r data-d="2">
-      <!-- Column 1: Source Materials -->
-      <div class="trace__col">
-        <div class="trace__col-head trace__col-head--blue">原始材料</div>
-        <div class="trace__card trace__card--src"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v4a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/></svg>碰头会录音</div>
-        <div class="trace__card trace__card--src"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>汇报材料</div>
-        <div class="trace__card trace__card--src"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="3" y1="9" x2="21" y2="9"/></svg>督办清单</div>
-      </div>
-      <!-- Arrow 1: Forward -->
-      <div class="trace__arrows">
-        <div class="trace__arrow-line trace__arrow-line--fwd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="12" x2="18" y2="12"/><polyline points="13 7 18 12 13 17"/></svg></div>
-        <div class="trace__dot-track"></div>
-        <div class="trace__arrow-label">AI 提炼归集</div>
-        <div class="trace__dot-track trace__dot-track--rev"></div>
-        <div class="trace__arrow-line trace__arrow-line--rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="12" x2="4" y2="12"/><polyline points="9 7 4 12 9 17"/></svg></div>
-        <div class="trace__arrow-label">精确回溯</div>
-      </div>
-      <!-- Column 2: Summary List -->
-      <div class="trace__col">
-        <div class="trace__col-head trace__col-head--amber">六维汇总清单</div>
-        <div class="trace__card trace__card--list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>战略判断</div>
-        <div class="trace__card trace__card--list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>技术关注</div>
-        <div class="trace__card trace__card--list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>行动跟进</div>
-      </div>
-      <!-- Arrow 2: Forward -->
-      <div class="trace__arrows">
-        <div class="trace__arrow-line trace__arrow-line--fwd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="4" y1="12" x2="18" y2="12"/><polyline points="13 7 18 12 13 17"/></svg></div>
-        <div class="trace__dot-track"></div>
-        <div class="trace__arrow-label">主题归并</div>
-        <div class="trace__dot-track trace__dot-track--rev"></div>
-        <div class="trace__arrow-line trace__arrow-line--rev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="12" x2="4" y2="12"/><polyline points="9 7 4 12 9 17"/></svg></div>
-        <div class="trace__arrow-label">链接引用</div>
-      </div>
-      <!-- Column 3: Output -->
-      <div class="trace__col">
-        <div class="trace__col-head trace__col-head--green">成果输出</div>
-        <div class="trace__card trace__card--out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>周总结报告</div>
-        <div class="trace__card trace__card--out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>可追溯知识库</div>
-        <div class="trace__card trace__card--out"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a4 4 0 0 0-8 0v2"/></svg>年度材料素材池</div>
-      </div>
-    </div>
-    <p class="trace__note" data-r data-d="3">双向链接 · 清单→原文精确定位 · 原文→清单反向引用 · 来源永不丢失</p>
-  </div>
-</section>
-
-<!-- ============ SLIDE 6: SUMMARY ============ -->
-<section class="slide summ" id="s6">
+<!-- ============ SLIDE 6: ENGINE ============ -->
+<section class="slide engine" id="s6">
   <div class="bg-grain"></div>
   <div class="bg-radial" style="width:500px;height:500px;top:-15%;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(232,146,10,.05),transparent 70%)"></div>
   <div class="slide-content" style="align-items:center;text-align:center">
-    <div class="eyebrow" data-r>周总结生成</div>
-    <h2 class="h2" data-r data-d="1">AI 提炼底稿，<em>人工判断定稿</em></h2>
-    <div class="summ__cascade" data-r data-d="2">
-      <div class="summ__stage">
-        <div class="summ__num summ__num--1">1</div>
-        <div class="summ__body">
-          <div class="summ__stage-title summ__stage-title--blue">多源输入汇聚</div>
-          <div class="summ__pills">
-            <div class="summ__pill">六维度汇总清单</div>
-            <div class="summ__pill">精确来源链接</div>
-            <div class="summ__pill">重要程度标记</div>
+    <div class="eyebrow" data-r>AI 写作引擎</div>
+    <h2 class="h2" data-r data-d="1">规则驱动起草，<em>人工判断定稿</em></h2>
+    <div class="engine__cascade" data-r data-d="2">
+      <!-- Step 1 -->
+      <div class="engine__stage">
+        <div class="engine__num engine__num--1">1</div>
+        <div>
+          <div class="engine__stage-title engine__stage-title--amber">选定文种，加载规则</div>
+          <div class="engine__pills">
+            <div class="engine__pill engine__pill--amber">汇报材料</div>
+            <div class="engine__pill engine__pill--amber">工作方案</div>
+            <div class="engine__pill engine__pill--amber">讲话稿</div>
+            <div class="engine__pill engine__pill--amber">通知发文</div>
           </div>
         </div>
       </div>
-      <div class="summ__conn"></div>
-      <div class="summ__stage">
-        <div class="summ__num summ__num--2">2</div>
-        <div class="summ__body">
-          <div class="summ__stage-title summ__stage-title--amber">AI 生成底稿</div>
-          <div class="summ__pills">
-            <div class="summ__pill summ__pill--ai">主题归并 · 3-5 章节</div>
-            <div class="summ__pill summ__pill--ai">行动分级 · 紧急/重点</div>
-            <div class="summ__pill summ__pill--ai">金句分组 · 风险聚合</div>
-            <div class="summ__pill summ__pill--ai">背景研判 · 撰写提示</div>
+      <div class="engine__conn"></div>
+      <!-- Step 2 -->
+      <div class="engine__stage">
+        <div class="engine__num engine__num--2">2</div>
+        <div>
+          <div class="engine__stage-title engine__stage-title--green">检索语料，匹配素材</div>
+          <div class="engine__pills">
+            <div class="engine__pill engine__pill--green">相关事实与数据</div>
+            <div class="engine__pill engine__pill--green">领导原话与表态</div>
+            <div class="engine__pill engine__pill--green">行动事项与进展</div>
           </div>
         </div>
       </div>
-      <div class="summ__conn"></div>
-      <div class="summ__stage">
-        <div class="summ__num summ__num--3">3</div>
-        <div class="summ__body">
-          <div class="summ__stage-title summ__stage-title--green">人工复核定稿</div>
-          <div class="summ__pills">
-            <div class="summ__pill summ__pill--out">正式周总结</div>
-            <div class="summ__pill summ__pill--out">行动事项清单</div>
-            <div class="summ__pill summ__pill--out">本周总评</div>
+      <div class="engine__conn"></div>
+      <!-- Step 3 -->
+      <div class="engine__stage">
+        <div class="engine__num engine__num--3">3</div>
+        <div>
+          <div class="engine__stage-title engine__stage-title--cyan">AI 生成初稿</div>
+          <div class="engine__pills">
+            <div class="engine__pill">按规则组织结构</div>
+            <div class="engine__pill">填充语料素材</div>
+            <div class="engine__pill">统一文风表达</div>
+          </div>
+        </div>
+      </div>
+      <div class="engine__conn"></div>
+      <!-- Step 4 -->
+      <div class="engine__stage">
+        <div class="engine__num engine__num--4">4</div>
+        <div>
+          <div class="engine__stage-title engine__stage-title--blue">人工复核定稿</div>
+          <div class="engine__pills">
+            <div class="engine__pill engine__pill--out">补充敏感数据</div>
+            <div class="engine__pill engine__pill--out">调整局部表述</div>
+            <div class="engine__pill engine__pill--out">成稿交付</div>
           </div>
         </div>
       </div>
     </div>
-    <div class="summ__note" data-r data-d="3">
-      <strong>AI 整理、归并、排序</strong> — 人判断、取舍、定调
+    <div class="engine__note" data-r data-d="3">
+      <strong>AI 负责结构、素材、初稿</strong> — 人负责判断、敏感数据、最终定调
     </div>
   </div>
 </section>
@@ -581,12 +651,12 @@ img,svg{display:block;max-width:100%}
     <div class="eyebrow" data-r>价值</div>
     <h2 class="h2" data-r data-d="1">六个<em>关键价值</em></h2>
     <div class="vals__list" data-r data-d="2">
-      <div class="val"><div class="val__num">01</div><div class="val__name">提效</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:95%"></div></div><div class="val__desc">减少 60% 重复整理时间</div></div></div>
-      <div class="val"><div class="val__num">02</div><div class="val__name">追溯</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:100%"></div></div><div class="val__desc">每个结论可回到原始出处</div></div></div>
-      <div class="val"><div class="val__num">03</div><div class="val__name">沉淀</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:80%"></div></div><div class="val__desc">周期积累 越用越厚</div></div></div>
-      <div class="val"><div class="val__num">04</div><div class="val__name">复盘</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:70%"></div></div><div class="val__desc">按周期回看重点 支撑年度总结</div></div></div>
-      <div class="val"><div class="val__num">05</div><div class="val__name">规范</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:85%"></div></div><div class="val__desc">统一标准 确保一致性</div></div></div>
-      <div class="val"><div class="val__num">06</div><div class="val__name">延续</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:90%"></div></div><div class="val__desc">人变知识不断 新人快速了解脉络</div></div></div>
+      <div class="val"><div class="val__num">01</div><div class="val__name">提效</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:95%"></div></div><div class="val__desc">从白纸起草到成稿交付周期大幅压缩</div></div></div>
+      <div class="val"><div class="val__num">02</div><div class="val__name">规范</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:90%"></div></div><div class="val__desc">写作规则统一，确保材料质量一致性</div></div></div>
+      <div class="val"><div class="val__num">03</div><div class="val__name">积累</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:85%"></div></div><div class="val__desc">规则和语料越用越厚，组织能力持续增长</div></div></div>
+      <div class="val"><div class="val__num">04</div><div class="val__name">追溯</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:100%"></div></div><div class="val__desc">每条语料可回溯原文出处，双向链接</div></div></div>
+      <div class="val"><div class="val__num">05</div><div class="val__name">传承</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:90%"></div></div><div class="val__desc">写作经验沉淀为规则，不随人员变动流失</div></div></div>
+      <div class="val"><div class="val__num">06</div><div class="val__name">安全</div><div class="val__bar-wrap"><div class="val__bar"><div class="val__bar-fill" style="--w:80%"></div></div><div class="val__desc">全程脱敏处理，敏感数据由人工补充</div></div></div>
     </div>
   </div>
 </section>
@@ -597,13 +667,13 @@ img,svg{display:block;max-width:100%}
   <div class="bg-radial" style="width:600px;height:600px;top:50%;left:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(232,146,10,.08),transparent 70%)"></div>
   <div class="slide-content">
     <div class="eyebrow" data-r>总结</div>
-    <h2 class="h2" data-r data-d="1" style="max-width:min(90vw,680px)">让碎片化思路<br/>成为<em>组织记忆</em></h2>
-    <p class="closing__quote" data-r data-d="2">“不是文档整理工具，而是一套把碎片化思路转化为可追溯、可复盘、可汇报的组织知识资产的 AI 工作流。”</p>
+    <h2 class="h2" data-r data-d="1" style="max-width:min(90vw,680px)">让写作经验成为<br/><em>组织能力</em></h2>
+    <p class="closing__quote" data-r data-d="2">"规则蒸馏沉淀写法，语料归集沉淀素材，AI 引擎融合输出——人只需补充判断和敏感数据，大幅压缩从白纸到成稿的周期。"</p>
     <div class="closing__tags" data-r data-d="3">
-      <span class="tag">已运行 4 个周期</span>
-      <span class="tag">3 类材料源</span>
-      <span class="tag">6 维度结构化</span>
+      <span class="tag">规则+语料双轮</span>
+      <span class="tag tag--green">六维度结构化</span>
       <span class="tag">双向可追溯</span>
+      <span class="tag tag--green">全程脱敏</span>
       <span class="tag">办公室 AI 应用探索</span>
     </div>
   </div>
@@ -612,7 +682,7 @@ img,svg{display:block;max-width:100%}
 <!-- NAV -->
 <nav class="nav-dots" aria-label="Slide navigation"></nav>
 <div class="slide-counter"><span id="current">1</span> / <span id="total">8</span></div>
-<div class="kbd-hint">滚轮 / ↑↓ 切换</div>
+<div class="kbd-hint">滚轮 / 上下 切换</div>
 
 <script>
 ;(function(){
@@ -634,7 +704,6 @@ img,svg{display:block;max-width:100%}
   var hint=document.querySelector('.kbd-hint');
   var total=slides.length;
 
-  // Build dots
   slides.forEach(function(_,i){
     var b=document.createElement('button');
     b.className='nav-dot'+(i===0?' active':'');
@@ -646,7 +715,6 @@ img,svg{display:block;max-width:100%}
 
   function goTo(i){slides[i].scrollIntoView({behavior:'smooth'})}
 
-  // Track active slide
   var isMobile=window.matchMedia('(max-width:600px)').matches;
   var sOb=new IntersectionObserver(function(entries){
     entries.forEach(function(e){
@@ -660,7 +728,6 @@ img,svg{display:block;max-width:100%}
   },{threshold:isMobile?.25:.55});
   slides.forEach(function(s){sOb.observe(s)});
 
-  // Keyboard
   document.addEventListener('keydown',function(e){
     var active=0;dotEls.forEach(function(d,i){if(d.classList.contains('active'))active=i});
     if(e.key==='ArrowDown'||e.key==='ArrowRight'||e.key===' '){e.preventDefault();if(active<total-1)goTo(active+1)}
@@ -669,7 +736,6 @@ img,svg{display:block;max-width:100%}
     if(e.key==='End'){e.preventDefault();goTo(total-1)}
   });
 
-  // Touch — desktop only; mobile uses native scroll+snap
   if(!isMobile){
     var touchY=0;
     document.addEventListener('touchstart',function(e){touchY=e.touches[0].clientY},{passive:true});
