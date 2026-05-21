@@ -1,39 +1,51 @@
 # AI Office Showcase
 
-AI Office Showcase 是一个静态前端演示项目，用于集中展示多款 AI 办公产品页面与统一总览首页。
+AI Office Showcase 是一个面向企业场景的 AI 办公产品展示站，聚焦“阅读、学习、会议、流程与管理”五类核心办公任务，提供统一入口与分产品沉浸式演示页。
 
-## 项目结构
+## 在线访问
 
-- `index.html`：总览首页（产品导航、概览介绍）
-- `styles.css` / `main.js` / `presentation.css` / `presentation.js`：首页样式与交互
-- `projects/`：各产品正式展示页（当前主版本）
-  - `insightflow/`
-  - `officehub/`
-  - `readmind/`
-  - `testmind/`
-  - `listenmind/`
-  - `ecoasset/`
-  - `supervision/`
-- `assets/`、`图片/`：静态资源
+- GitHub Pages（启用后）：`https://tinywhite1867.github.io/ai-office-showcase/`
 
-## 版本说明
+## 产品矩阵
 
-当前仓库以 `projects/*/index.html` 作为各产品页主版本。历史或临时版本请放在非发布目录中，避免与主版本混用。
+- `InsightFlow`：思路沉淀与文字工作流
+- `OfficeHub`：智能管理中台（空间/办公协同）
+- `ReadMind`：AI 辅助阅读与知识吸收
+- `TestMind`：学习训练与语音陪练
+- `ListenMind`：会议分析与决策辅助
+- `EcoAsset`：环资流系统展示
+- `Supervision`：监督与执行闭环场景
 
-## 本地运行
+## 项目亮点
 
-推荐使用任意静态服务器启动（以 Python 为例）：
+- 一站式产品总览：首页承载统一叙事、产品定位与导航入口
+- 单产品深度体验：每个产品独立页面，支持单独演示与传播
+- 纯静态部署：无需后端即可上线，适合低成本公开展示
+- 对外友好：适用于路演、招聘、合作沟通与方案介绍
+
+## 技术实现
+
+- 基础栈：`HTML` + `CSS` + `JavaScript`
+- 架构形式：多页面静态站（`index.html` + `projects/*/index.html`）
+- 发布方式：GitHub Pages（推荐）或任意静态托管服务
+
+## 目录结构
+
+- `index.html`：总览首页
+- `projects/`：各产品正式展示页
+- `styles.css` / `main.js`：首页核心样式与交互
+- `presentation.css` / `presentation.js`：展示增强样式与脚本
+
+## 本地预览
 
 ```bash
 python3 -m http.server 8080
 ```
 
-打开：
-
 - 首页：`http://localhost:8080/index.html`
-- 产品页示例：`http://localhost:8080/projects/officehub/index.html`
+- 示例：`http://localhost:8080/projects/officehub/index.html`
 
-## Git 约定
+## 维护说明
 
-- 汇报稿类文件（如 `汇报稿*.docx`）已在 `.gitignore` 中忽略，不会提交到远端。
-- 建议所有新增产品页统一放在 `projects/<product>/` 下，便于维护与发布。
+- 历史归档、重资源与汇报稿已配置为本地保留，不进入公开仓库
+- 新增产品建议使用 `projects/<product>/index.html` 的统一结构，便于持续扩展
