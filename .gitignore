@@ -43,3 +43,8 @@ temp/
 
 # Presentation scripts / drafts (local only)
 汇报稿*.docx
+
+# Local archive / heavy media (keep local, do not publish)
+archive/legacy-root/
+图片/
+.claude/
