@@ -40,3 +40,6 @@ coverage/
 out/
 tmp/
 temp/
+
+# Presentation scripts / drafts (local only)
+汇报稿*.docx
